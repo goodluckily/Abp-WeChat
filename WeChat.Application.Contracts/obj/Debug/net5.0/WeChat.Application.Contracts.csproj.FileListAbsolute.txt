@@ -1,0 +1,17 @@
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\Localization\Exceptions\zh-Hans.json
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\Localization\Exceptions\zh-Hant.json
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\WeChat.Application.Contracts.deps.json
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\WeChat.Application.Contracts.dll
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\ref\WeChat.Application.Contracts.dll
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\WeChat.Application.Contracts.pdb
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\WeChat.Domain.Shared.dll
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\bin\Debug\net5.0\WeChat.Domain.Shared.pdb
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.csproj.AssemblyReference.cache
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.AssemblyInfoInputs.cache
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.AssemblyInfo.cs
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.csproj.CoreCompileInputs.cache
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.csproj.CopyComplete
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.dll
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\ref\WeChat.Application.Contracts.dll
+E:\Abp\Abp-WeChat.git\WeChat.Application.Contracts\obj\Debug\net5.0\WeChat.Application.Contracts.pdb

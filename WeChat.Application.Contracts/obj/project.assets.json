@@ -3538,43 +3538,41 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\cy\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\MSI-PC\\.nuget\\packages\\": {},
+    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Abp\\Abp-WeChat\\WeChat.Application.Contracts\\WeChat.Application.Contracts.csproj",
+      "projectUniqueName": "E:\\Abp\\Abp-WeChat.git\\WeChat.Application.Contracts\\WeChat.Application.Contracts.csproj",
       "projectName": "WeChat.Application.Contracts",
-      "projectPath": "E:\\Abp\\Abp-WeChat\\WeChat.Application.Contracts\\WeChat.Application.Contracts.csproj",
-      "packagesPath": "C:\\Users\\cy\\.nuget\\packages\\",
-      "outputPath": "E:\\Abp\\Abp-WeChat\\WeChat.Application.Contracts\\obj\\",
+      "projectPath": "E:\\Abp\\Abp-WeChat.git\\WeChat.Application.Contracts\\WeChat.Application.Contracts.csproj",
+      "packagesPath": "C:\\Users\\MSI-PC\\.nuget\\packages\\",
+      "outputPath": "E:\\Abp\\Abp-WeChat.git\\WeChat.Application.Contracts\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\cy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\MSI-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "http://192.168.6.101:10000/nuget": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "E:\\Abp\\Abp-WeChat\\WeChat.Shared\\WeChat.Domain.Shared.csproj": {
-              "projectPath": "E:\\Abp\\Abp-WeChat\\WeChat.Shared\\WeChat.Domain.Shared.csproj"
+            "E:\\Abp\\Abp-WeChat.git\\WeChat.Shared\\WeChat.Domain.Shared.csproj": {
+              "projectPath": "E:\\Abp\\Abp-WeChat.git\\WeChat.Shared\\WeChat.Domain.Shared.csproj"
             }
           }
         }
