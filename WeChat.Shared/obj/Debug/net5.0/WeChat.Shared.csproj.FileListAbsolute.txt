@@ -1,0 +1,12 @@
+E:\Abp\Abp-WeChat\WeChat.Shared\bin\Debug\net5.0\WeChat.Shared.deps.json
+E:\Abp\Abp-WeChat\WeChat.Shared\bin\Debug\net5.0\WeChat.Shared.dll
+E:\Abp\Abp-WeChat\WeChat.Shared\bin\Debug\net5.0\ref\WeChat.Shared.dll
+E:\Abp\Abp-WeChat\WeChat.Shared\bin\Debug\net5.0\WeChat.Shared.pdb
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.csproj.AssemblyReference.cache
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.GeneratedMSBuildEditorConfig.editorconfig
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.AssemblyInfoInputs.cache
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.AssemblyInfo.cs
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.csproj.CoreCompileInputs.cache
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.dll
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\ref\WeChat.Shared.dll
+E:\Abp\Abp-WeChat\WeChat.Shared\obj\Debug\net5.0\WeChat.Shared.pdb
