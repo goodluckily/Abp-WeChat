@@ -19,5 +19,14 @@ namespace WeChat.Host
             //
             app.InitializeApplication();
         }
+
+
+
+        //1.首先翔想 测试一下 有没有提交草稿的 接口权限
+
+
+        //2.然后再试一下 公众号自定义菜单的功能
+
+        //3.然后再试试 Rozoir 写一个 H5页面尝试尝试
     }
 }
