@@ -15,13 +15,13 @@ namespace WeChat.Host.Controllers
         public ActionResult TokenValidation()
         {
             //验证token
-            string token = "abcd123456";   //验证token，随意填写  
+            string token = "abcd123456";   //验证token，随意填写
             string signature = HttpContext.Request.Query["signature"].ToString();
             string timestamp = HttpContext.Request.Query["timestamp"].ToString();
             string nonce = HttpContext.Request.Query["nonce"].ToString();
             string echostr = HttpContext.Request.Query["echostr"].ToString(); //随机数
 
-            var isWeiXin = CheckSignature.Check(signature, signature, nonce, token);
+            var isWeiXin = CheckSignature.Check(signature, timestamp, nonce, token);
             if (isWeiXin)
             {
                 return Content(echostr); //返回随机字符串则表示验证通过
