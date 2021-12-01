@@ -5,24 +5,31 @@ using Microsoft.OpenApi.Models;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
+using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
+using WeChat.Application;
+using WeChat.EntityFramewoekCore;
+using WeChat.Host.EntityFrameworkCore;
 
 namespace WeChat.Host
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
-        typeof(WeChatSwaggerModule)//swagger 模块
+        typeof(WeChatSwaggerModule),//swagger 模块
+        typeof(WeChatApplicationModule),
+        typeof(WeChatEntityFrameworkCoreModule)
         )]
-    public class WeChatHostModule:AbpModule
+    public class WeChatHostModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
             //多语言设置
-            Configure<AbpLocalizationOptions>(op => {
+            Configure<AbpLocalizationOptions>(op =>
+            {
                 op.Languages.Add(new LanguageInfo("en", "en", "English"));
                 op.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
 
@@ -42,6 +49,18 @@ namespace WeChat.Host
                 //options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
                 //options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
                 //options.Languages.Add(new LanguageInfo("es", "es", "Español"));
+            });
+
+            services.AddAbpDbContext<WeChatDbContext>(options=> 
+            {
+                options.AddDefaultRepositories();
+            });
+
+            services.AddAbpDbContext<WeChatSecondDbContext>();
+
+            Configure<AbpDbContextOptions>(optios=> 
+            {
+                optios.UseMySQL();
             });
 
         }

@@ -11,7 +11,7 @@ namespace WeChat.Domain.Shared.ExceptionCodes
         public static string NotFound => "WeChat:NotFound";
         public static string IdIsNullOrEmpty => "WeChat:IdIsNullOrEmpty";
         public static string CodeAlreadyExist => "WeChat:CodeAlreadyExist";
-        public static string NameIsEmpty => "WeChat:NameIsEmpty";
+        public static string TokenIsEmpty => "WeChat:TokenIsEmpty";
         public static string NameIsTheSame => "WeChat:NameIsTheSame";
     }
 }

@@ -10,11 +10,11 @@ namespace WeChat.Host.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public partial class WeChatTokenValidation : ControllerBase
+    public partial class WeChatTokenValidation : BaseController
     {
         private readonly IConfiguration _configuration;
 
-        public WeChatTokenValidation(IConfiguration configuration)
+        public WeChatTokenValidation(IConfiguration configuration) : base(configuration)
         {
             _configuration = configuration;
         }
@@ -43,18 +43,15 @@ namespace WeChat.Host.Controllers
 
 
         /// <summary>
-        /// 换取Token 准备开始自定义菜单
+        /// 换取Token 
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetAccessToken")]
         public ActionResult GetAccessToken()
         {
-            //验证token
-            var appid = _configuration["WeChatConfig:Appid"];
-            var appSecret = _configuration["WeChatConfig:AppSecret"];
-            var access_token = BasicAPI.GetAccessToken(appid, appSecret).access_token;
-            var js = JSAPI.GetTickect(access_token);
-            return Content(appSecret+"---"+ js); //返回随机字符串则表示验证通过
+            var token = GetToken();
+            var jstoken = GetJsToken();
+            return Content(token + "---" + jstoken); //返回随机字符串则表示验证通过
         }
     }
 }
