@@ -41,6 +41,11 @@ namespace WeChat.Host.Controllers
             return Content("不是微信消息请求"); //返回随机字符串则表示验证通过
         }
 
+
+        /// <summary>
+        /// 换取Token 准备开始自定义菜单
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetAccessToken")]
         public ActionResult GetAccessToken()
         {
