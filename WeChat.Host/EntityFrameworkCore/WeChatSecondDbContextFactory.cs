@@ -15,6 +15,7 @@ namespace WeChat.Host.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var connName = ConnectionStringNameAttribute.GetConnStringName<WeChatSecondDbContext>();
+
             var builder = new DbContextOptionsBuilder<WeChatSecondDbContext>()
                 .UseMySql(configuration.GetConnectionString(connName), new MySqlServerVersion(new Version(5, 7, 24)));
 
