@@ -15,10 +15,10 @@ namespace WeChat.Host.EntityFrameworkCore
             var configuration = BuildConfiguration();
 
             var connName = ConnectionStringNameAttribute.GetConnStringName<WeChatSecondDbContext>();
-
+            Console.WriteLine(connName);
+            
             var builder = new DbContextOptionsBuilder<WeChatSecondDbContext>()
-                .UseMySql(configuration.GetConnectionString(connName), new MySqlServerVersion(new Version(5, 7, 24)));
-
+                .UseSqlServer(configuration.GetConnectionString("WeChat"));
             return new WeChatSecondDbContext(builder.Options);
         }
 

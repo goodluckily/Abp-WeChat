@@ -12,7 +12,6 @@ namespace WeChat.Application
     [DependsOn(
         typeof(AbpDddApplicationModule),
         typeof(AbpAutoMapperModule)
-
         )]
     public class WeChatApplicationModule:AbpModule
     {

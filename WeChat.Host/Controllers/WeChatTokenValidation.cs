@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WeChat.Domain.Manager;
 using WeChat.Host.WeChat;
 
 namespace WeChat.Host.Controllers
@@ -40,7 +41,6 @@ namespace WeChat.Host.Controllers
             }
             return Content("不是微信消息请求"); //返回随机字符串则表示验证通过
         }
-
 
         /// <summary>
         /// 换取Token 

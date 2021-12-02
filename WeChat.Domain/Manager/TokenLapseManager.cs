@@ -13,12 +13,14 @@ namespace WeChat.Domain.Manager
     public class TokenLapseManager : ITokenLapseManager
     {
         private readonly IRepository<TokenLapse, Guid> _tokenLapsesRepository;
+
         #region DL
         public TokenLapseManager(IRepository<TokenLapse, Guid> tokenLapsesRepository)
         {
             _tokenLapsesRepository = tokenLapsesRepository;
         }
         #endregion
+
         public async Task<TokenLapse> CreateTokenLapseAsync(TokenLapse tokenLapse)
         {
             if (await _tokenLapsesRepository.AnyAsync(x => x.Id == tokenLapse.Id))

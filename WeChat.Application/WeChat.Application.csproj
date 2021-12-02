@@ -5,12 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
     <PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.4" />
     <PackageReference Include="Volo.Abp.Core" Version="4.4.4" />
     <PackageReference Include="Volo.Abp.Ddd.Application" Version="4.4.4" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WeChat.Application.Contracts\WeChat.Application.Contracts.csproj" />
     <ProjectReference Include="..\WeChat.Domain\WeChat.Domain.csproj" />
   </ItemGroup>
 

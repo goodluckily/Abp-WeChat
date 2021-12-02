@@ -17,6 +17,6 @@ namespace WeChat.Host
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                });
+                }).UseAutofac();
     }
 }

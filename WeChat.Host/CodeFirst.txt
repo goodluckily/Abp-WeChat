@@ -1,0 +1,12 @@
+
+
+
+
+
+
+
+Add-Migration init°æ±¾ -Context WeChatSecondDbContext Update-DateBase 
+
+
+
+update-database

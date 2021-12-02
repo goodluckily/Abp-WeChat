@@ -6,6 +6,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
@@ -18,7 +19,11 @@ namespace WeChat.Host
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
+
+        //typeof(AbpSwashbuckleModule),
         typeof(WeChatSwaggerModule),//swagger 模块
+
+        typeof(AbpEntityFrameworkCoreSqlServerModule),
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule)
         )]
@@ -27,6 +32,24 @@ namespace WeChat.Host
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
+
+            // 配置动态API控制器
+            services.Configure<AbpAspNetCoreMvcOptions>(options =>
+            {
+                //// TODO：忽略控制器失败
+                //var ignoreControllers = new Type[] {
+                //    typeof(AbpApiDefinitionController),
+                //    typeof(AbpApplicationConfigurationController)
+                //}; 
+                //// 定义忽略的控制器
+                //options.ConventionalControllers
+                //    .Create(typeof(WarehouseHostModule).Assembly, setting => {
+                //        setting.TypePredicate = type => ignoreControllers.Contains(type);
+                //    });
+
+                options.ConventionalControllers.Create(typeof(WeChatApplicationModule).Assembly);
+            });
+
             //多语言设置
             Configure<AbpLocalizationOptions>(op =>
             {
@@ -60,9 +83,8 @@ namespace WeChat.Host
 
             Configure<AbpDbContextOptions>(optios=> 
             {
-                optios.UseMySQL();
+                optios.UseSqlServer();
             });
-
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
