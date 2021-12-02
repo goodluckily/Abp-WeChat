@@ -14,6 +14,6 @@ namespace WeChat.EntityFramewoekCore
     [ConnectionStringName(WeChatDbProperties.ConnectionStringName)]
     public interface IWeChatDbContext: IEfCoreDbContext
     {
-        DbSet<TokenLapse> tokenLapses { get; set; }
+        public DbSet<TokenLapse> tokenLapses { get; set; }
     }
 }

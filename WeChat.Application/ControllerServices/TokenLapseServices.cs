@@ -24,7 +24,7 @@ namespace WeChat.Application.ControllerServices
             _tokenLapseManager = tokenLapseManager;
         }
 
-        [HttpPost("11")]
+        [HttpPost("createToken")]
         public async Task<TokenLapseDto> CreateTokenLapseAsync(TokenLapseDto tokenLapse)
         {
             tokenLapse.OperationTime = DateTime.Now;
@@ -35,25 +35,28 @@ namespace WeChat.Application.ControllerServices
             return dto;
         }
 
-        [HttpPost("22")]
-
+        [HttpDelete("del")]
         public Task DeleteAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-        [HttpPost("33")]
 
+
+        [HttpGet("getAll")]
         public Task<List<TokenLapseDto>> GetAllAsync()
         {
             throw new NotImplementedException();
         }
-        [HttpPost("44")]
+
+
+        [HttpGet("GetTokenLapse")]
         public Task<TokenLapseDto> GetTokenLapseAsync(Guid id)
         {
             throw new NotImplementedException();
         }
-        [HttpPost("55")]
 
+
+        [HttpPost("update")]
         public Task<TokenLapseDto> UpdateAsync(TokenLapseDto tokenLapse)
         {
             throw new NotImplementedException();

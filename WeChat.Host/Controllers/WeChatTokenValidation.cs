@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using WeChat.Application.Contracts.DtoModels;
 using WeChat.Domain.Manager;
+using WeChat.Domain.WeChat;
 using WeChat.Host.WeChat;
 
 namespace WeChat.Host.Controllers
@@ -47,7 +50,7 @@ namespace WeChat.Host.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetAccessToken")]
-        public ActionResult GetAccessToken()
+        public async Task<ActionResult> GetAccessTokenAsync()
         {
             var token = GetToken();
             var jstoken = GetJsToken();
