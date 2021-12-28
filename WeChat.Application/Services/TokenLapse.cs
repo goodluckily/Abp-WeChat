@@ -25,7 +25,8 @@ namespace WeChat.Application.Services
             _tokenLapseManager = tokenLapseManage;
         }
 
-        public async Task<TokenLapseDto> CreateTokenLapseAsync(TokenLapseDto tokenLapse)
+        [HttpPost("CreateTokenLapseAsync1")]
+        public async Task<TokenLapseDto> CreateTokenLapseAsync([FromBody]TokenLapseDto tokenLapse)
         {
             tokenLapse.OperationTime = DateTime.Now;
             var tokenDb = new Domain.WeChat.TokenLapse(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
@@ -35,12 +36,13 @@ namespace WeChat.Application.Services
             return dto;
         }
 
+        [RemoteService(true)]
         public Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            throw new ArgumentNullException("删除无效Null");
         }
 
-
+        [RemoteService(false)]
         public IEnumerable<TokenLapseDto> GetAll()
         {
             var dbTokenModel = _tokenLapseManager.GetAll().ToList();
@@ -48,13 +50,13 @@ namespace WeChat.Application.Services
             return dto;
         }
 
-
+        [RemoteService(false)]
         public Task<TokenLapseDto> GetTokenLapseAsync(Guid id)
         {
             throw new NotImplementedException();
         }
 
-
+        [RemoteService(false)]
         public Task<TokenLapseDto> UpdateAsync(TokenLapseDto tokenLapse)
         {
             throw new NotImplementedException();
