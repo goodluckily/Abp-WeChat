@@ -6,7 +6,7 @@ using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
@@ -18,14 +18,15 @@ namespace WeChat.Host
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
-        typeof(AbpAutofacModule),
-
+        
         //typeof(AbpSwashbuckleModule),
         typeof(WeChatSwaggerModule),//swagger 模块
 
-        typeof(AbpEntityFrameworkCoreSqlServerModule),
+        //typeof(AbpEntityFrameworkCoreSqlServerModule),
+        typeof(AbpEntityFrameworkCoreMySQLModule),
         typeof(WeChatApplicationModule),
-        typeof(WeChatEntityFrameworkCoreModule)
+        typeof(WeChatEntityFrameworkCoreModule),
+        typeof(AbpAutofacModule)
         )]
     public class WeChatHostModule : AbpModule
     {
@@ -49,6 +50,23 @@ namespace WeChat.Host
 
                 options.ConventionalControllers.Create(typeof(WeChatApplicationModule).Assembly);
             });
+
+            //跨域配置
+            services.AddCors(option=> 
+            {
+                option.AddPolicy("CorsPolicy", op => {
+                    op.SetIsOriginAllowed((x) => true)
+                       .AllowAnyOrigin()
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+                });
+            });
+
+            //services.AddApplication<WeChatApplicationModule>(options =>
+            //{
+            //    options.UseAutofac();
+            //});
+
 
             //多语言设置
             Configure<AbpLocalizationOptions>(op =>
@@ -76,15 +94,19 @@ namespace WeChat.Host
 
             services.AddAbpDbContext<WeChatDbContext>(options=> 
             {
-                options.AddDefaultRepositories();
+                options.AddDefaultRepositories(includeAllEntities:true);
             });
 
-            services.AddAbpDbContext<WeChatSecondDbContext>();
+            services.AddAbpDbContext<WeChatSecondDbContext>(options =>
+            {
+                options.AddDefaultRepositories(includeAllEntities: true);
+            });
 
             Configure<AbpDbContextOptions>(optios=> 
             {
-                optios.UseSqlServer();
+                optios.UseMySQL();
             });
+
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -102,6 +124,8 @@ namespace WeChat.Host
             app.UseUnitOfWork();
 
             app.UseRouting();
+
+            app.UseCors("CorsPolicy");
 
             app.UseAuthorization();
 

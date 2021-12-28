@@ -5,17 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
+using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared.ExceptionCodes;
 using WeChat.Domain.WeChat;
 
-namespace WeChat.Domain.Manager
+namespace WeChat.Domain.Repository
 {
-    public class TokenLapseManager : ITokenLapseManager
+    public class TokenLapseRepository : ITokenLapseRepository
     {
         private readonly IRepository<TokenLapse, Guid> _tokenLapsesRepository;
 
         #region DL
-        public TokenLapseManager(IRepository<TokenLapse, Guid> tokenLapsesRepository)
+        public TokenLapseRepository(IRepository<TokenLapse, Guid> tokenLapsesRepository)
         {
             _tokenLapsesRepository = tokenLapsesRepository;
         }
@@ -27,12 +28,18 @@ namespace WeChat.Domain.Manager
             {
                 throw new BusinessException(WeChatExceptionCodes.CodeAlreadyExist).WithData("Id", tokenLapse.Id);
             }
-            return await _tokenLapsesRepository.InsertAsync(tokenLapse);
+            var insertModel = await _tokenLapsesRepository.InsertAsync(tokenLapse);
+            return insertModel;
         }
 
         public async Task DeleteAsync(Guid id)
         {
             await _tokenLapsesRepository.DeleteAsync(x => x.Id == id);
+        }
+
+        public IEnumerable<TokenLapse> GetAll()
+        {
+            return  _tokenLapsesRepository.GetListAsync(x => true).Result;
         }
 
         public async Task<List<TokenLapse>> GetAllAsync()
@@ -58,7 +65,7 @@ namespace WeChat.Domain.Manager
 
             warehouse.UpdateTokenLapse(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
             await _tokenLapsesRepository.UpdateAsync(warehouse);
-
+            
             return warehouse;
         }
     }

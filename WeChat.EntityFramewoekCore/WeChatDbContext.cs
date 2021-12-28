@@ -16,7 +16,6 @@ namespace WeChat.EntityFramewoekCore
     {
         public WeChatDbContext(DbContextOptions<WeChatDbContext> options):base(options)
         {
-
         }
 
         public DbSet<TokenLapse> tokenLapses { get; set; }

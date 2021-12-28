@@ -14,7 +14,7 @@ namespace WeChat.Application.Mapping
         //配置实体之间的映射关系
         public WeChatMappingProfile()
         {
-            CreateMap <TokenLapse, TokenLapseDto>();
+            CreateMap<TokenLapse, TokenLapseDto>().ReverseMap();
         }
     }
 }

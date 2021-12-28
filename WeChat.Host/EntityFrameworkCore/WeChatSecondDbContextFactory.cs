@@ -5,6 +5,7 @@ using Volo.Abp.Data;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 using System;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 
 namespace WeChat.Host.EntityFrameworkCore
 {
@@ -17,8 +18,12 @@ namespace WeChat.Host.EntityFrameworkCore
             var connName = ConnectionStringNameAttribute.GetConnStringName<WeChatSecondDbContext>();
             Console.WriteLine(connName);
             
+            //var builder1 = new DbContextOptionsBuilder<WeChatSecondDbContext>()
+            //    .UseSqlServer(configuration.GetConnectionString("WeChat"));
+
             var builder = new DbContextOptionsBuilder<WeChatSecondDbContext>()
-                .UseSqlServer(configuration.GetConnectionString("WeChat"));
+                .UseMySql(configuration.GetConnectionString("WeChat"),new MySqlServerVersion(new Version(8,0,27)));
+
             return new WeChatSecondDbContext(builder.Options);
         }
 

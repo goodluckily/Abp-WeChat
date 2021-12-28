@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WeChat.Application.Contracts.DtoModels;
-using WeChat.Domain.Manager;
 using WeChat.Domain.WeChat;
 using WeChat.Host.WeChat;
 
@@ -14,6 +14,7 @@ namespace WeChat.Host.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("CorsPolicy")]
     public partial class WeChatTokenValidation : BaseController
     {
         private readonly IConfiguration _configuration;

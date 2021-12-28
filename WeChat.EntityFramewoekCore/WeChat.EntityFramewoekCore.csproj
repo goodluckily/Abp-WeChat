@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Volo.Abp.Core" Version="4.4.4" />
-    <PackageReference Include="Volo.Abp.EntityFrameworkCore" Version="4.4.4" />
+    <PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="4.4.4" />
   </ItemGroup>
 
   <ItemGroup>

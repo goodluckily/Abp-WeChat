@@ -6,14 +6,26 @@ using System.Threading.Tasks;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
+using WeChat.Application.Contracts;
+using WeChat.Domain;
 
 namespace WeChat.Application
 {
     [DependsOn(
         typeof(AbpDddApplicationModule),
-        typeof(AbpAutoMapperModule)
+        typeof(AbpAutoMapperModule),
+
+        typeof(WeChatDomainModule),
+        typeof(WeChatApplicationContractsModule)
         )]
     public class WeChatApplicationModule:AbpModule
     {
+        public override void ConfigureServices(ServiceConfigurationContext context)
+        {
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddMaps<WeChatApplicationModule>(validate: true);
+            });
+        }
     }
 }
