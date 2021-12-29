@@ -37,12 +37,13 @@ namespace WeChat.Application.Services
         }
 
         [RemoteService(true)]
+        [HttpDelete]
         public Task DeleteAsync(Guid id)
         {
             throw new ArgumentNullException("删除无效Null");
         }
 
-        [RemoteService(false)]
+        [HttpGet("GetAll")]
         public IEnumerable<TokenLapseDto> GetAll()
         {
             var dbTokenModel = _tokenLapseManager.GetAll().ToList();

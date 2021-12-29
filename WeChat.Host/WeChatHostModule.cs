@@ -10,6 +10,7 @@ using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.MySQL;
+using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
@@ -23,11 +24,12 @@ namespace WeChat.Host
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
 
-        //typeof(AbpSwashbuckleModule),
-        typeof(WeChatSwaggerModule),//swagger 模块
+        //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
+        typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
 
-        //typeof(AbpEntityFrameworkCoreSqlServerModule),
-        typeof(AbpEntityFrameworkCoreMySQLModule),
+        typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
+        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule),
         typeof(AbpAutofacModule)
@@ -42,6 +44,7 @@ namespace WeChat.Host
             //2.这里定义了 Application 里面可以自动的实现 webapi
             services.Configure<AbpAspNetCoreMvcOptions>(options =>
             {
+                //[RemoteService(true)] 指定API 隐藏
                 options.ConventionalControllers.Create(typeof(WeChatApplicationModule).Assembly);
             });
 
@@ -94,7 +97,8 @@ namespace WeChat.Host
 
             Configure<AbpDbContextOptions>(optios =>
             {
-                optios.UseMySQL();
+                //optios.UseMySQL();
+                optios.UseSqlServer();
             });
 
             #endregion
