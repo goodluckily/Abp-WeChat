@@ -10,7 +10,7 @@ namespace WeChat.Host.Filter
     {
         private readonly ILogger<WeChatGlobalExceptionFilter> _logger;
 
-        public WeChatGlobalExceptionFilter(Microsoft.Extensions.Logging.ILogger<WeChatGlobalExceptionFilter> logger)
+        public WeChatGlobalExceptionFilter(ILogger<WeChatGlobalExceptionFilter> logger)
         {
             _logger = logger;
         }
@@ -19,7 +19,7 @@ namespace WeChat.Host.Filter
         {
             var detail = context.Exception.Message;
             _logger.LogError(new EventId(context.Exception.HResult), context.Exception, detail);
-            context.Result = new JsonResult(new { code = 500, err = "系统异常", detail });
+            context.Result = new JsonResult(new { code = 500, error = "系统异常", detail });
             context.ExceptionHandled = true;
         }
     }

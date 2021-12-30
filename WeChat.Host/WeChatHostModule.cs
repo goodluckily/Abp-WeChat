@@ -122,6 +122,7 @@ namespace WeChat.Host
                 if (filterEx is not null)
                     options.Filters.Remove(filterEx);//1.移除 abp定义的
                 options.Filters.Add(typeof(WeChatGlobalExceptionFilter));//2.添加自己写的
+                options.Filters.Add(typeof(WeChatActionFilter));//3.添加自己写的 
             });
 
         }
