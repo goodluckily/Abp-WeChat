@@ -16,23 +16,25 @@ using AutoMapper;
 
 namespace WeChat.Application.Services
 {
-
-    public class TokenLapse : ApplicationService, ITokenLapse
+    public class TokenService : ApplicationService, ITokenService
     {
-        private readonly ITokenLapseRepository _tokenLapseManager;
-        public TokenLapse(ITokenLapseRepository tokenLapseManage)
+        private readonly ITokenRepository _tokenRepository;
+        private readonly IBaseService _baseService;
+
+        public TokenService(ITokenRepository tokenRepository,IBaseService baseService)
         {
-            _tokenLapseManager = tokenLapseManage;
+            _tokenRepository = tokenRepository;
+            _baseService = baseService;
         }
 
         [HttpPost("CreateTokenLapseAsync1")]
         public async Task<TokenLapseDto> CreateTokenLapseAsync([FromBody]TokenLapseDto tokenLapse)
         {
             tokenLapse.OperationTime = DateTime.Now;
-            var tokenDb = new Domain.WeChat.TokenLapse(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
+            var tokenDb = new Domain.WeChat.Token(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
 
-            var dbTokenModel = await _tokenLapseManager.CreateTokenLapseAsync(tokenDb);
-            var dto = ObjectMapper.Map<Domain.WeChat.TokenLapse, TokenLapseDto>(dbTokenModel);
+            var dbTokenModel = await _tokenRepository.CreateTokenAsync(tokenDb);
+            var dto = ObjectMapper.Map<Domain.WeChat.Token, TokenLapseDto>(dbTokenModel);
             return dto;
         }
 
@@ -46,8 +48,8 @@ namespace WeChat.Application.Services
         [HttpGet("GetAll")]
         public IEnumerable<TokenLapseDto> GetAll()
         {
-            var dbTokenModel = _tokenLapseManager.GetAll().ToList();
-            var dto = ObjectMapper.Map<List<Domain.WeChat.TokenLapse>, List<TokenLapseDto>>(dbTokenModel);
+            var dbTokenModel = _tokenRepository.GetAll().ToList();
+            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
             return dto;
         }
 
@@ -63,5 +65,11 @@ namespace WeChat.Application.Services
             throw new NotImplementedException();
         }
 
+        [HttpGet("GetTokenAsync")]
+        public async Task<string> GetTokenAsync() 
+        {
+            var token = await _baseService.GetTokenAsync();
+            return token;
+        }
     }
 }

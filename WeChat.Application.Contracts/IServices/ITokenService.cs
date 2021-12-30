@@ -8,7 +8,7 @@ using WeChat.Application.Contracts.DtoModels;
 
 namespace WeChat.Application.Contracts.IServices
 {
-    public interface ITokenLapse //: ITransientDependency 指定特殊的生命周期的时候使用 不常用
+    public interface ITokenService //: ITransientDependency 指定特殊的生命周期的时候使用 不常用
     {
         Task<TokenLapseDto> CreateTokenLapseAsync(TokenLapseDto tokenLapse);
 

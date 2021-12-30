@@ -6,7 +6,7 @@ using System;
 
 namespace WeChat.Host.Filter
 {
-    public class WeChatGlobalExceptionFilter:IExceptionFilter
+    public class WeChatGlobalExceptionFilter : IExceptionFilter
     {
         private readonly ILogger<WeChatGlobalExceptionFilter> _logger;
 
@@ -17,8 +17,9 @@ namespace WeChat.Host.Filter
 
         public void OnException(ExceptionContext context)
         {
-            _logger.LogError(new EventId(context.Exception.HResult),context.Exception,context.Exception.Message);
-            context.Result = new JsonResult(new { code = 500, err = "系统异常" });
+            var detail = context.Exception.Message;
+            _logger.LogError(new EventId(context.Exception.HResult), context.Exception, detail);
+            context.Result = new JsonResult(new { code = 500, err = "系统异常", detail });
             context.ExceptionHandled = true;
         }
     }

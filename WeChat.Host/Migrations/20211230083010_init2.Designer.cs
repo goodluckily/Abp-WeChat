@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.Host.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    partial class WeChatSecondDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211230083010_init2")]
+    partial class init2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,15 +29,17 @@ namespace WeChat.Host.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Access_Token")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
                         .HasComment("Token");
 
                     b.Property<double?>("Expires_In")
+                        .HasMaxLength(20)
                         .HasColumnType("float")
                         .HasComment("多少秒后失效");
 
                     b.Property<DateTime?>("OperationTime")
+                        .HasMaxLength(20)
                         .HasColumnType("datetime2")
                         .HasComment("操作时间");
 

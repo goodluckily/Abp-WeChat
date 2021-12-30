@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WeChat.Application.Contracts\WeChat.Application.Contracts.csproj" />
+    <ProjectReference Include="..\WeChat.Common\WeChat.Common.csproj" />
     <ProjectReference Include="..\WeChat.Domain\WeChat.Domain.csproj" />
   </ItemGroup>
 

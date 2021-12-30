@@ -1,19 +1,21 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31829.152
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Host", "WeChat.Host\WeChat.Host.csproj", "{C027A030-A807-4341-822A-D65497A16B9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Host", "WeChat.Host\WeChat.Host.csproj", "{C027A030-A807-4341-822A-D65497A16B9B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Application", "WeChat.Application\WeChat.Application.csproj", "{25C7A84C-2BDE-4FFF-B38E-901C8EA96CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Application", "WeChat.Application\WeChat.Application.csproj", "{25C7A84C-2BDE-4FFF-B38E-901C8EA96CCF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Domain", "WeChat.Domain\WeChat.Domain.csproj", "{5115AA96-4D6A-456C-914F-C69C6356DCC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Domain", "WeChat.Domain\WeChat.Domain.csproj", "{5115AA96-4D6A-456C-914F-C69C6356DCC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.EntityFramewoekCore", "WeChat.EntityFramewoekCore\WeChat.EntityFramewoekCore.csproj", "{8A480C91-954F-4065-B5A0-2ECFB3E217A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.EntityFramewoekCore", "WeChat.EntityFramewoekCore\WeChat.EntityFramewoekCore.csproj", "{8A480C91-954F-4065-B5A0-2ECFB3E217A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Domain.Shared", "WeChat.Shared\WeChat.Domain.Shared.csproj", "{C9FEB5A1-9D97-4AEC-86E3-CED2CB698D0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Domain.Shared", "WeChat.Shared\WeChat.Domain.Shared.csproj", "{C9FEB5A1-9D97-4AEC-86E3-CED2CB698D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Application.Contracts", "WeChat.Application.Contracts\WeChat.Application.Contracts.csproj", "{FAF4821B-C205-4987-BDFE-800C27EA403C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Application.Contracts", "WeChat.Application.Contracts\WeChat.Application.Contracts.csproj", "{FAF4821B-C205-4987-BDFE-800C27EA403C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Common", "WeChat.Common\WeChat.Common.csproj", "{F80B38E6-3C48-4C23-A236-8315A088F6CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{FAF4821B-C205-4987-BDFE-800C27EA403C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF4821B-C205-4987-BDFE-800C27EA403C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF4821B-C205-4987-BDFE-800C27EA403C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F80B38E6-3C48-4C23-A236-8315A088F6CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F80B38E6-3C48-4C23-A236-8315A088F6CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F80B38E6-3C48-4C23-A236-8315A088F6CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F80B38E6-3C48-4C23-A236-8315A088F6CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -7,13 +7,14 @@ using System.Threading.Tasks;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.Domain;
+using WeChat.Domain.Shared.Setting;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.EntityFramewoekCore
 {
-    [ConnectionStringName(WeChatDbProperties.ConnectionStringName)]
+    [ConnectionStringName(WeChatAppSetting.ConnectionKey)]
     public interface IWeChatDbContext: IEfCoreDbContext
     {
-        public DbSet<TokenLapse> tokenLapses { get; set; }
+        public DbSet<Token> tokenLapses { get; set; }
     }
 }

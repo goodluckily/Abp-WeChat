@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
 using WeChat.Domain.IRepository;
+using WeChat.Domain.Shared.Enum;
 using WeChat.Domain.Shared.ExceptionCodes;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.Repository
 {
-    public class TokenLapseRepository : ITokenLapseRepository
+    public class TokenRepository : ITokenRepository
     {
-        private readonly IRepository<TokenLapse, Guid> _tokenLapsesRepository;
+        private readonly IRepository<Token, Guid> _tokenLapsesRepository;
 
         #region DL
-        public TokenLapseRepository(IRepository<TokenLapse, Guid> tokenLapsesRepository)
+        public TokenRepository(IRepository<Token, Guid> tokenLapsesRepository)
         {
             _tokenLapsesRepository = tokenLapsesRepository;
         }
         #endregion
 
-        public async Task<TokenLapse> CreateTokenLapseAsync(TokenLapse tokenLapse)
+        public async Task<Token> CreateTokenAsync(Token tokenLapse)
         {
             if (await _tokenLapsesRepository.AnyAsync(x => x.Id == tokenLapse.Id))
             {
@@ -37,22 +38,32 @@ namespace WeChat.Domain.Repository
             await _tokenLapsesRepository.DeleteAsync(x => x.Id == id);
         }
 
-        public IEnumerable<TokenLapse> GetAll()
+        public IEnumerable<Token> GetAll()
         {
             return  _tokenLapsesRepository.GetListAsync(x => true).Result;
         }
 
-        public async Task<List<TokenLapse>> GetAllAsync()
+        public async Task<List<Token>> GetAllAsync()
         {
             return await _tokenLapsesRepository.GetListAsync(x => true);
         }
 
-        public async Task<TokenLapse> GetTokenLapseAsync(Guid id)
+        public Task<Token> GetTokenAsync(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Token> GetTokenByType(WeiChatEnum weiChatEnum = WeiChatEnum.CodeShare, TokenEnum tokenEnum = TokenEnum.Token)
+        {
+            return await _tokenLapsesRepository.FirstOrDefaultAsync(x => x.WeiChatType == weiChatEnum && x.TokenType == tokenEnum);
+        }
+
+        public async Task<Token> GetTokenLapseAsync(Guid id)
         {
             return await _tokenLapsesRepository.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<TokenLapse> UpdateAsync(TokenLapse tokenLapse)
+        public async Task<Token> UpdateAsync(Token tokenLapse)
         {
             if (tokenLapse.Id == Guid.Empty)
                 throw new BusinessException(WeChatExceptionCodes.IdIsNullOrEmpty);

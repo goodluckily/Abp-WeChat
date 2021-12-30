@@ -16,7 +16,7 @@ namespace WeChat.Host.EntityFrameworkCore
 
         }
 
-        public DbSet<TokenLapse> tokenLapses { get; set; }
+        public DbSet<Token> tokenLapses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

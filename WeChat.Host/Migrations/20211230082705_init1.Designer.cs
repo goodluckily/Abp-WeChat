@@ -11,8 +11,8 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    [Migration("20211229064644_init")]
-    partial class init
+    [Migration("20211230082705_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,7 +23,7 @@ namespace WeChat.Host.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WeChat.Domain.WeChat.TokenLapse", b =>
+            modelBuilder.Entity("WeChat.Domain.WeChat.Token", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
@@ -34,19 +34,27 @@ namespace WeChat.Host.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasComment("Token");
 
-                    b.Property<int>("Expires_In")
+                    b.Property<double?>("Expires_In")
+                        .IsRequired()
                         .HasMaxLength(20)
-                        .HasColumnType("int")
+                        .HasColumnType("float")
                         .HasComment("多少秒后失效");
 
-                    b.Property<DateTime>("OperationTime")
+                    b.Property<DateTime?>("OperationTime")
+                        .IsRequired()
                         .HasMaxLength(20)
                         .HasColumnType("datetime2")
                         .HasComment("操作时间");
 
+                    b.Property<int>("TokenType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WeiChatType")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("TokenLapse");
+                    b.ToTable("Token");
                 });
 #pragma warning restore 612, 618
         }

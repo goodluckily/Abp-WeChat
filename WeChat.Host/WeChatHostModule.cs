@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System.IO;
 using System.Linq;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
@@ -15,6 +17,7 @@ using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using Volo.Abp.Swashbuckle;
 using WeChat.Application;
+using WeChat.Domain.Shared.Setting;
 using WeChat.EntityFramewoekCore;
 using WeChat.Host.EntityFrameworkCore;
 using WeChat.Host.Filter;
@@ -36,9 +39,17 @@ namespace WeChat.Host
         )]
     public class WeChatHostModule : AbpModule
     {
+
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
+
+
+            #region 静态类的配置文件
+            var configuration = BuildConfiguration();
+            configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
+            configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting()); 
+            #endregion
 
             //1.配置动态API控制器
             //2.这里定义了 Application 里面可以自动的实现 webapi
@@ -48,6 +59,7 @@ namespace WeChat.Host
                 options.ConventionalControllers.Create(typeof(WeChatApplicationModule).Assembly);
             });
 
+            var sdfas = WeChatAppSetting.ConnectionKey;
             //跨域配置
             services.AddCors(option =>
             {
@@ -138,6 +150,16 @@ namespace WeChat.Host
             {
                 endpoints.MapDefaultControllerRoute();
             });
+        }
+
+
+        private static IConfigurationRoot BuildConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false);
+
+            return builder.Build();
         }
     }
 }

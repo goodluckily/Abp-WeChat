@@ -13,15 +13,15 @@ namespace WeChat.EntityFramewoekCore
     {
         public static void ConfigureWarehouse(this ModelBuilder builder)
         {
-            builder.Entity<TokenLapse>(b =>
+            builder.Entity<Token>(b =>
             {
-                b.ToTable(nameof(TokenLapse));
+                b.ToTable(nameof(Token));
                 // 不执行时，实体从基类继承的字段，可以会缺少描述和一些配置信息
                 b.ConfigureByConvention();
 
-                b.Property(f => f.Access_Token).IsRequired().HasMaxLength(20).HasComment("Token");
-                b.Property(f => f.Expires_In).IsRequired().HasMaxLength(20).HasComment("多少秒后失效");
-                b.Property(f => f.OperationTime).IsRequired().HasMaxLength(20).HasComment("操作时间");
+                b.Property(f => f.Access_Token).HasMaxLength(500).HasComment("Token");
+                b.Property(f => f.Expires_In).HasComment("多少秒后失效");
+                b.Property(f => f.OperationTime).HasComment("操作时间");
             });
         }
     }
