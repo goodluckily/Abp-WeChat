@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Net;
+using WeChat.Application;
 
 namespace WeChat.Host.Filter
 {
@@ -19,7 +21,7 @@ namespace WeChat.Host.Filter
         {
             var detail = context.Exception.Message;
             _logger.LogError(new EventId(context.Exception.HResult), context.Exception, detail);
-            context.Result = new JsonResult(new { code = 500, error = "系统异常", detail });
+            context.Result = new JsonResult(new DataResult(false, detail));
             context.ExceptionHandled = true;
         }
     }

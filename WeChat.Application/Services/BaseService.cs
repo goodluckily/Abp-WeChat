@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,19 +16,23 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Application.Services
 {
-    [RemoteService(false)]
-    public class BaseService:ApplicationService,IBaseService
+    public class BaseService : ApplicationService
     {
-        public ITokenRepository  _tokenRepository { get; init; }
+        public ITokenRepository _tokenRepository { get; init; }
 
-        public BaseService(ITokenRepository tokenRepository)
+        //public BaseService(ITokenRepository tokenRepository)
+        //{
+        //    _tokenRepository = tokenRepository;
+        //}
+        public BaseService()
         {
-            _tokenRepository = tokenRepository;
+
         }
 
+        [RemoteService(false)]
         public async Task<string> GetTokenAsync()
         {
-            var tokenDB =  await _tokenRepository.GetTokenByType();
+            var tokenDB = await _tokenRepository.GetTokenByType();
             string tokenStr = string.Empty;
             var locaTime = DateTime.Now;
             if (tokenDB != null)
@@ -61,24 +66,8 @@ namespace WeChat.Application.Services
             return tokenStr;
         }
 
-        private (string access_token, double expires_in) GetAccessTokenAndTime()
-        {
-            var accessDynamic = BasicAPI.GetAccessToken(WeChatAppSetting.Appid, WeChatAppSetting.AppSecret);
-            var val = (string)accessDynamic.ToString();
-            if (val.Contains("errcode"))
-            {
-                throw new Exception(val);
-            }
-            var access_token = accessDynamic.access_token;
-            var expires_in = accessDynamic.expires_in;
-            return (access_token, expires_in);
-        }
 
-        public string GetJsToken()
-        {
-            return "";
-        }
-
+        [RemoteService(false)]
         public string GetContent(string path)
         {
             string json = string.Empty;
@@ -92,5 +81,53 @@ namespace WeChat.Application.Services
             }
             return json;
         }
+
+        private (string access_token, double expires_in) GetAccessTokenAndTime()
+        {
+            var accessDynamic = BasicAPI.GetAccessToken(WeChatAppSetting.Appid, WeChatAppSetting.AppSecret);
+            var val = (string)accessDynamic.ToString();
+            if (val.Contains("errcode"))
+            {
+                throw new Exception(val);
+            }
+            var access_token = accessDynamic.access_token;
+            var expires_in = accessDynamic.expires_in;
+            return (access_token, expires_in);
+        }
+
+        private string GetJsToken()
+        {
+            return "";
+        }
+
+
+        #region 返回值封装
+
+        [RemoteService(false)]
+        public DataResult Json(object data, string message = "")
+        {
+            var result = new DataResult(true, data, message);
+            return result;
+        }
+        [RemoteService(false)]
+        public DataResult Json(long total, object data, string message = "")
+        {
+            var result = new DataResult(true, total, data, message);
+            return result;
+        }
+        [RemoteService(false)]
+        public DataResult Ok(string message)
+        {
+            var result = new DataResult(true, message);
+            return result;
+        }
+        [RemoteService(false)]
+        public DataResult Error(string message)
+        {
+            var result = new DataResult(false, message);
+            return result;
+        }
+
+        #endregion
     }
 }

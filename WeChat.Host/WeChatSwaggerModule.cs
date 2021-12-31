@@ -22,8 +22,6 @@ namespace WeChat.Host
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "WeChat API", Version = "v1" });
                 options.DocInclusionPredicate((docName, description) => true);
             });
-
-
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

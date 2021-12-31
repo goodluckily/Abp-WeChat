@@ -16,60 +16,86 @@ using AutoMapper;
 
 namespace WeChat.Application.Services
 {
-    public class TokenService : ApplicationService, ITokenService
+    public class TokenService : BaseService //ITokenService
     {
         private readonly ITokenRepository _tokenRepository;
-        private readonly IBaseService _baseService;
+        //private readonly IBaseService _baseService;
 
-        public TokenService(ITokenRepository tokenRepository,IBaseService baseService)
+        public TokenService(ITokenRepository tokenRepository)// : base(tokenRepository)
         {
             _tokenRepository = tokenRepository;
-            _baseService = baseService;
         }
 
-        [HttpPost("CreateTokenLapseAsync1")]
-        public async Task<TokenLapseDto> CreateTokenLapseAsync([FromBody]TokenLapseDto tokenLapse)
+        [HttpGet("getWeChatToken")]
+        public async Task<DataResult> GetWeChatToken() 
+        {
+            return Json(await GetTokenAsync());
+        }
+
+        [HttpPost("createToken")]
+        public async Task<DataResult> CreateTokenAsync([FromBody] TokenLapseDto tokenLapse)
         {
             tokenLapse.OperationTime = DateTime.Now;
             var tokenDb = new Domain.WeChat.Token(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
 
             var dbTokenModel = await _tokenRepository.CreateTokenAsync(tokenDb);
             var dto = ObjectMapper.Map<Domain.WeChat.Token, TokenLapseDto>(dbTokenModel);
-            return dto;
+            return Json(dto);
         }
 
-        [RemoteService(true)]
-        [HttpDelete]
-        public Task DeleteAsync(Guid id)
-        {
-            throw new ArgumentNullException("删除无效Null");
-        }
-
-        [HttpGet("GetAll")]
-        public IEnumerable<TokenLapseDto> GetAll()
+        [HttpGet("getDBTokenAll")]
+        public DataResult GetDbTokenAll()
         {
             var dbTokenModel = _tokenRepository.GetAll().ToList();
             var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
-            return dto;
+            return Json(dto);
         }
 
-        [RemoteService(false)]
-        public Task<TokenLapseDto> GetTokenLapseAsync(Guid id)
+        #region 自定义封装返回 测试
+
+        /// <summary>
+        /// 直接 list
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("test1")]
+        public DataResult test1()
         {
-            throw new NotImplementedException();
+            var dbTokenModel = _tokenRepository.GetAll().ToList();
+            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
+            return Json(dto);
         }
 
-        [RemoteService(false)]
-        public Task<TokenLapseDto> UpdateAsync(TokenLapseDto tokenLapse)
+        /// <summary>
+        /// 分页 list
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("test2")]
+        public DataResult test2()
         {
-            throw new NotImplementedException();
+            var dbTokenModel = _tokenRepository.GetAll().ToList();
+            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
+            return Json(dto.Count, dto);
         }
 
-        [HttpGet("GetTokenAsync")]
-        public async Task<string> GetTokenAsync() 
+        /// <summary>
+        /// 成功
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("test3")]
+        public DataResult test3()
         {
-            var token = await _baseService.GetTokenAsync();
-            return token;
+            return Ok("操作成功");
         }
+
+        /// <summary>
+        /// 失败
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("test4")]
+        public DataResult test4()
+        {
+            return Error("操作失败");
+        }
+        #endregion
     }
 }
