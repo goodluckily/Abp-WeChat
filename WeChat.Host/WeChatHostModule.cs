@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Autofac;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
@@ -59,7 +63,6 @@ namespace WeChat.Host
                 options.ConventionalControllers.Create(typeof(WeChatApplicationModule).Assembly);
             });
 
-            var sdfas = WeChatAppSetting.ConnectionKey;
             //跨域配置
             services.AddCors(option =>
             {
@@ -115,7 +118,7 @@ namespace WeChat.Host
 
             #endregion
 
-            //异常处理
+            //2.异常处理 3.返回结果处理
             Configure<MvcOptions>(options =>
             {
                 var filterEx = options.Filters.ToList().FirstOrDefault(x => x is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
@@ -125,6 +128,7 @@ namespace WeChat.Host
                 options.Filters.Add(typeof(WeChatActionFilter));//3.添加自己写的 
             });
 
+           
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -153,7 +157,6 @@ namespace WeChat.Host
                 endpoints.MapDefaultControllerRoute();
             });
         }
-
 
         private static IConfigurationRoot BuildConfiguration()
         {
