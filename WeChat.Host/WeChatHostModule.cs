@@ -145,7 +145,8 @@ namespace WeChat.Host
 
             app.UseCors("CorsPolicy");
 
-            app.UseAuthorization();
+            app.UseAuthentication();  //添加认证
+            app.UseAuthorization();   //添加授权
 
             app.UseEndpoints(endpoints =>
             {

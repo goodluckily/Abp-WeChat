@@ -26,6 +26,11 @@ namespace WeChat.Application.Services
             _tokenRepository = tokenRepository;
             _baseService = baseService;
         }
+        /// <summary>
+        /// 手动创建 WeChat Token
+        /// </summary>
+        /// <param name="tokenLapse"></param>
+        /// <returns></returns>
 
         [HttpPost("CreateTokenLapseAsync1")]
         public async Task<TokenLapseDto> CreateTokenLapseAsync([FromBody]TokenLapseDto tokenLapse)
@@ -45,6 +50,10 @@ namespace WeChat.Application.Services
             throw new ArgumentNullException("删除无效Null");
         }
 
+        /// <summary>
+        /// 获取全部 WeChat Token
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetAll")]
         public IEnumerable<TokenLapseDto> GetAll()
         {
