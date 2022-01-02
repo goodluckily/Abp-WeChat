@@ -16,7 +16,7 @@ using AutoMapper;
 
 namespace WeChat.Application.Services
 {
-    public class TokenService : BaseService //ITokenService
+    public class TokenService : BaseService //ITokenService 
     {
         private readonly ITokenRepository _tokenRepository;
         //private readonly IBaseService _baseService;
