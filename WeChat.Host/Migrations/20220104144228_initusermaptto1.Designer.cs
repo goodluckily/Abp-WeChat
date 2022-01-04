@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.Host.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    partial class WeChatSecondDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220104144228_initusermaptto1")]
+    partial class initusermaptto1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

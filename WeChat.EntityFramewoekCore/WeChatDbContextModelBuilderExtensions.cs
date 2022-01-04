@@ -1,10 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.EntityFrameworkCore.Modeling;
+using Volo.Abp.Guids;
+using Volo.Abp.Users;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.EntityFramewoekCore
@@ -13,6 +16,7 @@ namespace WeChat.EntityFramewoekCore
     {
         public static void ConfigureWarehouse(this ModelBuilder builder)
         {
+
             #region 示例
 
             ////简单的 一对多
@@ -96,6 +100,7 @@ namespace WeChat.EntityFramewoekCore
 
             #endregion
 
+
             builder.Entity<Token>(b =>
             {
                 b.ToTable(nameof(Token));
@@ -118,6 +123,33 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.LogType).HasMaxLength(50).HasComment("日志类型");
                 b.Property(f => f.LogLevel).HasMaxLength(50).HasComment("日志等级");
             });
+            #region 用户相关的 种子数据
+            var userInfo = new UserInfo(Guid.NewGuid())
+            {
+                LoginName = "admin",
+                PassWrod = "123456",
+                NickName = "管理员",
+                IsActive = true,
+                IsDel = true,
+                CreateTime = DateTime.Now,
+            };
+            var role = new Role(Guid.NewGuid())
+            {
+                Name = "管理者",
+                Description = "最高权限管理者",
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now,
+                Active = true,
+                IsDel = false
+            };
+            var userAndroleMap = new UserAndRoleMap()
+            {
+                UserId = userInfo.Id,
+                RoleId = role.Id,
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now
+            };
+            #endregion
 
             builder.Entity<UserInfo>(b =>
             {
@@ -128,6 +160,9 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.Email).HasMaxLength(50);
                 b.Property(f => f.Phone).HasMaxLength(50);
                 b.Property(f => f.AvatarUrl).HasMaxLength(150).HasComment("头像Url地址");
+
+                //种子数据
+                b.HasData(userInfo);
             });
 
             builder.Entity<Role>(b =>
@@ -135,8 +170,13 @@ namespace WeChat.EntityFramewoekCore
                 b.ToTable(nameof(Role));
                 b.Property(f => f.Name).HasMaxLength(50);
                 b.Property(f => f.Description).HasMaxLength(150).HasComment("说明");
+
+                b.HasData(role);
             });
-            
+
+            builder.Entity<UserAndRoleMap>(b => { b.HasData(userAndroleMap); });
+
+            //多对多关系 指定
             builder.Entity<UserInfo>().HasMany(x => x.Roles).WithMany(x => x.UserInfos)
                 .UsingEntity<UserAndRoleMap>(
                     j => j.HasOne(pt => pt.Role).WithMany(t => t.userAndRoleMap).HasForeignKey(pt => pt.RoleId),

@@ -23,11 +23,17 @@ namespace WeChat.Domain.WeChat
 
         public DateTime? EditTime { get; set; }
 
-        public bool IsActive { get; set; } = true;
-        public bool IsDel { get; set; } = false;
+        public bool? IsActive { get; set; } = true;
+        public bool? IsDel { get; set; } = false;
 
         public ICollection<UserAndRoleMap> userAndRoleMap { get; set; }
 
         public ICollection<Role> Roles { get; set; }
+
+
+        public UserInfo(Guid id):base(id)
+        {
+
+        }
     }
 }

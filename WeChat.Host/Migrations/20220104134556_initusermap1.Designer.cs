@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.Host.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    partial class WeChatSecondDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220104134556_initusermap1")]
+    partial class initusermap1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,13 +77,13 @@ namespace WeChat.Host.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("Active")
+                    b.Property<bool>("Active")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime?>("CreateTime")
+                    b.Property<DateTime>("CreateTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("CreateUserId")
+                    b.Property<Guid>("CreateUserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -92,10 +94,10 @@ namespace WeChat.Host.Migrations
                     b.Property<DateTime?>("EditTime")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("EditUserId")
+                    b.Property<Guid>("EditUserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("IsDel")
+                    b.Property<bool>("IsDel")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -105,18 +107,6 @@ namespace WeChat.Host.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("06cef685-e87c-4121-890c-89c6bae7b5bf"),
-                            Active = true,
-                            CreateTime = new DateTime(2022, 1, 4, 22, 42, 27, 399, DateTimeKind.Local).AddTicks(6942),
-                            CreateUserId = new Guid("8e4fe282-a026-4181-b5a7-566780103908"),
-                            Description = "最高权限管理者",
-                            IsDel = false,
-                            Name = "管理者"
-                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.WeChat.Token", b =>
@@ -167,15 +157,6 @@ namespace WeChat.Host.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserAndRoleMap");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("8e4fe282-a026-4181-b5a7-566780103908"),
-                            RoleId = new Guid("06cef685-e87c-4121-890c-89c6bae7b5bf"),
-                            CreateTime = new DateTime(2022, 1, 4, 22, 42, 27, 399, DateTimeKind.Local).AddTicks(8603),
-                            CreateUserId = new Guid("8e4fe282-a026-4181-b5a7-566780103908")
-                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.WeChat.UserInfo", b =>
@@ -205,10 +186,10 @@ namespace WeChat.Host.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<bool?>("IsActive")
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<bool?>("IsDel")
+                    b.Property<bool>("IsDel")
                         .HasColumnType("bit");
 
                     b.Property<string>("LoginName")
@@ -232,18 +213,6 @@ namespace WeChat.Host.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserInfo");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("8e4fe282-a026-4181-b5a7-566780103908"),
-                            CreateTime = new DateTime(2022, 1, 4, 22, 42, 27, 399, DateTimeKind.Local).AddTicks(4564),
-                            IsActive = true,
-                            IsDel = true,
-                            LoginName = "admin",
-                            NickName = "管理员",
-                            PassWrod = "123456"
-                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.WeChat.UserAndRoleMap", b =>

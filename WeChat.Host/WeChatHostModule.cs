@@ -17,6 +17,7 @@ using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
+using Volo.Abp.Guids;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using WeChat.Application;
@@ -142,7 +143,6 @@ namespace WeChat.Host
 
             #endregion
 
-
             #region JWT or authtoken配置
             //密钥
             var secretKey = configuration.GetSection("JWT:SecretKey");
@@ -206,6 +206,16 @@ namespace WeChat.Host
 
             #endregion
 
+            #region 依据数据类型 配置 Guid
+            //SequentialAtEnd（默认）适用于SQL Server。
+            //SequentialAsString由MySQL和PostgreSQL 使用。
+            //SequentialAsBinary由Oracle 使用
+            Configure<AbpSequentialGuidGeneratorOptions>(options =>
+            {
+                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAtEnd;
+            });
+
+            #endregion
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
