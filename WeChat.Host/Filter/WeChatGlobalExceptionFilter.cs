@@ -23,13 +23,14 @@ namespace WeChat.Host.Filter
         public void OnException(ExceptionContext context)
         {
             var detail = context.Exception.Message;
-            context.Result = new JsonResult(new DataResult(false, detail));
-            context.ExceptionHandled = true;
 
             //控制器 输出
             _logger.LogError(new EventId(context.Exception.HResult), context.Exception, detail);
             //Db 输出
             NLogCommon.WriteDBLog(NLog.LogLevel.Error, LogType.Web, detail,exception: new Exception(detail,context.Exception));
+
+            context.Result = new JsonResult(new DataResult(false, detail));
+            context.ExceptionHandled = true;
         }
     }
 }

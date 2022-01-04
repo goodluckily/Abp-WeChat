@@ -24,6 +24,12 @@ namespace WeChat.Application
             this.Message = message;
         }
 
+        public DataResult(int code, string message)
+        {
+            this.Code = code;
+            this.Message = message;
+        }
+
         public DataResult(bool flag, string message)
         {
             this.Code = flag ? (int)HttpStatusCode.OK : (int)HttpStatusCode.InternalServerError;

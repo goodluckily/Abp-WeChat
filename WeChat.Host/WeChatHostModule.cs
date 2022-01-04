@@ -1,25 +1,24 @@
-﻿using Autofac;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.IO;
 using System.Linq;
-using System.Reflection;
+using System.Net;
+using System.Text;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
-using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
-using Volo.Abp.Swashbuckle;
 using WeChat.Application;
 using WeChat.Domain.Shared.Setting;
 using WeChat.EntityFramewoekCore;
@@ -35,7 +34,7 @@ namespace WeChat.Host
         typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
 
         typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+                                                      //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
 
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule),
@@ -52,7 +51,7 @@ namespace WeChat.Host
             #region 静态类的配置文件
             var configuration = BuildConfiguration();
             configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
-            configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting()); 
+            configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting());
             #endregion
 
             //1.配置动态API控制器
@@ -124,11 +123,89 @@ namespace WeChat.Host
                 var filterEx = options.Filters.ToList().FirstOrDefault(x => x is ServiceFilterAttribute attribute && attribute.ServiceType.Equals(typeof(AbpExceptionFilter)));
                 if (filterEx is not null)
                     options.Filters.Remove(filterEx);//1.移除 abp定义的
-                options.Filters.Add(typeof(WeChatGlobalExceptionFilter));//2.添加自己写的
-                options.Filters.Add(typeof(WeChatActionFilter));//3.添加自己写的 
+                options.Filters.Add(typeof(WeChatGlobalExceptionFilter));//2.添加自己写的 异常处理
+                options.Filters.Add(typeof(WeChatActionFilter));//3.添加自己写的  控制器 AOP
             });
 
-           
+            #region Session
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".WeChat.Session";
+                options.IdleTimeout = System.TimeSpan.FromDays(1);//设置session的过期时间
+                options.Cookie.HttpOnly = true;//设置在浏览器不能通过js获得该cookie的值
+                options.Cookie.SameSite = SameSiteMode.Strict;//严格模式
+            });
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddHttpContextAccessor();
+
+            #endregion
+
+
+            #region JWT or authtoken配置
+            //密钥
+            var secretKey = configuration.GetSection("JWT:SecretKey");
+            var key = Encoding.UTF8.GetBytes(secretKey.Value);
+
+            //jwt鉴权授权
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+
+                x.Events = new JwtBearerEvents
+                {
+                    //先触发MessageReceived事件，来获取Token
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.HttpContext.Request.Cookies["authtoken"];
+                        var requestPath = context.HttpContext.Request.Path.Value;
+                        if (!string.IsNullOrWhiteSpace(accessToken))//&& requestPath.Contains("hubs/signalr")
+                        {
+                            context.Token = accessToken;
+                        }
+                        return System.Threading.Tasks.Task.CompletedTask;
+                    },
+                    //此处为权限验证失败后触发的事件
+                    OnChallenge = async context =>
+                    {
+                        //var accessToken = context.HttpContext.Request.Cookies["authtoken"];
+                        //var requestPath = context.HttpContext.Request.Path.Value;
+
+                        //此处代码为终止.Net Core默认的返回类型和数据结果，这个很重要哦，必须
+                        context.HandleResponse();
+                        //自定义返回的数据类型
+                        context.Response.ContentType = "application/json";
+                        context.HttpContext.Response.StatusCode = (int)HttpStatusCode.OK;
+                        context.Response.StatusCode = (int)HttpStatusCode.OK;
+
+                        //清除
+                        context.HttpContext.Response.Headers.Remove("Authorization");
+                        context.HttpContext.Response.Cookies.Delete("authtoken");
+
+                        await context.Response.WriteAsJsonAsync(new DataResult((int)HttpStatusCode.Unauthorized, "Token无效"));
+                        return;
+                    }
+                };
+
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,//是否验证SecurityKey token 正确性
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    RequireExpirationTime = true,//是否需要验证 过期时间
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            #endregion
+
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -151,6 +228,8 @@ namespace WeChat.Host
 
             app.UseAuthentication();  //添加认证
             app.UseAuthorization();   //添加授权
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

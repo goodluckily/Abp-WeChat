@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Volo.Abp.Domain.Entities;
+
+namespace WeChat.Domain.WeChat
+{
+    public class UserAndRoleMap
+    {
+        public Guid UserId { get; set; }
+        public UserInfo UserInfo { get; set; }
+
+        public Guid RoleId { get; set; }
+        public Role Role { get; set; }
+
+        public Guid? CreateUserId { get; set; }
+        public DateTime? CreateTime { get; set; }
+    }
+}
