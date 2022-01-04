@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Modularity;
@@ -13,6 +14,10 @@ namespace WeChat.EntityFramewoekCore
         )]
     public class WeChatEntityFrameworkCoreModule : AbpModule
     {
-
+        public override void ConfigureServices(ServiceConfigurationContext context)
+        {
+            var services = context.Services;
+            //services.AddAbpDbContext<WeChatDbContext>();
+        }
     }
 }

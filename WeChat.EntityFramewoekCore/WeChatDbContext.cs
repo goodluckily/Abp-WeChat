@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Data;
+using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.Guids;
 using WeChat.Domain;
 using WeChat.Domain.Shared.Setting;
 using WeChat.Domain.WeChat;
@@ -13,9 +15,10 @@ using WeChat.Domain.WeChat;
 namespace WeChat.EntityFramewoekCore
 {
     [ConnectionStringName(WeChatAppSetting.ConnectionKey)]
-    public class WeChatDbContext : AbpDbContext<WeChatDbContext>, IWeChatDbContext
+    public class WeChatDbContext : AbpDbContext<WeChatDbContext>
     {
-        public WeChatDbContext(DbContextOptions<WeChatDbContext> options):base(options)
+
+        public WeChatDbContext(DbContextOptions<WeChatDbContext> options) :base(options)
         {
         }
 

@@ -100,7 +100,6 @@ namespace WeChat.EntityFramewoekCore
 
             #endregion
 
-
             builder.Entity<Token>(b =>
             {
                 b.ToTable(nameof(Token));
@@ -133,7 +132,7 @@ namespace WeChat.EntityFramewoekCore
                 IsDel = true,
                 CreateTime = DateTime.Now,
             };
-            var role = new Role(Guid.NewGuid())
+            var role = new Role(Guid.NewGuid())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
             {
                 Name = "管理者",
                 Description = "最高权限管理者",
@@ -186,7 +185,6 @@ namespace WeChat.EntityFramewoekCore
                         j.HasKey(x => new { x.UserId, x.RoleId });
                     }
                 );
-
         }
     }
 }

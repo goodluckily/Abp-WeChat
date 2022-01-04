@@ -7,11 +7,13 @@ using System.IO;
 using System;
 using Volo.Abp.EntityFrameworkCore.MySQL;
 using WeChat.Domain.Shared.Setting;
+using Volo.Abp.Guids;
 
 namespace WeChat.Host.EntityFrameworkCore
 {
     public class WeChatSecondDbContextFactory : IDesignTimeDbContextFactory<WeChatSecondDbContext>
     {
+      
         public WeChatSecondDbContext CreateDbContext(string[] args)
         {
             

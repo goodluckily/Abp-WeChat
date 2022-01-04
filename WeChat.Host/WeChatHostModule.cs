@@ -30,16 +30,13 @@ namespace WeChat.Host
 {
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
-
+        typeof(AbpAutofacModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
         typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
-
         typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-                                                      //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
-
+        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatApplicationModule),
-        typeof(WeChatEntityFrameworkCoreModule),
-        typeof(AbpAutofacModule)
+        typeof(WeChatEntityFrameworkCoreModule)
         )]
     public class WeChatHostModule : AbpModule
     {
@@ -214,7 +211,6 @@ namespace WeChat.Host
             {
                 options.DefaultSequentialGuidType = SequentialGuidType.SequentialAtEnd;
             });
-
             #endregion
         }
 
