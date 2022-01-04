@@ -16,5 +16,6 @@ namespace WeChat.EntityFramewoekCore
     public interface IWeChatDbContext: IEfCoreDbContext
     {
         public DbSet<Token> tokenLapses { get; set; }
+        public DbSet<Log> logs { get; set; }
     }
 }

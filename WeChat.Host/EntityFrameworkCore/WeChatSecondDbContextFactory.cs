@@ -27,7 +27,5 @@ namespace WeChat.Host.EntityFrameworkCore
 
             return new WeChatSecondDbContext(builder.Options);
         }
-
-        
     }
 }

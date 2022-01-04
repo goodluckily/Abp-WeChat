@@ -16,6 +16,7 @@ using AutoMapper;
 
 namespace WeChat.Application.Services
 {
+    [Route("Token")]
     public class TokenService : BaseService //ITokenService 
     {
         private readonly ITokenRepository _tokenRepository;
@@ -57,6 +58,17 @@ namespace WeChat.Application.Services
         }
 
         #region 自定义封装返回 测试
+
+        /// <summary>
+        /// 异常测试
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        [HttpGet("ExTest")]
+        public DataResult ExTest() 
+        {
+            throw new ArgumentNullException("数据空异常");
+        }
 
         /// <summary>
         /// 直接 list

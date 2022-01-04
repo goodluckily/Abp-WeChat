@@ -11,8 +11,8 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    [Migration("20211230082705_init1")]
-    partial class init1
+    [Migration("20220104063517_initlog1")]
+    partial class initlog1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,26 +23,69 @@ namespace WeChat.Host.Migrations
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("WeChat.Domain.WeChat.Log", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Exception")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("LogDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LogLevel")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("日志等级");
+
+                    b.Property<string>("LogType")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)")
+                        .HasComment("日志类型");
+
+                    b.Property<string>("Logger")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MachineIp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MachineName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Message")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetRequestMethod")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetRequestUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int")
+                        .HasComment("操作人");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Log");
+                });
+
             modelBuilder.Entity("WeChat.Domain.WeChat.Token", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Access_Token")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)")
                         .HasComment("Token");
 
                     b.Property<double?>("Expires_In")
-                        .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("float")
                         .HasComment("多少秒后失效");
 
                     b.Property<DateTime?>("OperationTime")
-                        .IsRequired()
-                        .HasMaxLength(20)
                         .HasColumnType("datetime2")
                         .HasComment("操作时间");
 

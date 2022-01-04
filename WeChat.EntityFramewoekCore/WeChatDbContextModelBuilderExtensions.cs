@@ -23,6 +23,18 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.Expires_In).HasComment("多少秒后失效");
                 b.Property(f => f.OperationTime).HasComment("操作时间");
             });
+
+            builder.Entity<Log>(b => 
+            {
+                b.ToTable(nameof(Log));
+                b.ConfigureByConvention();
+
+                //HasColumnName 用来设置要映射的列名
+                //HasComment    表或列的注释
+                b.Property(f => f.UserId).HasComment("操作人");
+                b.Property(f => f.LogType).HasMaxLength(50).HasComment("日志类型");
+                b.Property(f => f.LogLevel).HasMaxLength(50).HasComment("日志等级");
+            });
         }
     }
 }

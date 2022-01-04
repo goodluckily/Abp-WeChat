@@ -68,6 +68,9 @@ namespace WeChat.Host
             app.UseAbpSwaggerUI(options =>
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Warehouse API");
+
+                //swagger 默认折叠
+                options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
             });
         }
     }

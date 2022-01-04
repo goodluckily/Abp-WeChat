@@ -20,6 +20,7 @@ namespace WeChat.EntityFramewoekCore
         }
 
         public DbSet<Token> tokenLapses { get; set; }
+        public DbSet<Log> logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

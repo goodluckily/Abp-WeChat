@@ -17,11 +17,11 @@ namespace WeChat.Host.EntityFrameworkCore
         }
 
         public DbSet<Token> tokenLapses { get; set; }
+        public DbSet<Log> logs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-
             builder.ConfigureWarehouse();
         }
     }

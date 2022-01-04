@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.Host.EntityFrameworkCore;
@@ -10,9 +11,10 @@ using WeChat.Host.EntityFrameworkCore;
 namespace WeChat.Host.Migrations
 {
     [DbContext(typeof(WeChatSecondDbContext))]
-    partial class WeChatSecondDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220104035242_initlog")]
+    partial class initlog
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,6 +60,15 @@ namespace WeChat.Host.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NetRequestUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetUserAuthtype")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetUserIdentity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NetUserIsauthenticated")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("UserId")
