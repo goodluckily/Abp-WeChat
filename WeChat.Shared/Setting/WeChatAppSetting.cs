@@ -8,25 +8,25 @@ namespace WeChat.Domain.Shared.Setting
 {
     public class WeChatAppSetting
     {
-        /// <summary>
-        /// 连接字符串
-        /// </summary>
-        public static string DBConnectionStr{ get; set; }
-        /// <summary>
-        /// 连接字符串 Key
-        /// </summary>
-        public const  string ConnectionKey = "DBConnectionStr";
+        ///// <summary>
+        ///// 连接字符串
+        ///// </summary>
+        //public static string DBConnectionStr{ get; set; }
+        ///// <summary>
+        ///// 连接字符串 Key
+        ///// </summary>
+        //public const  string ConnectionKey = "DBConnectionStr";
 
-        public static string Token { get; set; }
-        public static string Appid { get; set; }
-        public static string AppSecret { get; set; }
+        //public static string Token { get; set; }
+        //public static string Appid { get; set; }
+        //public static string AppSecret { get; set; }
 
-        #region JWT相关配置
+        //#region JWT相关配置
 
-        public static string SecretKey { get; set; }
-        public static int? RefreshTime { get; set; }
-        public static int? ExpireTime { get; set; }
+        //public static string SecretKey { get; set; }
+        //public static int? RefreshTime { get; set; }
+        //public static int? ExpireTime { get; set; }
 
-        #endregion
+        //#endregion
     }
 }

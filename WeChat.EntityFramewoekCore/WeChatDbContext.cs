@@ -14,7 +14,7 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.EntityFramewoekCore
 {
-    [ConnectionStringName(WeChatAppSetting.ConnectionKey)]
+    [ConnectionStringName("WeChat")]
     public class WeChatDbContext : AbpDbContext<WeChatDbContext>
     {
 

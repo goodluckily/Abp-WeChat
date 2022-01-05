@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Application.Services
 {
+    [Authorize]
     public class BaseService : ApplicationService
     {
         public ITokenRepository _tokenRepository { get; init; }
@@ -84,7 +86,9 @@ namespace WeChat.Application.Services
 
         private (string access_token, double expires_in) GetAccessTokenAndTime()
         {
-            var accessDynamic = BasicAPI.GetAccessToken(WeChatAppSetting.Appid, WeChatAppSetting.AppSecret);
+            var appid = ConfigCommon.Configuration["WeChatConfig:Appid"];
+            var AppSecret = ConfigCommon.Configuration["WeChatConfig:AppSecret"];
+            var accessDynamic = BasicAPI.GetAccessToken(appid, AppSecret);
             var val = (string)accessDynamic.ToString();
             if (val.Contains("errcode"))
             {
@@ -99,7 +103,6 @@ namespace WeChat.Application.Services
         {
             return "";
         }
-
 
         #region 返回值封装
 

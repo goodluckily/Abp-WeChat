@@ -21,6 +21,7 @@ using Volo.Abp.Guids;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using WeChat.Application;
+using WeChat.Common;
 using WeChat.Domain.Shared.Setting;
 using WeChat.EntityFramewoekCore;
 using WeChat.Host.Filter;
@@ -46,10 +47,10 @@ namespace WeChat.Host
 
 
             #region 静态类的配置文件
-            var configuration = BuildConfiguration();
-            configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
-            configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting());
-            configuration.GetSection("JWT").Bind(new WeChatAppSetting());
+            //var configuration = BuildConfiguration();
+            //configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
+            //configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting());
+            //configuration.GetSection("JWT").Bind(new WeChatAppSetting());
             #endregion
 
             //1.配置动态API控制器
@@ -137,9 +138,10 @@ namespace WeChat.Host
             #endregion
 
             #region JWT or authtoken配置
+
             //密钥
-            var secretKey = configuration.GetSection("JWT:SecretKey");
-            var key = Encoding.UTF8.GetBytes(secretKey.Value);
+            var secretKey = ConfigCommon.Configuration["JWT:SecretKey"];
+            var key = Encoding.UTF8.GetBytes(secretKey);
 
             //jwt鉴权授权
             services.AddAuthentication(x =>
@@ -157,7 +159,7 @@ namespace WeChat.Host
                     //先触发MessageReceived事件，来获取Token
                     OnMessageReceived = context =>
                     {
-                        var accessToken = context.HttpContext.Request.Cookies["authtoken"];
+                        var accessToken = context.HttpContext.Request.Cookies["Authtoken"];
                         var requestPath = context.HttpContext.Request.Path.Value;
                         if (!string.IsNullOrWhiteSpace(accessToken))//&& requestPath.Contains("hubs/signalr")
                         {
@@ -168,7 +170,7 @@ namespace WeChat.Host
                     //此处为权限验证失败后触发的事件
                     OnChallenge = async context =>
                     {
-                        //var accessToken = context.HttpContext.Request.Cookies["authtoken"];
+                        //var accessToken = context.HttpContext.Request.Cookies["Authtoken"];
                         //var requestPath = context.HttpContext.Request.Path.Value;
 
                         //此处代码为终止.Net Core默认的返回类型和数据结果，这个很重要哦，必须
@@ -180,9 +182,10 @@ namespace WeChat.Host
 
                         //清除
                         context.HttpContext.Response.Headers.Remove("Authorization");
-                        context.HttpContext.Response.Cookies.Delete("authtoken");
+                        context.HttpContext.Response.Cookies.Delete("Authtoken");
+                        context.HttpContext.Response.Cookies.Delete("RoleValue");
 
-                        await context.Response.WriteAsJsonAsync(new DataResult((int)HttpStatusCode.Unauthorized, "Token无效"));
+                        await context.Response.WriteAsJsonAsync(new DataResult((int)HttpStatusCode.Unauthorized, "登陆错误,请重新登陆"));
                         return;
                     }
                 };
@@ -239,13 +242,13 @@ namespace WeChat.Host
             });
         }
 
-        private static IConfigurationRoot BuildConfiguration()
-        {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false);
+        //private static IConfigurationRoot BuildConfiguration()
+        //{
+        //    var builder = new ConfigurationBuilder()
+        //        .SetBasePath(Directory.GetCurrentDirectory())
+        //        .AddJsonFile("appsettings.json", optional: false);
 
-            return builder.Build();
-        }
+        //    return builder.Build();
+        //}
     }
 }

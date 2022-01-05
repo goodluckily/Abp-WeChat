@@ -38,7 +38,7 @@ namespace WeChat.Host
                 {
                     Description = "在下框中输入请求头中需要添加Jwt授权Token：Bearer Token",
                     Name = "Authorization",
-                    In = ParameterLocation.Header,
+                    In = ParameterLocation.Cookie,
                     Type = SecuritySchemeType.ApiKey,
                     BearerFormat = "JWT",
                     Scheme = "Bearer"
