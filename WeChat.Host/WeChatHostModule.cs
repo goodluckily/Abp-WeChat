@@ -23,7 +23,6 @@ using Volo.Abp.Modularity;
 using WeChat.Application;
 using WeChat.Domain.Shared.Setting;
 using WeChat.EntityFramewoekCore;
-using WeChat.Host.EntityFrameworkCore;
 using WeChat.Host.Filter;
 
 namespace WeChat.Host
@@ -34,7 +33,7 @@ namespace WeChat.Host
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
         typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
         typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+                                                      //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule)
         )]
@@ -97,12 +96,8 @@ namespace WeChat.Host
             });
 
             #region DB
-            services.AddAbpDbContext<WeChatDbContext>(options =>
-                {
-                    options.AddDefaultRepositories(includeAllEntities: true);
-                });
 
-            services.AddAbpDbContext<WeChatSecondDbContext>(options =>
+            services.AddAbpDbContext<WeChatDbContext>(options =>
             {
                 options.AddDefaultRepositories(includeAllEntities: true);
             });

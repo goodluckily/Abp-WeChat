@@ -31,7 +31,7 @@ namespace WeChat.EntityFramewoekCore
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.ConfigureWarehouse();
+            builder.ConfigureWarehouse(GuidGenerator);
         }
     }
 }

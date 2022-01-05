@@ -13,6 +13,7 @@ using WeChat.Domain.IRepository;
 using Microsoft.AspNetCore.Cors;
 using Volo.Abp.ObjectMapping;
 using AutoMapper;
+using Volo.Abp.Guids;
 
 namespace WeChat.Application.Services
 {
@@ -20,11 +21,14 @@ namespace WeChat.Application.Services
     public class TokenService : BaseService //ITokenService 
     {
         private readonly ITokenRepository _tokenRepository;
+        private readonly IGuidGenerator _guidGenerator;
+
         //private readonly IBaseService _baseService;
 
-        public TokenService(ITokenRepository tokenRepository)// : base(tokenRepository)
+        public TokenService(ITokenRepository tokenRepository, IGuidGenerator guidGenerator)// : base(tokenRepository)
         {
             _tokenRepository = tokenRepository;
+            _guidGenerator = guidGenerator;
         }
         /// <summary>
         /// 手动创建 WeChat Token
@@ -52,6 +56,7 @@ namespace WeChat.Application.Services
         [HttpGet("getDBTokenAll")]
         public DataResult GetDbTokenAll()
         {
+            var guid = _guidGenerator.Create();
             var dbTokenModel = _tokenRepository.GetAll().ToList();
             var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
             return Json(dto);

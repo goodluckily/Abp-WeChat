@@ -14,7 +14,7 @@ namespace WeChat.EntityFramewoekCore
 {
     public static class WeChatDbContextModelBuilderExtensions
     {
-        public static void ConfigureWarehouse(this ModelBuilder builder)
+        public static void ConfigureWarehouse(this ModelBuilder builder, IGuidGenerator _guidGenerator)
         {
 
             #region 示例
@@ -122,8 +122,9 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.LogType).HasMaxLength(50).HasComment("日志类型");
                 b.Property(f => f.LogLevel).HasMaxLength(50).HasComment("日志等级");
             });
+
             #region 用户相关的 种子数据
-            var userInfo = new UserInfo(Guid.NewGuid())
+            var userInfo = new UserInfo(_guidGenerator.Create())
             {
                 LoginName = "admin",
                 PassWrod = "123456",
@@ -132,7 +133,7 @@ namespace WeChat.EntityFramewoekCore
                 IsDel = true,
                 CreateTime = DateTime.Now,
             };
-            var role = new Role(Guid.NewGuid())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
+            var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
             {
                 Name = "管理者",
                 Description = "最高权限管理者",
