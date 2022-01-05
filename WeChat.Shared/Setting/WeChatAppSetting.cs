@@ -20,5 +20,13 @@ namespace WeChat.Domain.Shared.Setting
         public static string Token { get; set; }
         public static string Appid { get; set; }
         public static string AppSecret { get; set; }
+
+        #region JWT相关配置
+
+        public static string SecretKey { get; set; }
+        public static int? RefreshTime { get; set; }
+        public static int? ExpireTime { get; set; }
+
+        #endregion
     }
 }

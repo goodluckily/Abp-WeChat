@@ -25,8 +25,9 @@ namespace WeChat.EntityFramewoekCore
         public DbSet<Token> tokenLapses { get; set; }
         public DbSet<Log> logs { get; set; }
 
-        public DbSet<UserInfo> userInfos { get; set; }
-        public DbSet<UserAndRoleMap> userAndRoleMaps { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
+        public DbSet<Role> Role { get; set; }
+        public DbSet<UserAndRoleMap> UserAndRoleMap { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

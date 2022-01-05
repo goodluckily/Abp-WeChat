@@ -49,6 +49,7 @@ namespace WeChat.Host
             var configuration = BuildConfiguration();
             configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
             configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting());
+            configuration.GetSection("JWT").Bind(new WeChatAppSetting());
             #endregion
 
             //1.配置动态API控制器

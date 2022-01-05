@@ -14,10 +14,10 @@ namespace WeChat.Domain.Repository
 {
     public class TokenRepository : ITokenRepository
     {
-        private readonly IRepository<Token, Guid> _tokenLapsesRepository;
+        private readonly IRepository<Token> _tokenLapsesRepository;
 
         #region DL
-        public TokenRepository(IRepository<Token, Guid> tokenLapsesRepository)
+        public TokenRepository(IRepository<Token> tokenLapsesRepository)
         {
             _tokenLapsesRepository = tokenLapsesRepository;
         }

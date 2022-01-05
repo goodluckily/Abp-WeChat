@@ -8,7 +8,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace WeChat.Domain.WeChat
 {
-    public class UserAndRoleMap
+    public class UserAndRoleMap:Entity
     {
         public Guid UserId { get; set; }
         public UserInfo UserInfo { get; set; }
@@ -18,5 +18,10 @@ namespace WeChat.Domain.WeChat
 
         public Guid? CreateUserId { get; set; }
         public DateTime? CreateTime { get; set; }
+
+        public override object[] GetKeys()
+        {
+            throw new NotImplementedException("GetKeys 暂时未实现");
+        }
     }
 }

@@ -179,8 +179,8 @@ namespace WeChat.EntityFramewoekCore
             //多对多关系 指定
             builder.Entity<UserInfo>().HasMany(x => x.Roles).WithMany(x => x.UserInfos)
                 .UsingEntity<UserAndRoleMap>(
-                    j => j.HasOne(pt => pt.Role).WithMany(t => t.userAndRoleMap).HasForeignKey(pt => pt.RoleId),
-                    j => j.HasOne(pt => pt.UserInfo).WithMany(a => a.userAndRoleMap).HasForeignKey(p => p.UserId),
+                    j => j.HasOne(pt => pt.Role).WithMany(t => t.UserAndRoleMaps).HasForeignKey(pt => pt.RoleId),
+                    j => j.HasOne(pt => pt.UserInfo).WithMany(a => a.UserAndRoleMaps).HasForeignKey(p => p.UserId),
                     j =>
                     {
                         j.HasKey(x => new { x.UserId, x.RoleId });

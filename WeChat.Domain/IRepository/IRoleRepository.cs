@@ -10,9 +10,8 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
 {
-    public interface IUserInfoRepository:ITransientDependency
+    public interface IRoleRepository: ITransientDependency
     {
-        Task<List<UserInfo>> GetAllAsync();
-        Task<UserInfo> GetUserLogin(string loginName, string passWord);
+        Task<List<Role>> GetAllAsync();
     }
 }

@@ -20,7 +20,7 @@ namespace WeChat.Domain.WeChat
         public bool? Active { get; set; } = true;
         public bool? IsDel { get; set; } = false;
 
-        public ICollection<UserAndRoleMap> userAndRoleMap { get; set; }
+        public ICollection<UserAndRoleMap> UserAndRoleMaps { get; set; }
         public ICollection<UserInfo> UserInfos { get; set; }
         public Role(Guid id):base(id)
         {

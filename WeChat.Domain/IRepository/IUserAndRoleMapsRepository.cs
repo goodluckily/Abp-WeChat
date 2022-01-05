@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,9 +11,9 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
 {
-    public interface IUserInfoRepository:ITransientDependency
+    public interface IUserAndRoleMapsRepository: ITransientDependency
     {
-        Task<List<UserInfo>> GetAllAsync();
-        Task<UserInfo> GetUserLogin(string loginName, string passWord);
+        Task<List<UserAndRoleMap>> GetAllAsync();
+        List<UserAndRoleMap> getRolesByUserId(Guid userId);
     }
 }
