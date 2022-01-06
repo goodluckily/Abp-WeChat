@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WeChat.Application.Contracts.DtoModels;
@@ -50,6 +51,7 @@ namespace WeChat.Application.Services
                 //得到角色Ids
                 var userAndRoles = _userAndRoleMapsRepository.getRolesByUserId(user.Id);
                 var rolesStr = string.Join(",", userAndRoles.Select(x => x.RoleId).ToArray());
+
                 //成功则生成token，将token返回
                 var token = AuthCommon.CreateToken(user.LoginName, user.Id.ToString(), rolesStr, expiresTime);
 
@@ -66,6 +68,18 @@ namespace WeChat.Application.Services
                 return Json(token);
             }
             return Error("用户登录失败，账号密码错误");
+        }
+
+        /// <summary>
+        /// GetUserInfo
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetUserInfo")]
+        public DataResult GetUserInfo()
+        {
+            var id = CurrentUserId();
+            var user = CurrentUserInfo();
+            return Json(user);
         }
 
         /// <summary>

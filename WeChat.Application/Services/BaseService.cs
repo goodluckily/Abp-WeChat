@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -21,14 +22,36 @@ namespace WeChat.Application.Services
     public class BaseService : ApplicationService
     {
         public ITokenRepository _tokenRepository { get; init; }
+        public IHttpContextAccessor _httpContextAccessor { get; init; }
+        public IUserInfoRepository _userInfoRepository { get; init; }
 
-        //public BaseService(ITokenRepository tokenRepository)
-        //{
-        //    _tokenRepository = tokenRepository;
-        //}
         public BaseService()
         {
 
+        }
+
+        /// <summary>
+        /// 获取当前用户Id
+        /// </summary>
+        /// <returns></returns>
+        [RemoteService(false)]
+        public Guid CurrentUserId()
+        {
+            var claimsUser = _httpContextAccessor.HttpContext?.User;
+            var userId = AuthCommon.GetUserId(claimsUser);
+            return userId;
+        }
+
+        /// <summary>
+        /// 获取当前用户 信息
+        /// </summary>
+        /// <returns></returns>
+        [RemoteService(false)]
+        public UserInfo CurrentUserInfo()
+        {
+            var userId = CurrentUserId();
+            var userinfo = _userInfoRepository.GetUserInfoById(userId);
+            return userinfo;
         }
 
         [RemoteService(false)]
@@ -67,7 +90,6 @@ namespace WeChat.Application.Services
             }
             return tokenStr;
         }
-
 
         [RemoteService(false)]
         public string GetContent(string path)
@@ -132,5 +154,6 @@ namespace WeChat.Application.Services
         }
 
         #endregion
+
     }
 }

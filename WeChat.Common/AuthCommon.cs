@@ -98,13 +98,13 @@ namespace WeChat.Common
             };
         }
 
-        public static int GetUserId(ClaimsPrincipal user)
+        public static Guid GetUserId(ClaimsPrincipal user)
         {
             //应该要先验证token的可用性
             var claimsIdentity = user.Identity as ClaimsIdentity;
-            //var userId = claimsIdentity.FindFirst("userId")?.Value;
-            var userId = claimsIdentity.FindFirst(ClaimTypes.Email)?.Value;
-            return userId.TryParseToInt();
+            var value = claimsIdentity.FindFirst(ClaimTypes.Actor)?.Value;
+            var userId = Guid.Parse(value);
+            return userId;
         }
 
         public static void AddBlackList(string token)

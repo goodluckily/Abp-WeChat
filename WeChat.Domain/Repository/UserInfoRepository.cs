@@ -22,17 +22,21 @@ namespace WeChat.Domain.Repository
         public UserInfoRepository(IRepository<UserInfo, Guid> userInfoRepository)
         {
             _userInfoRepository = userInfoRepository;
-        } 
+        }
         #endregion
 
         public async Task<List<UserInfo>> GetAllAsync()
         {
             return await _userInfoRepository.GetListAsync();
         }
+        public UserInfo GetUserInfoById(Guid userId)
+        {
+            return _userInfoRepository.FirstOrDefault(x => x.Id == userId);
+        }
 
         public async Task<UserInfo> GetUserLogin(string loginName, string passWord)
         {
-           return await _userInfoRepository.FirstOrDefaultAsync(x => x.LoginName == loginName && x.PassWrod == passWord);
+            return await _userInfoRepository.FirstOrDefaultAsync(x => x.LoginName == loginName && x.PassWrod == passWord);
         }
     }
 }

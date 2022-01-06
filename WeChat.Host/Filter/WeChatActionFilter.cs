@@ -5,6 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc.Auditing;
+using WeChat.Common;
 
 namespace WeChat.Host.Filter
 {
@@ -22,8 +23,9 @@ namespace WeChat.Host.Filter
         {
             var action = context.RouteData.Values["action"];
             var controller = context.RouteData.Values["controller"];
-            var requestMessage = context.HttpContext.Request.Method + "     " + controller + "/" + action;
+            var requestMessage = context.HttpContext.Request.Method + "   " + controller + "/" + action;
 
+            var userId = AuthCommon.GetUserId(context.HttpContext.User);
             _logger.LogInformation(requestMessage);
             base.OnActionExecuting(context);
         }
