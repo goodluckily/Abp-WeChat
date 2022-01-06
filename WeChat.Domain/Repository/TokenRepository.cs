@@ -40,7 +40,7 @@ namespace WeChat.Domain.Repository
 
         public IEnumerable<Token> GetAll()
         {
-            return  _tokenLapsesRepository.GetListAsync(x => true).Result;
+            return _tokenLapsesRepository.GetListAsync(x => true).Result;
         }
 
         public async Task<List<Token>> GetAllAsync()
@@ -76,7 +76,7 @@ namespace WeChat.Domain.Repository
 
             warehouse.UpdateTokenLapse(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
             await _tokenLapsesRepository.UpdateAsync(warehouse);
-            
+
             return warehouse;
         }
     }
