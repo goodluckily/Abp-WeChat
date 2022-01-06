@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace WeChat.Application.Contracts.DtoModels
 {
+    /// <summary>
+    /// token 转换DTO
+    /// </summary>
     public class TokenLapseDto
     {
         public string Access_Token { get; set; }

@@ -2,6 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+    <DocumentationFile>\WeChat.Application.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

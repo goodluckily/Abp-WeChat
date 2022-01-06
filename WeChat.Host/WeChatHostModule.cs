@@ -31,12 +31,12 @@ namespace WeChat.Host
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
-        //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
-        typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
         typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
                                                       //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatApplicationModule),
-        typeof(WeChatEntityFrameworkCoreModule)
+        typeof(WeChatEntityFrameworkCoreModule),
+        //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
+        typeof(WeChatSwaggerModule)//使用自己定义的 Swagger 模块
         )]
     public class WeChatHostModule : AbpModule
     {
@@ -185,7 +185,7 @@ namespace WeChat.Host
                         context.HttpContext.Response.Cookies.Delete("Authtoken");
                         context.HttpContext.Response.Cookies.Delete("RoleValue");
 
-                        await context.Response.WriteAsJsonAsync(new DataResult((int)HttpStatusCode.Unauthorized, "登陆错误,请重新登陆"));
+                        await context.Response.WriteAsJsonAsync(new DataResult((int)HttpStatusCode.Unauthorized, "失效,请重新登陆"));
                         return;
                     }
                 };

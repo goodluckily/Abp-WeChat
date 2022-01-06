@@ -30,6 +30,7 @@ namespace WeChat.Application.Services
             _tokenRepository = tokenRepository;
             _guidGenerator = guidGenerator;
         }
+
         /// <summary>
         /// 手动创建 WeChat Token
         /// </summary>
@@ -42,6 +43,11 @@ namespace WeChat.Application.Services
             return Json(await GetTokenAsync());
         }
 
+        /// <summary>
+        /// 创建微信 Token
+        /// </summary>
+        /// <param name="tokenLapse"></param>
+        /// <returns></returns>
         [HttpPost("createToken")]
         public async Task<DataResult> CreateTokenAsync([FromBody] TokenLapseDto tokenLapse)
         {

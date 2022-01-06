@@ -30,6 +30,11 @@ namespace WeChat.Application.Services
             _httpContextAccessor = httpContextAccessor;
         }
 
+        /// <summary>
+        /// 登陆
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("Login")]
         public async Task<DataResult> Login([FromBody] LoginDto login)
@@ -47,7 +52,7 @@ namespace WeChat.Application.Services
                 var rolesStr = string.Join(",", userAndRoles.Select(x => x.RoleId).ToArray());
                 //成功则生成token，将token返回
                 var token = AuthCommon.CreateToken(user.LoginName, user.Id.ToString(), rolesStr, expiresTime);
-                
+
                 //添加到cookie 配置
                 var cOptions = new CookieOptions
                 {
@@ -63,6 +68,10 @@ namespace WeChat.Application.Services
             return Error("用户登录失败，账号密码错误");
         }
 
+        /// <summary>
+        /// 获取全部用户列表
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("GetUserList")]
         public async Task<DataResult> GetUserList()
         {

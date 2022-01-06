@@ -6,9 +6,19 @@ using System.Threading.Tasks;
 
 namespace WeChat.Application.Contracts.DtoModels
 {
+    /// <summary>
+    /// 登陆DTO
+    /// </summary>
     public class LoginDto
     {
+        /// <summary>
+        /// 登陆账户
+        /// </summary>
         public string LoginName { get; set; }
+
+        /// <summary>
+        /// 登陆密码
+        /// </summary>
 
         public string PassWord { get; set; }
     }
