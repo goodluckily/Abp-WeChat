@@ -10,8 +10,9 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
 {
-    public interface IRoleRepository: ITransientDependency
+    public interface IRoleRepository : ITransientDependency
     {
+        Task<Role> CreateRoleAsync(Role role);
         Task<List<Role>> GetAllAsync();
     }
 }
