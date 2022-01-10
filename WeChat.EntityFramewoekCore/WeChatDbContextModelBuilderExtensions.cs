@@ -163,6 +163,7 @@ namespace WeChat.EntityFramewoekCore
 
                 //种子数据
                 b.HasData(userInfo);
+                b.ConfigureByConvention();
             });
 
             builder.Entity<Role>(b =>
@@ -172,9 +173,10 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.Description).HasMaxLength(150).HasComment("说明");
 
                 b.HasData(role);
+                b.ConfigureByConvention();
             });
 
-            builder.Entity<UserAndRoleMap>(b => { b.HasData(userAndroleMap); });
+            builder.Entity<UserAndRoleMap>(b => { b.HasData(userAndroleMap); b.ConfigureByConvention(); });
 
             //多对多关系 指定
             builder.Entity<UserInfo>().HasMany(x => x.Roles).WithMany(x => x.UserInfos)
@@ -190,6 +192,8 @@ namespace WeChat.EntityFramewoekCore
             builder.Entity<Netcnblogs>(b =>
             {
                 b.ToTable(nameof(Netcnblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.ConfigureByConvention();
             });
         }
     }

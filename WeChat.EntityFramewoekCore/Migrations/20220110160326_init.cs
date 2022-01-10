@@ -30,6 +30,33 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Netcnblogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RecommendNum = table.Column<int>(type: "int", nullable: true),
+                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthorManUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CommentNum = table.Column<int>(type: "int", nullable: true),
+                    ReadNum = table.Column<int>(type: "int", nullable: true),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    CreateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    EditTime = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
+                    IsDel = table.Column<bool>(type: "bit", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Netcnblogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -116,17 +143,17 @@ namespace WeChat.EntityFramewoekCore.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsActive", "IsDel", "Name" },
-                values: new object[] { new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"), new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(3270), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), "最高权限管理者", null, null, true, false, "管理者" });
+                values: new object[] { new Guid("29403342-2366-8911-12c6-3a0156e7bb02"), new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(7852), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), "最高权限管理者", null, null, true, false, "管理者" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "AvatarUrl", "CreateTime", "CreateUserId", "EditTime", "EditUserId", "Email", "IsActive", "IsDel", "LoginName", "NickName", "PassWrod", "Phone" },
-                values: new object[] { new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), null, new DateTime(2022, 1, 10, 18, 38, 10, 603, DateTimeKind.Local).AddTicks(2196), null, null, null, null, true, true, "admin", "管理员", "123456", null });
+                values: new object[] { new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), null, new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(5435), null, null, null, null, true, true, "admin", "管理员", "123456", null });
 
             migrationBuilder.InsertData(
                 table: "UserAndRoleMap",
                 columns: new[] { "RoleId", "UserId", "CreateTime", "CreateUserId" },
-                values: new object[] { new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(4704), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa") });
+                values: new object[] { new Guid("29403342-2366-8911-12c6-3a0156e7bb02"), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(9021), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAndRoleMap_RoleId",
@@ -138,6 +165,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Log");
+
+            migrationBuilder.DropTable(
+                name: "Netcnblogs");
 
             migrationBuilder.DropTable(
                 name: "Token");

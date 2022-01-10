@@ -10,6 +10,7 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Application.Services.Job
 {
+    [Route("NetBlogJob")]
     public class NetBlogJob : BaseService
     {
         private readonly INetcnblogsRepository _netcnblogsRepository;

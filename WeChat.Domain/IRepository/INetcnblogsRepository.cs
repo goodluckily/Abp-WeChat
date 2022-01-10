@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.DependencyInjection;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
 {
-    public interface INetcnblogsRepository
+    public interface INetcnblogsRepository : ITransientDependency
     {
         Task<Netcnblogs> CreateNetcnblogsAsync(Netcnblogs netcnblogs);
         Task<List<Netcnblogs>> CreateNetcnblogsAsync(List<Netcnblogs> netcnblogs);

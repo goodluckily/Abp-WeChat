@@ -11,8 +11,8 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    [Migration("20220110103811_init")]
-    partial class init
+    [Migration("20220110162146_init4")]
+    partial class init4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.SqlServer)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.13")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("WeChat.Domain.WeChat.Log", b =>
@@ -71,6 +71,65 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.ToTable("Log");
                 });
 
+            modelBuilder.Entity("WeChat.Domain.WeChat.Netcnblogs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("AnalyzingType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Author")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AuthorManUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CommentNum")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("CreateUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("EditTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("EditUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool?>("IsDel")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("ReadNum")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("RecommendNum")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReleaseTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SubContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("标题");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Netcnblogs");
+                });
+
             modelBuilder.Entity("WeChat.Domain.WeChat.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -110,9 +169,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"),
-                            CreateTime = new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(3270),
-                            CreateUserId = new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"),
+                            Id = new Guid("5faa5830-4e13-7be0-d51f-3a0156f88710"),
+                            CreateTime = new DateTime(2022, 1, 11, 0, 21, 46, 385, DateTimeKind.Local).AddTicks(755),
+                            CreateUserId = new Guid("31e0f7bc-d09a-f371-9f7f-3a0156f88710"),
                             Description = "最高权限管理者",
                             IsActive = true,
                             IsDel = false,
@@ -172,10 +231,10 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"),
-                            RoleId = new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"),
-                            CreateTime = new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(4704),
-                            CreateUserId = new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa")
+                            UserId = new Guid("31e0f7bc-d09a-f371-9f7f-3a0156f88710"),
+                            RoleId = new Guid("5faa5830-4e13-7be0-d51f-3a0156f88710"),
+                            CreateTime = new DateTime(2022, 1, 11, 0, 21, 46, 385, DateTimeKind.Local).AddTicks(1743),
+                            CreateUserId = new Guid("31e0f7bc-d09a-f371-9f7f-3a0156f88710")
                         });
                 });
 
@@ -236,8 +295,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"),
-                            CreateTime = new DateTime(2022, 1, 10, 18, 38, 10, 603, DateTimeKind.Local).AddTicks(2196),
+                            Id = new Guid("31e0f7bc-d09a-f371-9f7f-3a0156f88710"),
+                            CreateTime = new DateTime(2022, 1, 11, 0, 21, 46, 384, DateTimeKind.Local).AddTicks(8384),
                             IsActive = true,
                             IsDel = true,
                             LoginName = "admin",
