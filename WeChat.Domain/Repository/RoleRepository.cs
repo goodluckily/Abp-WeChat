@@ -20,12 +20,17 @@ namespace WeChat.Domain.Repository
         public RoleRepository(IRepository<Role, Guid> roleRepository)
         {
             _roleRepository = roleRepository;
-        } 
+        }
         #endregion
 
         public async Task<List<Role>> GetAllAsync()
         {
             return await _roleRepository.GetListAsync();
+        }
+
+        public async Task<Role> CreateRoleAsync(Role role)
+        {
+            return await _roleRepository.InsertAsync(role);
         }
     }
 }
