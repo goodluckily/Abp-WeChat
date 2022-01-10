@@ -18,7 +18,7 @@ namespace WeChat.EntityFramewoekCore
     public class WeChatDbContext : AbpDbContext<WeChatDbContext>
     {
 
-        public WeChatDbContext(DbContextOptions<WeChatDbContext> options) :base(options)
+        public WeChatDbContext(DbContextOptions<WeChatDbContext> options) : base(options)
         {
         }
 
@@ -28,6 +28,9 @@ namespace WeChat.EntityFramewoekCore
         public DbSet<UserInfo> UserInfo { get; set; }
         public DbSet<Role> Role { get; set; }
         public DbSet<UserAndRoleMap> UserAndRoleMap { get; set; }
+
+        public DbSet<Netcnblogs> Netcnblogs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
+using Volo.Abp.Linq;
 using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared.Enum;
 using WeChat.Domain.Shared.ExceptionCodes;
@@ -26,9 +27,27 @@ namespace WeChat.Domain.Repository
             return await _userAndRoleMapsRepository.GetListAsync();
         }
 
-        public List<UserAndRoleMap> getRolesByUserId(Guid userId)
+        public async Task<List<UserAndRoleMap>> getRolesByUserId(Guid userId)
         {
-            return _userAndRoleMapsRepository.Where(x => x.UserId == userId).ToList();
+            return await _userAndRoleMapsRepository.GetListAsync(x => x.UserId == userId);
+        }
+
+        public async Task<List<UserAndRoleMap>> getUserAndRoleMapByUserId(Guid userId)
+        {
+            //得到关联Role数据
+            var queryable = await _userAndRoleMapsRepository.WithDetailsAsync(x => x.Role, x => x.UserInfo);
+            //筛选条件
+            var query = queryable.Where(x => x.UserId == userId).ToList();
+            return query;
+        }
+
+        public async Task<List<UserAndRoleMap>> getUserAndRoleMapByRoleId(Guid roleId)
+        {
+            //得到关联Role数据
+            var queryable = await _userAndRoleMapsRepository.WithDetailsAsync(x => x.Role, x => x.UserInfo);
+            //筛选条件
+            var query = queryable.Where(x => x.RoleId == roleId).ToList();
+            return query;
         }
     }
 }

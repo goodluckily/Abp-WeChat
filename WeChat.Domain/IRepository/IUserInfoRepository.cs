@@ -14,6 +14,8 @@ namespace WeChat.Domain.IRepository
     {
         Task<List<UserInfo>> GetAllAsync();
         Task<UserInfo> GetUserLogin(string loginName, string passWord);
+        Task<UserInfo> GetUserForRolesLogin(string loginName, string passWord);
+        Task<UserInfo> GetUserInfoAsyncById(Guid userId);
         UserInfo GetUserInfoById(Guid userId);
     }
 }

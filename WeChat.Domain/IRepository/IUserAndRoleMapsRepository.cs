@@ -11,9 +11,23 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
 {
-    public interface IUserAndRoleMapsRepository: ITransientDependency
+    public interface IUserAndRoleMapsRepository : ITransientDependency
     {
         Task<List<UserAndRoleMap>> GetAllAsync();
-        List<UserAndRoleMap> getRolesByUserId(Guid userId);
+        Task<List<UserAndRoleMap>> getRolesByUserId(Guid userId);
+
+        /// <summary>
+        /// 依据用户Id 得到相关角色数据
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        Task<List<UserAndRoleMap>> getUserAndRoleMapByRoleId(Guid roleId);
+
+        /// <summary>
+        /// 依据角色Id 得到相关用户数据
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        Task<List<UserAndRoleMap>> getUserAndRoleMapByUserId(Guid userId);
     }
 }

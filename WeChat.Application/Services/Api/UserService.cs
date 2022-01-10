@@ -41,7 +41,7 @@ namespace WeChat.Application.Services
         [HttpPost("Login")]
         public async Task<DataResult> Login([FromBody] LoginDto login)
         {
-            var user = await _userInfoRepository.GetUserLogin(login.LoginName, login.PassWord);
+            var user = await _userInfoRepository.GetUserForRolesLogin(login.LoginName, login.PassWord);
             if (user is not null)
             {
                 var ExpireTime = ConfigCommon.GetConfig<int>("JWT:ExpireTime");
@@ -49,9 +49,13 @@ namespace WeChat.Application.Services
                 //时效时间
                 var expiresTime = DateTime.Now.AddMinutes(ExpireTime);
 
-                //得到角色Ids
-                var userAndRoles = _userAndRoleMapsRepository.getRolesByUserId(user.Id);
-                var rolesStr = string.Join(",", userAndRoles.Select(x => x.RoleId).ToArray());
+                //得到角色Ids 关联表数据
+                //var userRoles = _userAndRoleMapsRepository.getUserAndRoleMapByUserId(user.Id);
+                //var userAndRoles = await _userAndRoleMapsRepository.getRolesByUserId(user.Id);
+                //var rolesStr = string.Join(",", userAndRoles.Select(x => x.RoleId).ToArray());
+
+                var userAndRoles = user.Roles.ToList();
+                var rolesStr = string.Join(",", userAndRoles.Select(x => x.Id).ToArray());
 
                 //成功则生成token，将token返回
                 var token = AuthCommon.CreateToken(user.LoginName, user.Id.ToString(), rolesStr, expiresTime);
@@ -63,9 +67,10 @@ namespace WeChat.Application.Services
                     SameSite = SameSiteMode.Strict,
                     Expires = expiresTime
                 };
+
                 _httpContextAccessor.HttpContext.Response.Cookies.Append("Authtoken", token, cOptions);
                 _httpContextAccessor.HttpContext.Response.Cookies.Append("RoleValue", rolesStr, cOptions);
-                NLogCommon.WriteFileLog(NLog.LogLevel.Info, LogType.Web, "登陆成功", user.Id.ToString());
+                NLogCommon.WriteFileLog(NLog.LogLevel.Info, LogTypeEnum.Web, "登陆成功", user.Id.ToString());
                 return Json(token);
             }
             return Error("用户登录失败，账号密码错误");
@@ -76,7 +81,7 @@ namespace WeChat.Application.Services
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetUserInfo")]
-        public DataResult GetUserInfo()
+        public async Task<DataResult> GetUserInfo()
         {
             var id = CurrentUserId();
             var user = CurrentUserInfo();

@@ -108,6 +108,9 @@ namespace WeChat.Host
             {
                 //optios.UseMySQL();
                 optios.UseSqlServer();
+
+                //Microsoft.EntityFrameworkCore.Proxies //需要安装Buget包
+                //optios.DbContextOptions.UseLazyLoadingProxies(); //启用延时加载
             });
 
             #endregion

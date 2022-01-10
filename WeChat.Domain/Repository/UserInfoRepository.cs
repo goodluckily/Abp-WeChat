@@ -29,6 +29,11 @@ namespace WeChat.Domain.Repository
         {
             return await _userInfoRepository.GetListAsync();
         }
+        public async Task<UserInfo> GetUserInfoAsyncById(Guid userId)
+        {
+            return await _userInfoRepository.GetAsync(userId, false);
+        }
+
         public UserInfo GetUserInfoById(Guid userId)
         {
             return _userInfoRepository.FirstOrDefault(x => x.Id == userId);
@@ -37,6 +42,12 @@ namespace WeChat.Domain.Repository
         public async Task<UserInfo> GetUserLogin(string loginName, string passWord)
         {
             return await _userInfoRepository.FirstOrDefaultAsync(x => x.LoginName == loginName && x.PassWrod == passWord);
+        }
+
+        public async Task<UserInfo> GetUserForRolesLogin(string loginName, string passWord)
+        {
+            var queryable = await _userInfoRepository.WithDetailsAsync(x => x.Roles);
+            return queryable.FirstOrDefault(x => x.LoginName == loginName && x.PassWrod == passWord);
         }
     }
 }

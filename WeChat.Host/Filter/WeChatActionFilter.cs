@@ -23,10 +23,14 @@ namespace WeChat.Host.Filter
         {
             var action = context.RouteData.Values["action"];
             var controller = context.RouteData.Values["controller"];
-            var requestMessage = context.HttpContext.Request.Method + "   " + controller + "/" + action;
+            var method = context.HttpContext.Request.Method;
+            var route = controller + "/" + action;
 
-            var userId = AuthCommon.GetUserId(context.HttpContext.User);
-            _logger.LogInformation(requestMessage);
+            if (!route.ToLower().Equals("user/login"))
+            {
+                var userId = AuthCommon.GetUserId(context.HttpContext.User);
+            }
+            _logger.LogInformation(method + "    " + route);
             base.OnActionExecuting(context);
         }
 

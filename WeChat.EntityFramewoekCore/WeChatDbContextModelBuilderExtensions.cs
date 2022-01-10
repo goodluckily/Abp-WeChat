@@ -139,7 +139,7 @@ namespace WeChat.EntityFramewoekCore
                 Description = "最高权限管理者",
                 CreateUserId = userInfo.Id,
                 CreateTime = DateTime.Now,
-                Active = true,
+                IsActive = true,
                 IsDel = false
             };
             var userAndroleMap = new UserAndRoleMap()
@@ -186,6 +186,11 @@ namespace WeChat.EntityFramewoekCore
                         j.HasKey(x => new { x.UserId, x.RoleId });
                     }
                 );
+
+            builder.Entity<Netcnblogs>(b =>
+            {
+                b.ToTable(nameof(Netcnblogs));
+            });
         }
     }
 }

@@ -20,7 +20,7 @@ namespace WeChat.Common
         /// <param name="logType">日志类型</param>
         /// <param name="message">信息</param>
         /// <param name="exception">异常</param>
-        public static void WriteDBLog(LogLevel logLevel, LogType logType, string message,string OptionUserId = null, Exception exception = null)
+        public static void WriteDBLog(LogLevel logLevel, LogTypeEnum logType, string message,string OptionUserId = null, Exception exception = null)
         {
             LogEventInfo theEvent = new LogEventInfo(logLevel, dbLogger.Name, message);
             theEvent.Properties["Id"] = Guid.NewGuid().ToString();
@@ -37,7 +37,7 @@ namespace WeChat.Common
         /// <param name="logType">日志类型</param>
         /// <param name="message">信息</param>
         /// <param name="exception">异常</param>
-        public static void WriteFileLog(LogLevel logLevel, LogType logType, string message, string OptionUserId = null, Exception exception = null)
+        public static void WriteFileLog(LogLevel logLevel, LogTypeEnum logType, string message, string OptionUserId = null, Exception exception = null)
         {
             LogEventInfo theEvent = new LogEventInfo(logLevel, fileLogger.Name, message);
             theEvent.Properties["Id"] = Guid.NewGuid().ToString();

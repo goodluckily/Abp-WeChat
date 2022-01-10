@@ -28,15 +28,15 @@ namespace WeChat.Host
                 NLogCommon.EnsureNlogConfig("NLog.config", ConnectionStr);
                 //其他项目启动时需要做的事情
                 //code
-                NLogCommon.WriteDBLog(NLog.LogLevel.Trace, LogType.Web, "网站启动成功");
+                NLogCommon.WriteDBLog(NLog.LogLevel.Trace, LogTypeEnum.Web, "网站启动成功");
                 host.Run();
             }
             catch (Exception ex)
             {
                 //使用nlog写到本地日志文件（万一数据库没创建/连接成功）
                 string errorMessage = "网站启动初始化数据异常";
-                NLogCommon.WriteFileLog(NLog.LogLevel.Error, LogType.Web, errorMessage, exception: new Exception(errorMessage, ex));
-                NLogCommon.WriteDBLog(NLog.LogLevel.Error, LogType.Web, errorMessage, exception: new Exception(errorMessage, ex));
+                NLogCommon.WriteFileLog(NLog.LogLevel.Error, LogTypeEnum.Web, errorMessage, exception: new Exception(errorMessage, ex));
+                NLogCommon.WriteDBLog(NLog.LogLevel.Error, LogTypeEnum.Web, errorMessage, exception: new Exception(errorMessage, ex));
             }
         }
 

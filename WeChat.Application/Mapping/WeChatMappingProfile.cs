@@ -9,12 +9,13 @@ using WeChat.Domain.WeChat;
 
 namespace WeChat.Application.Mapping
 {
-    public class WeChatMappingProfile:Profile
+    public class WeChatMappingProfile : Profile
     {
         //配置实体之间的映射关系
         public WeChatMappingProfile()
         {
             CreateMap<Token, TokenLapseDto>().ReverseMap();
+            CreateMap<Netcnblogs, NetcnblogsDto>().ReverseMap();
         }
     }
 }

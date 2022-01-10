@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeChat.EntityFramewoekCore.Migrations
 {
-    public partial class init1 : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -40,7 +40,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     EditUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     EditTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Active = table.Column<bool>(type: "bit", nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: true),
                     IsDel = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
@@ -115,18 +115,18 @@ namespace WeChat.EntityFramewoekCore.Migrations
 
             migrationBuilder.InsertData(
                 table: "Role",
-                columns: new[] { "Id", "Active", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsDel", "Name" },
-                values: new object[] { new Guid("3b06ea55-9997-a7b4-effa-3a013b7ee4c6"), true, new DateTime(2022, 1, 5, 16, 19, 10, 154, DateTimeKind.Local).AddTicks(3504), new Guid("8db61cfc-c0f7-fcc9-7b83-3a013b7ee4c5"), "最高权限管理者", null, null, false, "管理者" });
+                columns: new[] { "Id", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsActive", "IsDel", "Name" },
+                values: new object[] { new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"), new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(3270), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), "最高权限管理者", null, null, true, false, "管理者" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "AvatarUrl", "CreateTime", "CreateUserId", "EditTime", "EditUserId", "Email", "IsActive", "IsDel", "LoginName", "NickName", "PassWrod", "Phone" },
-                values: new object[] { new Guid("8db61cfc-c0f7-fcc9-7b83-3a013b7ee4c5"), null, new DateTime(2022, 1, 5, 16, 19, 10, 150, DateTimeKind.Local).AddTicks(6479), null, null, null, null, true, true, "admin", "管理员", "123456", null });
+                values: new object[] { new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), null, new DateTime(2022, 1, 10, 18, 38, 10, 603, DateTimeKind.Local).AddTicks(2196), null, null, null, null, true, true, "admin", "管理员", "123456", null });
 
             migrationBuilder.InsertData(
                 table: "UserAndRoleMap",
                 columns: new[] { "RoleId", "UserId", "CreateTime", "CreateUserId" },
-                values: new object[] { new Guid("3b06ea55-9997-a7b4-effa-3a013b7ee4c6"), new Guid("8db61cfc-c0f7-fcc9-7b83-3a013b7ee4c5"), new DateTime(2022, 1, 5, 16, 19, 10, 154, DateTimeKind.Local).AddTicks(6244), new Guid("8db61cfc-c0f7-fcc9-7b83-3a013b7ee4c5") });
+                values: new object[] { new Guid("9ad08a4d-b1c0-699e-f5e1-3a0155bdf4ac"), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa"), new DateTime(2022, 1, 10, 18, 38, 10, 604, DateTimeKind.Local).AddTicks(4704), new Guid("12949c9f-b090-266f-7415-3a0155bdf4aa") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAndRoleMap_RoleId",

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WeChat.Domain.Shared.Enum
 {
-    public enum LogType
+    public enum LogTypeEnum
     {
         [Description("网站")]
         Web,

@@ -54,6 +54,7 @@ namespace WeChat.Application.Services
             return userinfo;
         }
 
+
         [RemoteService(false)]
         public async Task<string> GetTokenAsync()
         {
