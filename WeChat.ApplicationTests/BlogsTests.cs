@@ -22,7 +22,10 @@ namespace WeChat.ApplicationTests
             //Blogs.GetToDayNewsCnblogsContent();
 
             //3
-            new ATest().jiexiContent().Wait();
+            //new ATest().jiexiContent().Wait();
+
+            //4
+            Juejin.GetJuejinNewsContent();
         }
     }
 }
