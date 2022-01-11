@@ -30,7 +30,7 @@ namespace WeChat.EntityFramewoekCore
         public DbSet<UserAndRoleMap> UserAndRoleMap { get; set; }
 
         public DbSet<Netcnblogs> Netcnblogs { get; set; }
-
+        public DbSet<JueJinblogs> JueJinblogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

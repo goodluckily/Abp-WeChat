@@ -189,6 +189,7 @@ namespace WeChat.EntityFramewoekCore
                     }
                 );
 
+            //博客园
             builder.Entity<Netcnblogs>(b =>
             {
                 b.ToTable(nameof(Netcnblogs));
@@ -203,6 +204,23 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.CommentNum).HasComment("评论数");
                 b.Property(f => f.RecommendNum).HasComment("推荐数");
                 b.Property(f => f.ReadNum).HasComment("阅读数");
+
+                b.ConfigureByConvention();
+            });
+            //掘金
+            builder.Entity<JueJinblogs>(b =>
+            {
+                b.ToTable(nameof(JueJinblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.Img).HasComment("主图");
+                b.Property(f => f.SubContent).HasComment("文章简介");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.Author).HasMaxLength(520).HasComment("作者");
+                b.Property(f => f.AuthorManUrl).HasComment("作者主页地址");
+                b.Property(f => f.ReleaseTimeStr).HasComment("发布时间 string");
+
+                b.Property(f => f.CommentNum).HasComment("评论数");
+                b.Property(f => f.GiveLikeNum).HasComment("点赞数");
 
                 b.ConfigureByConvention();
             });
