@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IServices\**" />
+    <EmbeddedResource Remove="IServices\**" />
+    <None Remove="IServices\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Volo.Abp.Ddd.Application.Contracts" Version="4.4.4" />
   </ItemGroup>
 

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WeChat.Application.Services;
+using WeChat.Common.Analyzing;
 
 namespace WeChat.ApplicationTests
 {
@@ -14,8 +15,14 @@ namespace WeChat.ApplicationTests
         [TestMethod()]
         public void GetCnblogsContentTest()
         {
-            var blog = new Blogs();
-            blog.GetCnblogsContent();
+            //1
+            //Blogs.GetNetCnblogsContent();
+
+            //2
+            //Blogs.GetToDayNewsCnblogsContent();
+
+            //3
+            new ATest().jiexiContent().Wait();
         }
     }
 }

@@ -193,6 +193,17 @@ namespace WeChat.EntityFramewoekCore
             {
                 b.ToTable(nameof(Netcnblogs));
                 b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.Img).HasComment("主图");
+                b.Property(f => f.SubContent).HasComment("文章简介");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.Author).HasMaxLength(520).HasComment("作者");
+                b.Property(f => f.AuthorManUrl).HasComment("作者主页地址");
+                b.Property(f => f.ReleaseTime).HasComment("发布时间");
+
+                b.Property(f => f.CommentNum).HasComment("评论数");
+                b.Property(f => f.RecommendNum).HasComment("推荐数");
+                b.Property(f => f.ReadNum).HasComment("阅读数");
+
                 b.ConfigureByConvention();
             });
         }

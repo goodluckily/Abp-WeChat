@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
-using WeChat.Application.Contracts.IServices;
 using WeChat.Common;
 using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared.Enum;

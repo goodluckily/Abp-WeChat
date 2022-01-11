@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WeChat.Application.Contracts\WeChat.Application.Contracts.csproj" />
     <ProjectReference Include="..\WeChat.Shared\WeChat.Domain.Shared.csproj" />
   </ItemGroup>
 

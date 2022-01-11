@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
-using WeChat.Application.Contracts.IServices;
 using WeChat.Application.Contracts.DtoModels;
 using WeChat.Domain.WeChat;
 using WeChat.Domain.IRepository;
@@ -38,7 +37,7 @@ namespace WeChat.Application.Services
         /// <returns></returns>
 
         [HttpGet("getWeChatToken")]
-        public async Task<DataResult> GetWeChatToken() 
+        public async Task<DataResult> GetWeChatToken()
         {
             return Json(await GetTokenAsync());
         }
@@ -76,7 +75,7 @@ namespace WeChat.Application.Services
         /// <returns></returns>
         /// <exception cref="ArgumentNullException"></exception>
         [HttpGet("ExTest")]
-        public DataResult ExTest() 
+        public DataResult ExTest()
         {
             throw new ArgumentNullException("数据空异常");
         }

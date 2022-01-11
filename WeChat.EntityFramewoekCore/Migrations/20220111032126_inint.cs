@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeChat.EntityFramewoekCore.Migrations
 {
-    public partial class init : Migration
+    public partial class inint : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -34,15 +34,16 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Img = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    RecommendNum = table.Column<int>(type: "int", nullable: true),
-                    Author = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AuthorManUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ReleaseTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CommentNum = table.Column<int>(type: "int", nullable: true),
-                    ReadNum = table.Column<int>(type: "int", nullable: true),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "标题"),
+                    Img = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "主图"),
+                    SubContent = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "文章简介"),
+                    ContentUrl = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "文章完整地址Url"),
+                    RecommendNum = table.Column<int>(type: "int", nullable: true, comment: "推荐数"),
+                    Author = table.Column<string>(type: "nvarchar(520)", maxLength: 520, nullable: true, comment: "作者"),
+                    AuthorManUrl = table.Column<string>(type: "nvarchar(max)", nullable: true, comment: "作者主页地址"),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime2", nullable: true, comment: "发布时间"),
+                    CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
+                    ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
                     CreateUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
                     CreateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -143,17 +144,17 @@ namespace WeChat.EntityFramewoekCore.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsActive", "IsDel", "Name" },
-                values: new object[] { new Guid("29403342-2366-8911-12c6-3a0156e7bb02"), new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(7852), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), "最高权限管理者", null, null, true, false, "管理者" });
+                values: new object[] { new Guid("a48786bd-8512-b45c-25cd-3a01595476b3"), new DateTime(2022, 1, 11, 11, 21, 25, 940, DateTimeKind.Local).AddTicks(1352), new Guid("952af015-8e1c-28e6-7551-3a01595476b3"), "最高权限管理者", null, null, true, false, "管理者" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "AvatarUrl", "CreateTime", "CreateUserId", "EditTime", "EditUserId", "Email", "IsActive", "IsDel", "LoginName", "NickName", "PassWrod", "Phone" },
-                values: new object[] { new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), null, new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(5435), null, null, null, null, true, true, "admin", "管理员", "123456", null });
+                values: new object[] { new Guid("952af015-8e1c-28e6-7551-3a01595476b3"), null, new DateTime(2022, 1, 11, 11, 21, 25, 939, DateTimeKind.Local).AddTicks(8569), null, null, null, null, true, true, "admin", "管理员", "123456", null });
 
             migrationBuilder.InsertData(
                 table: "UserAndRoleMap",
                 columns: new[] { "RoleId", "UserId", "CreateTime", "CreateUserId" },
-                values: new object[] { new Guid("29403342-2366-8911-12c6-3a0156e7bb02"), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02"), new DateTime(2022, 1, 11, 0, 3, 25, 570, DateTimeKind.Local).AddTicks(9021), new Guid("a7cc7553-f685-7d44-7da0-3a0156e7bb02") });
+                values: new object[] { new Guid("a48786bd-8512-b45c-25cd-3a01595476b3"), new Guid("952af015-8e1c-28e6-7551-3a01595476b3"), new DateTime(2022, 1, 11, 11, 21, 25, 940, DateTimeKind.Local).AddTicks(2805), new Guid("952af015-8e1c-28e6-7551-3a01595476b3") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAndRoleMap_RoleId",

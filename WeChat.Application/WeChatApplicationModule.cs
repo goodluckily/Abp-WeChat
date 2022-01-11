@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,7 @@ using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
 using WeChat.Application.Contracts;
+using WeChat.Application.Mapping;
 using WeChat.Domain;
 
 namespace WeChat.Application
@@ -18,14 +20,18 @@ namespace WeChat.Application
         typeof(WeChatDomainModule),
         typeof(WeChatApplicationContractsModule)
         )]
-    public class WeChatApplicationModule:AbpModule
+    public class WeChatApplicationModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
+            // Use AutoMapper for MyModule
+            context.Services.AddAutoMapperObjectMapper<WeChatApplicationModule>();
+
             Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<WeChatApplicationModule>(validate: true);
-            });
+           {
+               options.AddMaps<WeChatApplicationModule>(validate: true);
+               options.AddProfile<WeChatMappingProfile>(validate: true);
+           });
         }
     }
 }
