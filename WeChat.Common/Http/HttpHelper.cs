@@ -59,7 +59,7 @@ namespace WeChat.Common
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static string Post(string url, Dictionary<String, String> param, Dictionary<string, string> headers = null)
+        public static string Post(string url, Dictionary<string, string> param, Dictionary<string, string> headers = null)
         {
             #region 写日记
             string parameterSt = "";
@@ -240,7 +240,7 @@ namespace WeChat.Common
                 if (sz == 0) break;
                 ms.Write(buffer, 0, sz);
             }
-            string content = Encoding.UTF8.GetString(ms.ToArray()); 
+            string content = Encoding.UTF8.GetString(ms.ToArray());
             return ms;
         }
 

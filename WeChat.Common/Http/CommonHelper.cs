@@ -73,11 +73,10 @@ namespace WeChat.Common
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string PostRequestStr(string url)
+        public static string PostRequestStr(string url,string contentStr)
         {
             try
             {
-                string contentStr = "";
                 StringContent sc = new StringContent(contentStr);
                 sc.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");//todo
                 var response = httpClient.PostAsync(new Uri(url), sc).Result;

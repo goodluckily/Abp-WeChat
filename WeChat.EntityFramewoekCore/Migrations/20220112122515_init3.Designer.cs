@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.EntityFramewoekCore;
@@ -10,9 +11,10 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    partial class WeChatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220112122515_init3")]
+    partial class init3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -63,8 +65,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .HasComment("点赞数");
 
                     b.Property<double?>("HotIndex")
-                        .HasColumnType("float")
-                        .HasComment("热门系数");
+                        .HasColumnType("float");
 
                     b.Property<string>("Img")
                         .HasColumnType("nvarchar(max)")
@@ -77,12 +78,11 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int?>("ReadNum")
-                        .HasColumnType("int")
-                        .HasComment("阅读数");
+                        .HasColumnType("int");
 
-                    b.Property<DateTime?>("ReleaseTime")
-                        .HasColumnType("datetime2")
-                        .HasComment("发布时间");
+                    b.Property<string>("ReleaseTimeStr")
+                        .HasColumnType("nvarchar(max)")
+                        .HasComment("发布时间 string");
 
                     b.Property<string>("SubContent")
                         .HasColumnType("nvarchar(max)")
@@ -256,9 +256,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("4ffee807-f945-08d9-10e7-3a016084846b"),
-                            CreateTime = new DateTime(2022, 1, 12, 20, 51, 15, 692, DateTimeKind.Local).AddTicks(1829),
-                            CreateUserId = new Guid("10a668b8-118f-a4f0-9952-3a016084846b"),
+                            Id = new Guid("85148845-e680-3951-6d49-3a01606cb2ca"),
+                            CreateTime = new DateTime(2022, 1, 12, 20, 25, 14, 698, DateTimeKind.Local).AddTicks(5763),
+                            CreateUserId = new Guid("298ecbe0-2002-9bd5-5778-3a01606cb2c9"),
                             Description = "最高权限管理者",
                             IsActive = true,
                             IsDel = false,
@@ -318,10 +318,10 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("10a668b8-118f-a4f0-9952-3a016084846b"),
-                            RoleId = new Guid("4ffee807-f945-08d9-10e7-3a016084846b"),
-                            CreateTime = new DateTime(2022, 1, 12, 20, 51, 15, 692, DateTimeKind.Local).AddTicks(3463),
-                            CreateUserId = new Guid("10a668b8-118f-a4f0-9952-3a016084846b")
+                            UserId = new Guid("298ecbe0-2002-9bd5-5778-3a01606cb2c9"),
+                            RoleId = new Guid("85148845-e680-3951-6d49-3a01606cb2ca"),
+                            CreateTime = new DateTime(2022, 1, 12, 20, 25, 14, 698, DateTimeKind.Local).AddTicks(7013),
+                            CreateUserId = new Guid("298ecbe0-2002-9bd5-5778-3a01606cb2c9")
                         });
                 });
 
@@ -382,8 +382,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("10a668b8-118f-a4f0-9952-3a016084846b"),
-                            CreateTime = new DateTime(2022, 1, 12, 20, 51, 15, 691, DateTimeKind.Local).AddTicks(7675),
+                            Id = new Guid("298ecbe0-2002-9bd5-5778-3a01606cb2c9"),
+                            CreateTime = new DateTime(2022, 1, 12, 20, 25, 14, 698, DateTimeKind.Local).AddTicks(2563),
                             IsActive = true,
                             IsDel = true,
                             LoginName = "admin",

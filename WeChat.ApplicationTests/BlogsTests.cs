@@ -25,7 +25,10 @@ namespace WeChat.ApplicationTests
             //new ATest().jiexiContent().Wait();
 
             //4
-            Juejin.GetJuejinNewsContent();
+            //Juejin.GetJuejinNewsContent();
+
+            //4
+            Juejin.GetJuejinNewsContentForApi();
         }
     }
 }

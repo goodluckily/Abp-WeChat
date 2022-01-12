@@ -17,6 +17,8 @@ namespace WeChat.Application.Mapping
         {
             CreateMap<Token, TokenLapseDto>().ReverseMap();
             CreateMap<Netcnblogs, NetcnblogsDto>().ReverseMap();
+
+            CreateMap<JueJinblogs, JueJinblogsDto>().ReverseMap();
         }
     }
 }

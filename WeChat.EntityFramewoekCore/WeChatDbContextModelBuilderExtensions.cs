@@ -217,7 +217,9 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
                 b.Property(f => f.Author).HasMaxLength(520).HasComment("作者");
                 b.Property(f => f.AuthorManUrl).HasComment("作者主页地址");
-                b.Property(f => f.ReleaseTimeStr).HasComment("发布时间 string");
+                b.Property(f => f.ReleaseTime).HasComment("发布时间");
+                b.Property(f => f.HotIndex).HasComment("热门系数");
+                b.Property(f => f.ReadNum).HasComment("阅读数");
 
                 b.Property(f => f.CommentNum).HasComment("评论数");
                 b.Property(f => f.GiveLikeNum).HasComment("点赞数");

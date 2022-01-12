@@ -89,6 +89,48 @@ namespace WeChat.Common
             return string.IsNullOrEmpty(str);
         }
 
+        #region DateTime To 时间戳
+
+        public static long GetTimeStamp(DateTime date)
+        {
+            return (date.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        }
+
+        public static long ToTimeStamp(this DateTime date)
+        {
+            return (date.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        }
+
+        public static long? ToTimeStamp(this DateTime? date)
+        {
+            if (date == null) return null;
+            return (date?.ToUniversalTime().Ticks - 621355968000000000) / 10000000;
+        }
+
+        #endregion
+
+        #region
+        /// <summary>
+        /// 根据时间戳获取时间
+        /// </summary>
+        /// <param name="createTime"></param>
+        /// <returns></returns>
+        public static DateTime GetDateByStamp(long timeStamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timeStamp).ToLocalTime();
+        }
+        public static DateTime ToDateByStamp(this long timeStamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timeStamp).ToLocalTime();
+        }
+        public static DateTime? ToDateByStamp(this long? timeStamp)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            return origin.AddSeconds(timeStamp ?? 0).ToLocalTime();
+        }
+        #endregion
         public static int TryParseToInt(this string str, int value = 0)
         {
             var flag = int.TryParse(str, out int strValue);

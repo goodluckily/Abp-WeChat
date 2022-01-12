@@ -33,7 +33,6 @@ namespace WeChat.Application.Services.Job
             return Json(netBlogsList);
         }
 
-
         [HttpGet("createNetcnblogs")]
         public async Task<DataResult> createNetcnblogs()
         {

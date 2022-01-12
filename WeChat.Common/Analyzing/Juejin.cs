@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using WeChat.Application.Contracts.DtoModels;
 using WeChat.Common;
 using WeChat.Domain.Shared.Enum;
@@ -18,6 +21,10 @@ namespace WeChat.Common.Analyzing
     {
         public static string JuejinNewsUrl = "https://juejin.cn/news?sort=weekly_hottest";
 
+        /// <summary>
+        /// 缺点 主图 地址获取不到
+        /// </summary>
+        /// <returns></returns>
         public static List<JueJinblogsDto> GetJuejinNewsContent()
         {
             var juejinblogsList = new List<JueJinblogsDto>();
@@ -31,7 +38,6 @@ namespace WeChat.Common.Analyzing
             var nuewsUserUrl = juejinUrl + "/user/";
             foreach (var itemNode in itemHtmlNodes)
             {
-
                 //原文地址
                 var contentUrl = juejinUrl + itemNode.Attributes["href"].Value;
 
@@ -43,8 +49,8 @@ namespace WeChat.Common.Analyzing
                 }
 
                 //主图
-                var Img = itemNode.SelectSingleNode(".//img[@class='lazy thumbnail']")?.Attributes["src"]?.Value?.Trim();
-
+                var Img = itemNode.SelectSingleNode(".//img[@class='lazy thumbnail']")?.Attributes["src"]?.Value?.Trim();//
+                var aaa = itemNode.SelectSingleNode(".//img[@alt='年终盘点服务网格：实用当先，生态为本']")?.Attributes["src"]?.Value?.Trim();
                 //内容简介
                 var SubContent = itemNode.SelectSingleNode(".//p[@class='brief']")?.InnerText?.Trim();
 
@@ -69,7 +75,7 @@ namespace WeChat.Common.Analyzing
                 {
                     Author = author,
                     Title = title,
-                    ReleaseTimeStr = ReleaseTimeStr,
+                    //ReleaseTime = ReleaseTimeStr,
                     SubContent = SubContent,
                     Img = Img,
                     AuthorManUrl = authorManUrl,
@@ -78,6 +84,63 @@ namespace WeChat.Common.Analyzing
                     GiveLikeNum = GiveLikeNum,
                     AnalyzingType = AnalyzingEnum.ReDian,
                 });
+            }
+
+            return juejinblogsList;
+        }
+
+
+        /// <summary>
+        /// 最新资讯
+        /// </summary>
+        /// <returns></returns>
+
+        public static List<JueJinblogsDto> GetJuejinNewsContentForApi()
+        {
+            var juejinblogsList = new List<JueJinblogsDto>();
+
+            var apiUrl = "https://api.juejin.cn/recommend_api/v1/news/list";
+
+            //对大50个数据
+            var json = "{\"limit\":60,\"recommend_mode\":1,\"sort_type\":600}";
+
+            var result = CommonHelper.PostRequestStr(apiUrl, json);
+
+            var juejinUrl = "https://juejin.cn";
+            var nuewsUserUrl = juejinUrl + "/user/";
+            var nuewsContentUrl = juejinUrl + "/news/";
+
+            JObject _jObject = JObject.Parse(result);
+            var code = _jObject["err_msg"].ToString();
+            if (code.Equals("success"))
+            {
+                var data = _jObject["data"];
+                foreach (var item in data)
+                {
+                    var cInfo = JsonConvert.DeserializeObject<dynamic>(item["content_info"].ToString());
+
+                    var cUser = JsonConvert.DeserializeObject<dynamic>(item["author_user_info"].ToString());
+
+                    var cCounter = JsonConvert.DeserializeObject<dynamic>(item["content_counter"].ToString());
+
+                    var pushTime = cInfo.publish_time;
+                    juejinblogsList.Add(new JueJinblogsDto
+                    {
+                        Title = cInfo.title,//标题
+                        SubContent = cInfo.brief,//内容简介
+                        Img = cInfo.thumbnail,//内容图片
+                        Author = cUser.user_name,//作者
+                        AuthorManUrl = nuewsUserUrl + cUser.user_id,//作者主页地址
+                        ContentUrl = nuewsContentUrl + cInfo.content_id,//源内容地址
+
+                        GiveLikeNum = cCounter.digg,//点赞数
+                        ReadNum = cCounter.view,//展示阅读数
+                        CommentNum = cCounter.comment,//评论数
+                        HotIndex = cCounter.hot_index,//热门系数
+                        ReleaseTime = ((long)pushTime).ToDateByStamp(),//发布时间
+                        AnalyzingType = AnalyzingEnum.ReDian,
+                    });
+                }
             }
 
             return juejinblogsList;
