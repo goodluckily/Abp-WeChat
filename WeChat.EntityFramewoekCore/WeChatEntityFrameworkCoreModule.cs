@@ -8,8 +8,8 @@ using WeChat.Domain;
 namespace WeChat.EntityFramewoekCore
 {
     [DependsOn(
-        typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+        //typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
+        typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatDomainModule)
         )]
     public class WeChatEntityFrameworkCoreModule : AbpModule

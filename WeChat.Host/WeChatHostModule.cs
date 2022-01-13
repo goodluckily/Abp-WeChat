@@ -16,6 +16,7 @@ using Volo.Abp.AspNetCore.Mvc;
 using Volo.Abp.AspNetCore.Mvc.ExceptionHandling;
 using Volo.Abp.Autofac;
 using Volo.Abp.EntityFrameworkCore;
+using Volo.Abp.EntityFrameworkCore.MySQL;
 using Volo.Abp.EntityFrameworkCore.SqlServer;
 using Volo.Abp.Guids;
 using Volo.Abp.Localization;
@@ -31,8 +32,8 @@ namespace WeChat.Host
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
-        typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-                                                      //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+        //typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
+        typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
@@ -106,8 +107,8 @@ namespace WeChat.Host
 
             Configure<AbpDbContextOptions>(optios =>
             {
-                //optios.UseMySQL();
-                optios.UseSqlServer();
+                optios.UseMySQL();
+                //optios.UseSqlServer();
 
                 //Microsoft.EntityFrameworkCore.Proxies //需要安装Buget包
                 //optios.DbContextOptions.UseLazyLoadingProxies(); //启用延时加载
@@ -211,7 +212,7 @@ namespace WeChat.Host
             //SequentialAsBinary由Oracle 使用
             Configure<AbpSequentialGuidGeneratorOptions>(options =>
             {
-                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAtEnd;
+                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString; //mysql 使用
             });
             #endregion
         }
