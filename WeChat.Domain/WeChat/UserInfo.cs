@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace WeChat.Domain.WeChat
+namespace WeChat.Domain
 {
     public class UserInfo : BaseEntity
     {

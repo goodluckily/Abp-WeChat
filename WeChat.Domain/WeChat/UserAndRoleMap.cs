@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace WeChat.Domain.WeChat
+namespace WeChat.Domain
 {
-    public class UserAndRoleMap:Entity
+    public class UserAndRoleMap : Entity
     {
         public Guid UserId { get; set; }
         public UserInfo UserInfo { get; set; }

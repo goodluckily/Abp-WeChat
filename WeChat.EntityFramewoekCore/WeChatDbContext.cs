@@ -9,7 +9,6 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Guids;
 using WeChat.Domain;
-using WeChat.Domain.WeChat;
 
 namespace WeChat.EntityFramewoekCore
 {
@@ -28,8 +27,11 @@ namespace WeChat.EntityFramewoekCore
         public DbSet<Role> Role { get; set; }
         public DbSet<UserAndRoleMap> UserAndRoleMap { get; set; }
 
-        public DbSet<Netcnblogs> Netcnblogs { get; set; }
+        public DbSet<Cnblogs> Cnblogs { get; set; }
         public DbSet<JueJinblogs> JueJinblogs { get; set; }
+        public DbSet<Csdnblogs> Csdnblogs { get; set; }
+        public DbSet<Segmentfaultblogs> Segmentfaultblogs { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

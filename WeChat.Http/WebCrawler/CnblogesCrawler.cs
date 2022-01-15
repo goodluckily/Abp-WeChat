@@ -12,7 +12,7 @@ namespace WeChat.Http.WebCrawler
     /// <summary>
     /// 博客园  https://www.cnblogs.com/
     /// </summary>
-    public class Blogs
+    public class CnblogesCrawler
     {
         /// <summary>
         /// .net 技术文章列表地址 准备爬去前三页的内容

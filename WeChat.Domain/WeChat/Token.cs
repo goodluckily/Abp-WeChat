@@ -5,7 +5,7 @@ using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 using WeChat.Domain.Shared;
 
-namespace WeChat.Domain.WeChat
+namespace WeChat.Domain
 {
     public class Token : Entity<Guid>
     {

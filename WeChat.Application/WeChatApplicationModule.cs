@@ -24,9 +24,8 @@ namespace WeChat.Application
             // Use AutoMapper for MyModule
             context.Services.AddAutoMapperObjectMapper<WeChatApplicationModule>();
 
-            Configure<AbpAutoMapperOptions>(options =>
+           Configure<AbpAutoMapperOptions>(options =>
            {
-               options.AddMaps<WeChatApplicationModule>(validate: true);
                options.AddProfile<WeChatMappingProfile>(validate: true);
            });
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Volo.Abp.EntityFrameworkCore.Modeling;
 using Volo.Abp.Guids;
 using Volo.Abp.Users;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 
 namespace WeChat.EntityFramewoekCore
 {
@@ -190,9 +190,9 @@ namespace WeChat.EntityFramewoekCore
                 );
 
             //博客园
-            builder.Entity<Netcnblogs>(b =>
+            builder.Entity<Cnblogs>(b =>
             {
-                b.ToTable(nameof(Netcnblogs));
+                b.ToTable(nameof(Cnblogs));
                 b.Property(f => f.Title).HasComment("标题");
                 b.Property(f => f.Img).HasComment("主图");
                 b.Property(f => f.SubContent).HasComment("文章简介");
@@ -224,6 +224,39 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.CommentNum).HasComment("评论数");
                 b.Property(f => f.GiveLikeNum).HasComment("点赞数");
 
+                b.ConfigureByConvention();
+            });
+
+            //CSDN
+            builder.Entity<Csdnblogs>(b =>
+            {
+                b.ToTable(nameof(Csdnblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.Img).HasComment("主图");
+                b.Property(f => f.SubContent).HasComment("文章简介");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.Author).HasMaxLength(520).HasComment("作者");
+                b.Property(f => f.AuthorManUrl).HasComment("作者主页地址");
+                b.Property(f => f.CreatedAt).HasComment("创建");
+                b.Property(f => f.DiggNum).HasComment("点赞数");
+                b.Property(f => f.ReadNum).HasComment("阅读数");
+                b.Property(f => f.CommentNum).HasComment("评论数");
+
+                b.ConfigureByConvention();
+            });
+
+            //思否
+            builder.Entity<Segmentfaultblogs>(b =>
+            {
+                b.ToTable(nameof(Segmentfaultblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.Img).HasComment("主图");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.Author).HasMaxLength(520).HasComment("作者");
+                b.Property(f => f.AuthorManUrl).HasComment("作者主页地址");
+                b.Property(f => f.ReleaseTime).HasComment("发布时间");
+                b.Property(f => f.DiggNum).HasComment("点赞数");
+                b.Property(f => f.CommentNum).HasComment("评论数");
                 b.ConfigureByConvention();
             });
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using Microsoft.AspNetCore.Cors;
 using Volo.Abp.ObjectMapping;
@@ -51,10 +51,10 @@ namespace WeChat.Application.Services
         public async Task<DataResult> CreateTokenAsync([FromBody] TokenLapseDto tokenLapse)
         {
             tokenLapse.OperationTime = DateTime.Now;
-            var tokenDb = new Domain.WeChat.Token(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
+            var tokenDb = new Domain.Token(tokenLapse.Access_Token, tokenLapse.Expires_In, tokenLapse.OperationTime);
 
             var dbTokenModel = await _tokenRepository.CreateTokenAsync(tokenDb);
-            var dto = ObjectMapper.Map<Domain.WeChat.Token, TokenLapseDto>(dbTokenModel);
+            var dto = ObjectMapper.Map<Domain.Token, TokenLapseDto>(dbTokenModel);
             return Json(dto);
         }
 
@@ -63,7 +63,7 @@ namespace WeChat.Application.Services
         {
             var guid = _guidGenerator.Create();
             var dbTokenModel = _tokenRepository.GetAll().ToList();
-            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
+            var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
             return Json(dto);
         }
 
@@ -88,7 +88,7 @@ namespace WeChat.Application.Services
         public DataResult test1()
         {
             var dbTokenModel = _tokenRepository.GetAll().ToList();
-            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
+            var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
             return Json(dto);
         }
 
@@ -100,7 +100,7 @@ namespace WeChat.Application.Services
         public DataResult test2()
         {
             var dbTokenModel = _tokenRepository.GetAll().ToList();
-            var dto = ObjectMapper.Map<List<Domain.WeChat.Token>, List<TokenLapseDto>>(dbTokenModel);
+            var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
             return Json(dto.Count, dto);
         }
 

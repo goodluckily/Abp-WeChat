@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 
-namespace WeChat.Domain.WeChat
+namespace WeChat.Domain
 {
-    public class Log:Entity<Guid>
+    public class Log : Entity<Guid>
     {
         public Guid? UserId { get; set; }
         public string? LogLevel { get; set; }

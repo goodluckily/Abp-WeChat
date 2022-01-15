@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WeChat.Domain.WeChat;
 using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared;
 using WeChat.Http.WebCrawler;
+using WeChat.Domain;
 
 namespace WeChat.Application.Services.Job
 {
@@ -31,7 +31,7 @@ namespace WeChat.Application.Services.Job
         [HttpPost("CreateJueJinblogs")]
         public async Task<DataResult> CreateJueJinblogs()
         {
-            var result = Juejin.GetJuejinNewsContentForApi();
+            var result = JuejinCrawler.GetJuejinNewsContentForApi();
             //数据转换
             var dbJueJinblogs = ObjectMapper.Map<List<JueJinblogsDto>, List<JueJinblogs>>(result);
 

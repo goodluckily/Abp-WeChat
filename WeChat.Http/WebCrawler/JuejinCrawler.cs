@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -10,7 +11,7 @@ namespace WeChat.Http.WebCrawler
     /// <summary>
     /// 稀土掘金
     /// </summary>
-    public class Juejin
+    public class JuejinCrawler
     {
         public static string JuejinNewsUrl = "https://juejin.cn/news?sort=weekly_hottest";
 
@@ -18,6 +19,7 @@ namespace WeChat.Http.WebCrawler
         /// 缺点 主图 地址获取不到
         /// </summary>
         /// <returns></returns>
+        [Obsolete("缺点 主图 地址获取不到", true)]
         public static List<JueJinblogsDto> GetJuejinNewsContent()
         {
             var juejinblogsList = new List<JueJinblogsDto>();
@@ -81,7 +83,6 @@ namespace WeChat.Http.WebCrawler
 
             return juejinblogsList;
         }
-
 
         /// <summary>
         /// 最新资讯

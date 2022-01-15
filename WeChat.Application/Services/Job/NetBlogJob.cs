@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared;
 using WeChat.Http.WebCrawler;
@@ -34,9 +34,9 @@ namespace WeChat.Application.Services.Job
         public async Task<DataResult> createNetcnblogs()
         {
             //.NET 专题
-            var blogNetResult = Blogs.GetNetCnblogsContent();
+            var blogNetResult = CnblogesCrawler.GetNetCnblogsContent();
             //数据转换
-            var dbNetblogs = ObjectMapper.Map<List<NetcnblogsDto>, List<Netcnblogs>>(blogNetResult);
+            var dbNetblogs = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNetResult);
             var clientDBNetCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.NET);
             var netBlogsList = await CreateCnBlogsData(dbNetblogs, clientDBNetCnblogsList);
             return Json(netBlogsList);
@@ -50,17 +50,17 @@ namespace WeChat.Application.Services.Job
         public async Task<DataResult> createNewscnblogs()
         {
             //热门新闻
-            var blogNewsResut = Blogs.GetToDayNewsCnblogsContent();
+            var blogNewsResut = CnblogesCrawler.GetToDayNewsCnblogsContent();
             //数据转换
-            var blogNews = ObjectMapper.Map<List<NetcnblogsDto>, List<Netcnblogs>>(blogNewsResut);
+            var blogNews = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNewsResut);
             var clientDBNewsCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.ReDian);
             var netNewsList = await CreateCnBlogsData(blogNews, clientDBNewsCnblogsList);
             return Json(netNewsList);
         }
 
-        private async Task<List<Netcnblogs>> CreateCnBlogsData(List<Netcnblogs> dbNetblogs, List<Netcnblogs> clientDBNetcnblogsList)
+        private async Task<List<Cnblogs>> CreateCnBlogsData(List<Cnblogs> dbNetblogs, List<Cnblogs> clientDBNetcnblogsList)
         {
-            var newNetcnblogs = new List<Netcnblogs>();
+            var newNetcnblogs = new List<Cnblogs>();
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
             var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;

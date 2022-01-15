@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 
 namespace WeChat.Domain.IRepository
 {

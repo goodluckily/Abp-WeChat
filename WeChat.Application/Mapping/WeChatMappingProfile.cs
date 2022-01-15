@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.AutoMapper;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 using WeChat.Domain.Shared;
 
 namespace WeChat.Application.Mapping
@@ -16,9 +16,11 @@ namespace WeChat.Application.Mapping
         public WeChatMappingProfile()
         {
             CreateMap<Token, TokenLapseDto>().ReverseMap();
-            CreateMap<Netcnblogs, NetcnblogsDto>().ReverseMap();
-
+            CreateMap<Cnblogs, NetcnblogsDto>().ReverseMap();
             CreateMap<JueJinblogs, JueJinblogsDto>().ReverseMap();
+            CreateMap<Csdnblogs, CsdnblogsDto>().ReverseMap();
+
+            CreateMap<Segmentfaultblogs, SegmentfaultblogsDto>().ReverseMap();
         }
     }
 }

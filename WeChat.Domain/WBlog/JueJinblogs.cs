@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeChat.Domain.Shared;
 
-namespace WeChat.Domain.WeChat
+namespace WeChat.Domain
 {
     public class JueJinblogs : BaseEntity
     {

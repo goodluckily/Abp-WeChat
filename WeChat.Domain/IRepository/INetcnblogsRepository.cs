@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 using WeChat.Domain.Shared;
-using WeChat.Domain.WeChat;
+using WeChat.Domain;
 
 namespace WeChat.Domain.IRepository
 {
     public interface INetcnblogsRepository : ITransientDependency
     {
-        Task<Netcnblogs> CreateNetcnblogsAsync(Netcnblogs netcnblogs);
-        Task<List<Netcnblogs>> CreateNetcnblogsAsync(List<Netcnblogs> netcnblogs);
+        Task<Cnblogs> CreateNetcnblogsAsync(Cnblogs netcnblogs);
+        Task<List<Cnblogs>> CreateNetcnblogsAsync(List<Cnblogs> netcnblogs);
         Task DeleteNetcnblogsAsync(Guid netcnblogsId);
 
         /// <summary>
         /// 获取全部 .NET 博客文章列表
         /// </summary>
         /// <returns></returns>
-        Task<List<Netcnblogs>> GetAllAsync(AnalyzingEnum? analyzingEnum = null);
+        Task<List<Cnblogs>> GetAllAsync(AnalyzingEnum? analyzingEnum = null);
     }
 }

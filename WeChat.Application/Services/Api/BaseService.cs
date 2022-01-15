@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp;
 using Volo.Abp.Application.Services;
+using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Domain.Shared;
-using WeChat.Domain.WeChat;
 using WeChat.Http.WeiChatApi;
 
 namespace WeChat.Application.Services
