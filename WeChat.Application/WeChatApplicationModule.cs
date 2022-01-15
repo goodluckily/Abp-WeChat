@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
 using Volo.Abp.Modularity;
-using WeChat.Application.Contracts;
 using WeChat.Application.Mapping;
 using WeChat.Domain;
 
@@ -16,9 +15,7 @@ namespace WeChat.Application
     [DependsOn(
         typeof(AbpDddApplicationModule),
         typeof(AbpAutoMapperModule),
-
-        typeof(WeChatDomainModule),
-        typeof(WeChatApplicationContractsModule)
+        typeof(WeChatDomainModule)
         )]
     public class WeChatApplicationModule : AbpModule
     {

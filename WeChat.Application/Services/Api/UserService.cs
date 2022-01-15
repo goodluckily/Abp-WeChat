@@ -8,11 +8,8 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using WeChat.Application.Contracts.DtoModels;
-using WeChat.Common;
 using WeChat.Domain.IRepository;
-using WeChat.Domain.Shared.Enum;
-using WeChat.Domain.Shared.Setting;
+using WeChat.Domain.Shared;
 
 namespace WeChat.Application.Services
 {

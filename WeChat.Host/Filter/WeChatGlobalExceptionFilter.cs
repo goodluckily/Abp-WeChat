@@ -6,8 +6,7 @@ using NLog;
 using System;
 using System.Net;
 using WeChat.Application;
-using WeChat.Common;
-using WeChat.Domain.Shared.Enum;
+using WeChat.Domain.Shared;
 
 namespace WeChat.Host.Filter
 {

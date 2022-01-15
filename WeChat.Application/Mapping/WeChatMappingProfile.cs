@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.AutoMapper;
-using WeChat.Application.Contracts.DtoModels;
 using WeChat.Domain.WeChat;
+using WeChat.Domain.Shared;
 
 namespace WeChat.Application.Mapping
 {

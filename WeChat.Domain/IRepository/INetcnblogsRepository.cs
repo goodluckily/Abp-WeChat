@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
+using WeChat.Domain.Shared;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.IRepository
@@ -18,6 +19,6 @@ namespace WeChat.Domain.IRepository
         /// 获取全部 .NET 博客文章列表
         /// </summary>
         /// <returns></returns>
-        Task<List<Netcnblogs>> GetAllAsync();
+        Task<List<Netcnblogs>> GetAllAsync(AnalyzingEnum? analyzingEnum = null);
     }
 }

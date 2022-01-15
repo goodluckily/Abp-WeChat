@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 using Volo.Abp.Application.Services;
 using Microsoft.AspNetCore.Mvc;
 using Volo.Abp;
-using WeChat.Application.Contracts.DtoModels;
 using WeChat.Domain.WeChat;
 using WeChat.Domain.IRepository;
 using Microsoft.AspNetCore.Cors;
 using Volo.Abp.ObjectMapping;
 using AutoMapper;
 using Volo.Abp.Guids;
+using WeChat.Domain.Shared;
 
 namespace WeChat.Application.Services
 {

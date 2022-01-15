@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared.Enum
+namespace WeChat.Domain.Shared
 {
     public enum WeiChatEnum
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared.ExceptionCodes
+namespace WeChat.Domain.Shared
 {
     public class WeChatExceptionCodes
     {

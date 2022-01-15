@@ -9,7 +9,6 @@ using Volo.Abp.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Guids;
 using WeChat.Domain;
-using WeChat.Domain.Shared.Setting;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.EntityFramewoekCore

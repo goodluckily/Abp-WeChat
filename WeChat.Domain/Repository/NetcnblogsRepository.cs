@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Repositories;
 using WeChat.Domain.IRepository;
+using WeChat.Domain.Shared;
 using WeChat.Domain.WeChat;
 
 namespace WeChat.Domain.Repository
@@ -18,9 +19,10 @@ namespace WeChat.Domain.Repository
             _netcnblogsRepository = netcnblogsRepository;
         }
 
-        public async Task<List<Netcnblogs>> GetAllAsync()
+        public async Task<List<Netcnblogs>> GetAllAsync(AnalyzingEnum? analyzingEnum = null)
         {
-            return await _netcnblogsRepository.GetListAsync();
+            if (analyzingEnum is null) return await _netcnblogsRepository.GetListAsync();
+            return await _netcnblogsRepository.GetListAsync(x => x.AnalyzingType == analyzingEnum);
         }
 
         public async Task<Netcnblogs> CreateNetcnblogsAsync(Netcnblogs netcnblogs)

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
-using WeChat.Domain.Shared.Enum;
+using WeChat.Domain.Shared;
 
 namespace WeChat.Domain.WeChat
 {

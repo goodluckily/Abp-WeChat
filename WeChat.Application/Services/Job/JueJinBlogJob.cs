@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Application.Services;
 using Microsoft.AspNetCore.Mvc;
-using Volo.Abp;
-using WeChat.Application.Contracts.DtoModels;
 using WeChat.Domain.WeChat;
 using WeChat.Domain.IRepository;
-using Microsoft.AspNetCore.Cors;
-using Volo.Abp.ObjectMapping;
-using AutoMapper;
-using Volo.Abp.Guids;
-using WeChat.Common.Analyzing;
+using WeChat.Domain.Shared;
+using WeChat.Http.WebCrawler;
 
 namespace WeChat.Application.Services.Job
 {

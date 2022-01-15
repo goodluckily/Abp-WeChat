@@ -22,8 +22,7 @@ using Volo.Abp.Guids;
 using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using WeChat.Application;
-using WeChat.Common;
-using WeChat.Domain.Shared.Setting;
+using WeChat.Domain.Shared;
 using WeChat.EntityFramewoekCore;
 using WeChat.Host.Filter;
 

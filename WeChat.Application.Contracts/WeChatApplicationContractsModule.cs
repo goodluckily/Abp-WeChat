@@ -1,15 +1,13 @@
 ﻿using System;
 using Volo.Abp.Application;
 using Volo.Abp.Modularity;
-using WeChat.Domain.Shared;
 
 namespace WeChat.Application.Contracts
 {
     [DependsOn(
-        typeof(AbpDddApplicationContractsModule),
-        typeof(WeChatDomainSharedModule)
+        typeof(AbpDddApplicationContractsModule)
         )]
-    public class WeChatApplicationContractsModule:AbpModule
+    public class WeChatApplicationContractsModule : AbpModule
     {
     }
 }
