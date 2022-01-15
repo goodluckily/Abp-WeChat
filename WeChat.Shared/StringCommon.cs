@@ -5,7 +5,7 @@ using System.Text;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public static class StringCommon
     {

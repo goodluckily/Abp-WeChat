@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using HtmlAgilityPack;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Http.WebCrawler
 {

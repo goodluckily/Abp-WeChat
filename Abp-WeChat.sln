@@ -11,11 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Domain", "WeChat.Dom
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.EntityFramewoekCore", "WeChat.EntityFramewoekCore\WeChat.EntityFramewoekCore.csproj", "{8A480C91-954F-4065-B5A0-2ECFB3E217A5}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Domain.Shared", "WeChat.Shared\WeChat.Domain.Shared.csproj", "{C9FEB5A1-9D97-4AEC-86E3-CED2CB698D0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Shared", "WeChat.Shared\WeChat.Shared.csproj", "{C9FEB5A1-9D97-4AEC-86E3-CED2CB698D0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Http", "WeChat.Http\WeChat.Http.csproj", "{18481869-0F86-4B8D-82F8-1A9B997D954B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Http", "WeChat.Http\WeChat.Http.csproj", "{18481869-0F86-4B8D-82F8-1A9B997D954B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.Http.Tests", "WeChat.Http.Tests\WeChat.Http.Tests.csproj", "{0BD2D076-B511-4B3B-B2DA-562AF726F919}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Http.Tests", "WeChat.Http.Tests\WeChat.Http.Tests.csproj", "{0BD2D076-B511-4B3B-B2DA-562AF726F919}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

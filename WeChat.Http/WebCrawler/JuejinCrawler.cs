@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 using WeChat.Http.Helper;
 
 namespace WeChat.Http.WebCrawler

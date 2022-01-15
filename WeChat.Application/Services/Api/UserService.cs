@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using WeChat.Domain.IRepository;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Application.Services
 {

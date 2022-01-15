@@ -13,7 +13,7 @@
 
 ##### WeChat.Application.Domain 领域层 (核心就是 充血模型Model)   里面定义了 IReponstory 和 Reponstory 
 
-- 依赖 `WeChat.Domain.Shared`
+- 依赖 `WeChat.Shared`
 
   
 
@@ -25,7 +25,7 @@
 
 ##### WeChat.Application.Contracts 合约层 （相当于定义 IService 和Dtom ViewModel 用的）
 
-- 依赖 `WeChat.Domain.Shared`
+- 依赖 `WeChat.Shared`
 
 - 主要是 定义一些 Dto(viewModel)类 和生命IService(业务抽象层) 用的
 

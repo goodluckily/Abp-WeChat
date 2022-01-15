@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Web;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Host
 {

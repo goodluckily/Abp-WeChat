@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.AutoMapper;
 using WeChat.Domain;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Application.Mapping
 {

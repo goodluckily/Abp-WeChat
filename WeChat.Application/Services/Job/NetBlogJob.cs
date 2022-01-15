@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WeChat.Domain;
 using WeChat.Domain.IRepository;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 
 namespace WeChat.Application.Services.Job

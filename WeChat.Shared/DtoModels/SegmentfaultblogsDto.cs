@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class SegmentfaultblogsDto
     {

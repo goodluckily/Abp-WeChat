@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WeChat.Domain.IRepository;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using WeChat.Domain;
 

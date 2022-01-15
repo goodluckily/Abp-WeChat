@@ -1,7 +1,7 @@
 ﻿using System;
 using Volo.Abp.Domain;
 using Volo.Abp.Modularity;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Domain
 {

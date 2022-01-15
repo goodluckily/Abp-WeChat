@@ -4,9 +4,9 @@ using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Xml.Linq;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class NLogCommon
     {

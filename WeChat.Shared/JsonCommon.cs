@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class JsonCommon
     {

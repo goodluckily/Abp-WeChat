@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class RedisCommon
     {

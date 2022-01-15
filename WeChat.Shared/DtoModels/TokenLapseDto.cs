@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     /// <summary>
     /// token 转换DTO

@@ -9,7 +9,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class AuthCommon
     {

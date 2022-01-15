@@ -1,7 +1,7 @@
 ﻿using System;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class NetcnblogsDto
     {

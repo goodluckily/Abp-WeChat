@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public class ConfigCommon
     {

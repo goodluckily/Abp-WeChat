@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public enum LogTypeEnum
     {

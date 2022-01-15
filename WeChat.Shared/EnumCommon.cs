@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace WeChat.Domain.Shared
+namespace WeChat.Shared
 {
     public static class EnumCommon
     {

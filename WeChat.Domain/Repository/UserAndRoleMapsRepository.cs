@@ -7,7 +7,7 @@ using Volo.Abp;
 using Volo.Abp.Domain.Repositories;
 using Volo.Abp.Linq;
 using WeChat.Domain.IRepository;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 using WeChat.Domain;
 
 namespace WeChat.Domain.Repository

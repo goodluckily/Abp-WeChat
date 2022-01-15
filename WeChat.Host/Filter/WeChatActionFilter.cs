@@ -5,7 +5,7 @@ using System;
 using System.Net;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc.Auditing;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Host.Filter
 {

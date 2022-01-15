@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Cors;
 using Volo.Abp.ObjectMapping;
 using AutoMapper;
 using Volo.Abp.Guids;
-using WeChat.Domain.Shared;
+using WeChat.Shared;
 
 namespace WeChat.Application.Services
 {

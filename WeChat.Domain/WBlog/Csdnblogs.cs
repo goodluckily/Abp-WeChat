@@ -1,4 +1,4 @@
-﻿using WeChat.Domain.Shared;
+﻿using WeChat.Shared;
 
 namespace WeChat.Domain
 {
