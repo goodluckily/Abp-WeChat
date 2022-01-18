@@ -11,6 +11,9 @@ using WeChat.Http.WebCrawler;
 
 namespace WeChat.Application.Services.Job
 {
+    /// <summary>
+    /// CSDN
+    /// </summary>
     [Route("CsdnBlogJob")]
     public class CsdnBlogJob : BaseService
     {
@@ -21,7 +24,7 @@ namespace WeChat.Application.Services.Job
             _csdnblogsRepository = csdnblogsRepository;
         }
 
-        [HttpGet("getCsdnBlogContent")]
+        [HttpPost("getCsdnBlogContent")]
         public async Task<DataResult> GetCsdnBlogContent()
         {
             var csdnblogs = new List<Csdnblogs>();

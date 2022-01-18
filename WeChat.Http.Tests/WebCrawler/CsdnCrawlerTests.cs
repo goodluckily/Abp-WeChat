@@ -16,7 +16,12 @@ namespace WeChat.Http.WebCrawler.Tests
         {
             //var aaa = CsdnCrawler.GetCsdnOtherContentAsync().Result;
 
-            var aaaaaaaa = SegmentfaulCrawler.GetSegmentfaulCrawlerContentAsync().Result;
+            //var aaaaaaaa = SegmentfaulCrawler.GetSegmentfaulCrawlerContentAsync().Result;
+
+            //ItHomeCrwaler.GetItHomeNews();
+            //ItHomeCrwaler.GetItHomeMicrosoftNews();
+
+            CodeDeaultCrawler.GetCodeDeaultContent();
         }
     }
 }

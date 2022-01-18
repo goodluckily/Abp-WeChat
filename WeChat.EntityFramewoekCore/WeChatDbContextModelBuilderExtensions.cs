@@ -259,6 +259,29 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.CommentNum).HasComment("评论数");
                 b.ConfigureByConvention();
             });
+
+            //It之家
+            builder.Entity<ItHomeblogs>(b =>
+            {
+                b.ToTable(nameof(ItHomeblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.Img).HasComment("主图");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.ReleaseTime).HasComment("发布时间");
+                b.Property(f => f.Tags).HasComment("标签");
+                b.Property(f => f.TagsUrl).HasComment("标签地址");
+                b.ConfigureByConvention();
+            });
+
+            //CodeDeaultb
+            builder.Entity<CodeDeaultblogs>(b =>
+            {
+                b.ToTable(nameof(CodeDeaultblogs));
+                b.Property(f => f.Title).HasComment("标题");
+                b.Property(f => f.ContentUrl).HasComment("文章完整地址Url");
+                b.Property(f => f.ReleaseTime).HasComment("发布时间");
+                b.ConfigureByConvention();
+            });
         }
     }
 }

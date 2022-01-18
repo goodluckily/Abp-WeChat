@@ -34,21 +34,15 @@ namespace WeChat.Host
                     Scheme = "Bearer"
                 });
 
-                //// 添加swagger-API方法注释
-                //var xmlapppath = Path.Combine(AppContext.BaseDirectory, "WeChat.Application.xml");
-                //if (File.Exists(xmlapppath))
-                //    options.IncludeXmlComments(xmlapppath, true);
+                // 添加swagger-API方法注释
+                var xmlapppath = Path.Combine(AppContext.BaseDirectory, "WeChat.Application.xml");
+                if (File.Exists(xmlapppath))
+                    options.IncludeXmlComments(xmlapppath, true);
 
-                //// 添加swagger-DTO参数注释
-                //var xmlContractspath = Path.Combine(AppContext.BaseDirectory, "WeChat.Application.Contracts.xml");
-                //if (File.Exists(xmlContractspath))
-                //    options.IncludeXmlComments(xmlContractspath, true);
-
-                //// 添加swagger-自定义控制器注释
-                //var xmlapipath = Path.Combine(AppContext.BaseDirectory, "WeChat.Host.xml");
-                //if (File.Exists(xmlapipath))//
-                //    options.IncludeXmlComments(xmlapipath, true);
-
+                // 添加swagger-自定义控制器注释
+                var xmlapipath = Path.Combine(AppContext.BaseDirectory, "WeChat.Host.xml");
+                if (File.Exists(xmlapipath))//
+                    options.IncludeXmlComments(xmlapipath, true);
             });
         }
 
@@ -58,7 +52,7 @@ namespace WeChat.Host
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "Warehouse API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "WeChat API");
                 //swagger 默认折叠
                 options.DocExpansion(Swashbuckle.AspNetCore.SwaggerUI.DocExpansion.None);
             });

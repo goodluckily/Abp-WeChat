@@ -10,6 +10,9 @@ using WeChat.Http.WebCrawler;
 
 namespace WeChat.Application.Services.Job
 {
+    /// <summary>
+    /// 博客园
+    /// </summary>
     [Route("NetBlogJob")]
     public class NetBlogJob : BaseService
     {
@@ -30,7 +33,7 @@ namespace WeChat.Application.Services.Job
         /// 博客园 .NET技术专题文章
         /// </summary>
         /// <returns></returns>
-        [HttpGet("createNetcnblogs")]
+        [HttpPost("createNetcnblogs")]
         public async Task<DataResult> createNetcnblogs()
         {
             //.NET 专题
@@ -46,7 +49,7 @@ namespace WeChat.Application.Services.Job
         /// 博客园 新闻最新发布文章
         /// </summary>
         /// <returns></returns>
-        [HttpGet("createNewscnblogs")]
+        [HttpPost("createNewscnblogs")]
         public async Task<DataResult> createNewscnblogs()
         {
             //热门新闻

@@ -10,7 +10,9 @@ using WeChat.Domain;
 
 namespace WeChat.Application.Services.Job
 {
-
+    /// <summary>
+    /// 稀土掘金
+    /// </summary>
     [Route("JueJinBlogJob")]
     public class JueJinBlogJob : BaseService
     {

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 using WeChat.EntityFramewoekCore;
@@ -9,9 +10,10 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    partial class WeChatDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220118075718_initithomeNew")]
+    partial class initithomeNew
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,67 +91,6 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cnblogs");
-                });
-
-            modelBuilder.Entity("WeChat.Domain.CodeDeaultblogs", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .HasColumnType("char(36)");
-
-                    b.Property<int?>("AnalyzingType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Category")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("CollectionNum")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CommentNum")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ContentUrl")
-                        .HasColumnType("longtext")
-                        .HasComment("文章完整地址Url");
-
-                    b.Property<DateTime?>("CreateTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<bool?>("IsDel")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int?>("LikeNum")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ReadNum")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ReleaseTime")
-                        .HasColumnType("datetime(6)")
-                        .HasComment("发布时间");
-
-                    b.Property<string>("SubContent")
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("longtext")
-                        .HasComment("标题");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CodeDeaultblogs");
                 });
 
             modelBuilder.Entity("WeChat.Domain.Csdnblogs", b =>
@@ -269,7 +210,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Tags")
-                        .HasColumnType("longtext")
+                        .HasMaxLength(520)
+                        .HasColumnType("varchar(520)")
                         .HasComment("标签");
 
                     b.Property<string>("TagsUrl")
@@ -448,9 +390,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a017f20-45cb-e458-36e5-36684656d8d9"),
-                            CreateTime = new DateTime(2022, 1, 18, 19, 29, 59, 756, DateTimeKind.Local).AddTicks(654),
-                            CreateUserId = new Guid("3a017f20-45cb-d18e-5b22-29bb4ebfc5ce"),
+                            Id = new Guid("3a017e5d-8955-6dc2-060c-c46dffa6277d"),
+                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 526, DateTimeKind.Local).AddTicks(29),
+                            CreateUserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
                             Description = "最高权限管理者",
                             IsActive = true,
                             IsDel = false,
@@ -574,10 +516,10 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("3a017f20-45cb-d18e-5b22-29bb4ebfc5ce"),
-                            RoleId = new Guid("3a017f20-45cb-e458-36e5-36684656d8d9"),
-                            CreateTime = new DateTime(2022, 1, 18, 19, 29, 59, 756, DateTimeKind.Local).AddTicks(2032),
-                            CreateUserId = new Guid("3a017f20-45cb-d18e-5b22-29bb4ebfc5ce")
+                            UserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
+                            RoleId = new Guid("3a017e5d-8955-6dc2-060c-c46dffa6277d"),
+                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 526, DateTimeKind.Local).AddTicks(1233),
+                            CreateUserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b")
                         });
                 });
 
@@ -638,8 +580,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a017f20-45cb-d18e-5b22-29bb4ebfc5ce"),
-                            CreateTime = new DateTime(2022, 1, 18, 19, 29, 59, 755, DateTimeKind.Local).AddTicks(7276),
+                            Id = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
+                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 525, DateTimeKind.Local).AddTicks(7170),
                             IsActive = true,
                             IsDel = true,
                             LoginName = "admin",

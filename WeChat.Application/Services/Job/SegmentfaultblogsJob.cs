@@ -10,6 +10,9 @@ using WeChat.Http.WebCrawler;
 
 namespace WeChat.Application.Services.Job
 {
+    /// <summary>
+    /// 思否
+    /// </summary>
     [Route("Segmentfaultblogs")]
     public class SegmentfaultblogsJob : BaseService
     {
@@ -20,7 +23,7 @@ namespace WeChat.Application.Services.Job
             _segmentfaultblogsRepository = segmentfaultblogsRepository;
         }
 
-        [HttpGet("GetSegmentfaultblogsContent")]
+        [HttpPost("GetSegmentfaultblogsContent")]
         public async Task<DataResult> GetSegmentfaultblogsContent()
         {
             var segmentfaultblogList = new List<Segmentfaultblogs>();
@@ -58,6 +61,5 @@ namespace WeChat.Application.Services.Job
             var data = await _segmentfaultblogsRepository.CreateSegmentfaultblogsAsync(segmentfaultblogList);
             return Json(data);
         }
-
     }
 }
