@@ -33,8 +33,8 @@ namespace WeChat.Application.Services.Job
         /// 博客园 .NET技术专题文章
         /// </summary>
         /// <returns></returns>
-        [HttpPost("createNetcnblogs")]
-        public async Task<DataResult> createNetcnblogs()
+        [HttpPost("Netcnblogs")]
+        public async Task<DataResult> Netcnblogs()
         {
             //.NET 专题
             var blogNetResult = CnblogesCrawler.GetNetCnblogsContent();
@@ -49,8 +49,8 @@ namespace WeChat.Application.Services.Job
         /// 博客园 新闻最新发布文章
         /// </summary>
         /// <returns></returns>
-        [HttpPost("createNewscnblogs")]
-        public async Task<DataResult> createNewscnblogs()
+        [HttpPost("Newscnblogs")]
+        public async Task<DataResult> Newscnblogs()
         {
             //热门新闻
             var blogNewsResut = CnblogesCrawler.GetToDayNewsCnblogsContent();

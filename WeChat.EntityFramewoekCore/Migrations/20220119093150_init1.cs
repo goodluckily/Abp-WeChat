@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeChat.EntityFramewoekCore.Migrations
 {
-    public partial class initcsdn : Migration
+    public partial class init1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,6 +46,38 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "CodeDeaultblogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: true, comment: "标题")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: true, comment: "文章完整地址Url")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubContent = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Category = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "发布时间"),
+                    ReadNum = table.Column<int>(type: "int", nullable: true),
+                    CommentNum = table.Column<int>(type: "int", nullable: true),
+                    LikeNum = table.Column<int>(type: "int", nullable: true),
+                    CollectionNum = table.Column<int>(type: "int", nullable: true),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CodeDeaultblogs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Csdnblogs",
                 columns: table => new
                 {
@@ -80,6 +112,70 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Csdnblogs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "CTO51blogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: true, comment: "标题")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubContent = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: true, comment: "文章完整地址Url")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Img = table.Column<string>(type: "longtext", nullable: true, comment: "主图")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    KeyWords = table.Column<string>(type: "longtext", nullable: true, comment: "关键词")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SourceType = table.Column<string>(type: "longtext", nullable: true, comment: "来源类型")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "时间"),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CTO51blogs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "ItHomeblogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: true, comment: "标题")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: true, comment: "文章完整地址Url")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubContent = table.Column<string>(type: "longtext", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Tags = table.Column<string>(type: "longtext", nullable: true, comment: "标签")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    TagsUrl = table.Column<string>(type: "longtext", nullable: true, comment: "标签地址")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Img = table.Column<string>(type: "longtext", nullable: true, comment: "主图")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "发布时间"),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ItHomeblogs", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -152,6 +248,42 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "OsChinablogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: true, comment: "标题")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Img = table.Column<string>(type: "longtext", nullable: true, comment: "主图")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    SubContent = table.Column<string>(type: "longtext", nullable: true, comment: "文章简介")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: true, comment: "文章完整地址Url")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Author = table.Column<string>(type: "varchar(520)", maxLength: 520, nullable: true, comment: "作者")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AuthorManUrl = table.Column<string>(type: "longtext", nullable: true, comment: "作者主页地址")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReleaseTimeStr = table.Column<string>(type: "longtext", nullable: true, comment: "时间")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
+                    ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
+                    LikeNum = table.Column<int>(type: "int", nullable: true, comment: "喜欢数"),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OsChinablogs", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "Role",
                 columns: table => new
                 {
@@ -170,6 +302,38 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Segmentfaultblogs",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    Title = table.Column<string>(type: "longtext", nullable: true, comment: "标题")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ContentUrl = table.Column<string>(type: "longtext", nullable: true, comment: "文章完整地址Url")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Author = table.Column<string>(type: "varchar(520)", maxLength: 520, nullable: true, comment: "作者")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Img = table.Column<string>(type: "longtext", nullable: true, comment: "主图")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    AuthorManUrl = table.Column<string>(type: "longtext", nullable: true, comment: "作者主页地址")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "发布时间"),
+                    DiggNum = table.Column<int>(type: "int", nullable: true, comment: "点赞数"),
+                    CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
+                    AnalyzingType = table.Column<int>(type: "int", nullable: true),
+                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
+                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
+                    IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Segmentfaultblogs", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -251,17 +415,17 @@ namespace WeChat.EntityFramewoekCore.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsActive", "IsDel", "Name" },
-                values: new object[] { new Guid("3a016f34-a23c-37fb-4e07-f845581274a4"), new DateTime(2022, 1, 15, 17, 18, 18, 684, DateTimeKind.Local).AddTicks(8532), new Guid("3a016f34-a23b-1664-1927-0745ffa47a86"), "最高权限管理者", null, null, true, false, "管理者" });
+                values: new object[] { new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"), new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(5395), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), "最高权限管理者", null, null, true, false, "管理者" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "AvatarUrl", "CreateTime", "CreateUserId", "EditTime", "EditUserId", "Email", "IsActive", "IsDel", "LoginName", "NickName", "PassWrod", "Phone" },
-                values: new object[] { new Guid("3a016f34-a23b-1664-1927-0745ffa47a86"), null, new DateTime(2022, 1, 15, 17, 18, 18, 684, DateTimeKind.Local).AddTicks(4244), null, null, null, null, true, true, "admin", "管理员", "123456", null });
+                values: new object[] { new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), null, new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(2809), null, null, null, null, true, true, "admin", "管理员", "123456", null });
 
             migrationBuilder.InsertData(
                 table: "UserAndRoleMap",
                 columns: new[] { "RoleId", "UserId", "CreateTime", "CreateUserId" },
-                values: new object[] { new Guid("3a016f34-a23c-37fb-4e07-f845581274a4"), new Guid("3a016f34-a23b-1664-1927-0745ffa47a86"), new DateTime(2022, 1, 15, 17, 18, 18, 685, DateTimeKind.Local).AddTicks(283), new Guid("3a016f34-a23b-1664-1927-0745ffa47a86") });
+                values: new object[] { new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(6431), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAndRoleMap_RoleId",
@@ -275,13 +439,28 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 name: "Cnblogs");
 
             migrationBuilder.DropTable(
+                name: "CodeDeaultblogs");
+
+            migrationBuilder.DropTable(
                 name: "Csdnblogs");
+
+            migrationBuilder.DropTable(
+                name: "CTO51blogs");
+
+            migrationBuilder.DropTable(
+                name: "ItHomeblogs");
 
             migrationBuilder.DropTable(
                 name: "JueJinblogs");
 
             migrationBuilder.DropTable(
                 name: "Log");
+
+            migrationBuilder.DropTable(
+                name: "OsChinablogs");
+
+            migrationBuilder.DropTable(
+                name: "Segmentfaultblogs");
 
             migrationBuilder.DropTable(
                 name: "Token");

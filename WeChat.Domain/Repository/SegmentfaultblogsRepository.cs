@@ -31,5 +31,4 @@ namespace WeChat.Domain.Repository
             return await _segmentfaultblogsRepository.ToListAsync();
         }
     }
-
 }

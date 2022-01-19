@@ -10,6 +10,4 @@ namespace WeChat.Domain.IRepository
         Task<List<Csdnblogs>> CreateCsdnblogsAsync(List<Csdnblogs> csdnblogs);
         Task<List<Csdnblogs>> GetCsdnblogsAll();
     }
-
-
 }

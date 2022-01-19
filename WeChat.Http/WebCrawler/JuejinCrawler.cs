@@ -45,7 +45,7 @@ namespace WeChat.Http.WebCrawler
 
                 //主图
                 var Img = itemNode.SelectSingleNode(".//img[@class='lazy thumbnail']")?.Attributes["src"]?.Value?.Trim();//
-                var aaa = itemNode.SelectSingleNode(".//img[@alt='年终盘点服务网格：实用当先，生态为本']")?.Attributes["src"]?.Value?.Trim();
+
                 //内容简介
                 var SubContent = itemNode.SelectSingleNode(".//p[@class='brief']")?.InnerText?.Trim();
 

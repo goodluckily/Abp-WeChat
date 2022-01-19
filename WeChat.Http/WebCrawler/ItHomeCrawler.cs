@@ -11,7 +11,7 @@ using WeChat.Shared;
 
 namespace WeChat.Http.WebCrawler
 {
-    public class ItHomeCrwaler
+    public class ItHomeCrawler
     {
         public static string itHomeUrl = "https://it.ithome.com/";
 

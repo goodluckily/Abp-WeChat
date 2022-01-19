@@ -22,6 +22,8 @@ namespace WeChat.Application.Mapping
             CreateMap<Segmentfaultblogs, SegmentfaultblogsDto>().ReverseMap();
             CreateMap<ItHomeblogs, ItHomeblogsDto>().ReverseMap();
             CreateMap<CodeDeaultblogs, CodeDeaultblogsDto>().ReverseMap();
+            CreateMap<OsChinablogs, OsChinablogsDto>().ReverseMap();
+            CreateMap<CTO51blogs, CTO51blogsDto>().ReverseMap();
         }
     }
 }

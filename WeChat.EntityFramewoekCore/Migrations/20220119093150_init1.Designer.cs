@@ -10,8 +10,8 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    [Migration("20220118075718_initithomeNew")]
-    partial class initithomeNew
+    [Migration("20220119093150_init1")]
+    partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,64 @@ namespace WeChat.EntityFramewoekCore.Migrations
                 .HasAnnotation("_Abp_DatabaseProvider", EfCoreDatabaseProvider.MySql)
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.12");
+
+            modelBuilder.Entity("WeChat.Domain.CTO51blogs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int?>("AnalyzingType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentUrl")
+                        .HasColumnType("longtext")
+                        .HasComment("文章完整地址Url");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreateUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("EditTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("EditUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("longtext")
+                        .HasComment("主图");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("IsDel")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("KeyWords")
+                        .HasColumnType("longtext")
+                        .HasComment("关键词");
+
+                    b.Property<DateTime?>("ReleaseTime")
+                        .HasColumnType("datetime(6)")
+                        .HasComment("时间");
+
+                    b.Property<string>("SourceType")
+                        .HasColumnType("longtext")
+                        .HasComment("来源类型");
+
+                    b.Property<string>("SubContent")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext")
+                        .HasComment("标题");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CTO51blogs");
+                });
 
             modelBuilder.Entity("WeChat.Domain.Cnblogs", b =>
                 {
@@ -91,6 +149,67 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cnblogs");
+                });
+
+            modelBuilder.Entity("WeChat.Domain.CodeDeaultblogs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int?>("AnalyzingType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("longtext");
+
+                    b.Property<int?>("CollectionNum")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CommentNum")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ContentUrl")
+                        .HasColumnType("longtext")
+                        .HasComment("文章完整地址Url");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreateUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("EditTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("EditUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("IsDel")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("LikeNum")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ReadNum")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("ReleaseTime")
+                        .HasColumnType("datetime(6)")
+                        .HasComment("发布时间");
+
+                    b.Property<string>("SubContent")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext")
+                        .HasComment("标题");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CodeDeaultblogs");
                 });
 
             modelBuilder.Entity("WeChat.Domain.Csdnblogs", b =>
@@ -210,8 +329,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("Tags")
-                        .HasMaxLength(520)
-                        .HasColumnType("varchar(520)")
+                        .HasColumnType("longtext")
                         .HasComment("标签");
 
                     b.Property<string>("TagsUrl")
@@ -351,6 +469,78 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.ToTable("Log");
                 });
 
+            modelBuilder.Entity("WeChat.Domain.OsChinablogs", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int?>("AnalyzingType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Author")
+                        .HasMaxLength(520)
+                        .HasColumnType("varchar(520)")
+                        .HasComment("作者");
+
+                    b.Property<string>("AuthorManUrl")
+                        .HasColumnType("longtext")
+                        .HasComment("作者主页地址");
+
+                    b.Property<int?>("CommentNum")
+                        .HasColumnType("int")
+                        .HasComment("评论数");
+
+                    b.Property<string>("ContentUrl")
+                        .HasColumnType("longtext")
+                        .HasComment("文章完整地址Url");
+
+                    b.Property<DateTime?>("CreateTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("CreateUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime?>("EditTime")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("EditUserId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Img")
+                        .HasColumnType("longtext")
+                        .HasComment("主图");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<bool?>("IsDel")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<int?>("LikeNum")
+                        .HasColumnType("int")
+                        .HasComment("喜欢数");
+
+                    b.Property<int?>("ReadNum")
+                        .HasColumnType("int")
+                        .HasComment("阅读数");
+
+                    b.Property<string>("ReleaseTimeStr")
+                        .HasColumnType("longtext")
+                        .HasComment("时间");
+
+                    b.Property<string>("SubContent")
+                        .HasColumnType("longtext")
+                        .HasComment("文章简介");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("longtext")
+                        .HasComment("标题");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("OsChinablogs");
+                });
+
             modelBuilder.Entity("WeChat.Domain.Role", b =>
                 {
                     b.Property<Guid>("Id")
@@ -390,9 +580,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a017e5d-8955-6dc2-060c-c46dffa6277d"),
-                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 526, DateTimeKind.Local).AddTicks(29),
-                            CreateUserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
+                            Id = new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"),
+                            CreateTime = new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(5395),
+                            CreateUserId = new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"),
                             Description = "最高权限管理者",
                             IsActive = true,
                             IsDel = false,
@@ -516,10 +706,10 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
-                            RoleId = new Guid("3a017e5d-8955-6dc2-060c-c46dffa6277d"),
-                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 526, DateTimeKind.Local).AddTicks(1233),
-                            CreateUserId = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b")
+                            UserId = new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"),
+                            RoleId = new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"),
+                            CreateTime = new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(6431),
+                            CreateUserId = new Guid("3a0183da-724b-8103-de3c-1c9af2316abb")
                         });
                 });
 
@@ -580,8 +770,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a017e5d-8955-aa43-8a4e-5a73b83b547b"),
-                            CreateTime = new DateTime(2022, 1, 18, 15, 57, 17, 525, DateTimeKind.Local).AddTicks(7170),
+                            Id = new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"),
+                            CreateTime = new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(2809),
                             IsActive = true,
                             IsDel = true,
                             LoginName = "admin",

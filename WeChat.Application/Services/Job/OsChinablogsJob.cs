@@ -11,27 +11,31 @@ using WeChat.Http.WebCrawler;
 namespace WeChat.Application.Services.Job
 {
     /// <summary>
-    /// 思否
+    /// 开源中国
     /// </summary>
-    [Route("Segmentfaultblogs")]
-    public class SegmentfaultblogsJob : BaseService
+    [Route("OsChinablogsJob")]
+    public class OsChinablogsJob : BaseService
     {
-        private readonly ISegmentfaultblogsRepository _segmentfaultblogsRepository;
+        private readonly IOsChinablogsRepository _osChinablogsRepository;
 
-        public SegmentfaultblogsJob(ISegmentfaultblogsRepository segmentfaultblogsRepository)
+        public OsChinablogsJob(IOsChinablogsRepository osChinablogsRepository)
         {
-            _segmentfaultblogsRepository = segmentfaultblogsRepository;
+            _osChinablogsRepository = osChinablogsRepository;
         }
 
-        [HttpPost("SegmentfaultblogsContent")]
-        public async Task<DataResult> SegmentfaultblogsContent()
+        /// <summary>
+        /// 开源中国 博客文章
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("OsChinablogsContent")]
+        public async Task<DataResult> OsChinablogsContent()
         {
-            var segmentfaultblogList = new List<Segmentfaultblogs>();
+            var OsChinablogsList = new List<OsChinablogs>();
 
-            var result = await SegmentfaulCrawler.GetSegmentfaulCrawlerContentAsync();
+            var result = OsChinaCrawler.GetOsChinaBlogContent();
 
             //数据转换
-            var dbSegmentfaults = ObjectMapper.Map<List<SegmentfaultblogsDto>, List<Segmentfaultblogs>>(result);
+            var dbSegmentfaults = ObjectMapper.Map<List<OsChinablogsDto>, List<OsChinablogs>>(result);
 
             //自己去重
             dbSegmentfaults = dbSegmentfaults.Where((x, i) => dbSegmentfaults.FindIndex(z => z.Author == x.Author && z.Title == x.Title) == i).ToList();
@@ -40,16 +44,16 @@ namespace WeChat.Application.Services.Job
             var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
-            var clientDBlogsList = await _segmentfaultblogsRepository.GetSegmentfaultblogsAll();
+            var clientDBlogsList = await _osChinablogsRepository.GetOsChinablogsAll();
 
             //db 去重
             dbSegmentfaults.ForEach(item =>
             {
                 var isChecket = clientDBlogsList.Any(x => x.Title == item.Title && x.Author == item.Author);
-                if (!isChecket) segmentfaultblogList.Add(item);
+                if (!isChecket) OsChinablogsList.Add(item);
             });
 
-            segmentfaultblogList.ForEach(x =>
+            OsChinablogsList.ForEach(x =>
             {
                 x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
@@ -58,7 +62,7 @@ namespace WeChat.Application.Services.Job
             });
 
             //db add
-            var data = await _segmentfaultblogsRepository.CreateSegmentfaultblogsAsync(segmentfaultblogList);
+            var data = await _osChinablogsRepository.CreateOsChinablogsAsync(OsChinablogsList);
             return Json(data);
         }
     }

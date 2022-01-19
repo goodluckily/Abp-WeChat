@@ -33,6 +33,8 @@ namespace WeChat.EntityFramewoekCore
         public DbSet<Segmentfaultblogs> Segmentfaultblogs { get; set; }
         public DbSet<ItHomeblogs> ItHomeblogs { get; set; }
         public DbSet<CodeDeaultblogs> CodeDeaultblogs { get; set; }
+        public DbSet<OsChinablogs> OsChinablogs { get; set; }
+        public DbSet<CTO51blogs> CTO51blogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

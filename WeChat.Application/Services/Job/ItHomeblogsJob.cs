@@ -39,10 +39,10 @@ namespace WeChat.Application.Services.Job
         /// 获取 It之家的 IT资讯最新
         /// </summary>
         /// <returns></returns>
-        [HttpPost("GetItHomeblogsContent")]
-        public async Task<DataResult> GetItHomeblogsContent()
+        [HttpPost("ItHomeblogsContent")]
+        public async Task<DataResult> ItHomeblogsContent()
         {
-            var result = ItHomeCrwaler.GetItHomeNews();
+            var result = ItHomeCrawler.GetItHomeNews();
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
@@ -53,10 +53,10 @@ namespace WeChat.Application.Services.Job
         /// 获取It之家 微软资讯
         /// </summary>
         /// <returns></returns>
-        [HttpPost("GetItHomeblogsMicrosoftContent")]
-        public async Task<DataResult> GetItHomeblogsMicrosoftContent()
+        [HttpPost("ItHomeblogsMicrosoftContent")]
+        public async Task<DataResult> ItHomeblogsMicrosoftContent()
         {
-            var result = ItHomeCrwaler.GetItHomeMicrosoftNews();
+            var result = ItHomeCrawler.GetItHomeMicrosoftNews();
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);

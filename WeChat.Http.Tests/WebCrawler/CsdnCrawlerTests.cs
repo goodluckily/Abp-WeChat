@@ -21,7 +21,11 @@ namespace WeChat.Http.WebCrawler.Tests
             //ItHomeCrwaler.GetItHomeNews();
             //ItHomeCrwaler.GetItHomeMicrosoftNews();
 
-            CodeDeaultCrawler.GetCodeDeaultContent();
+            //CodeDeaultCrawler.GetCodeDeaultContent();
+
+            //OsChinaCrawler.GetOsChinaBlogContent();
+
+            var aa = CTO51Crawler.Get51CTOContentAsync().Result;
         }
     }
 }

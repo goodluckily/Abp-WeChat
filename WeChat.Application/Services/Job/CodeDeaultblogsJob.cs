@@ -23,8 +23,8 @@ namespace WeChat.Application.Services.Job
             _codeDeaultblogsRepository = codeDeaultblogsRepository;
         }
 
-        [HttpPost("GetCodeDeaultblogsContent")]
-        public async Task<DataResult> GetCodeDeaultblogsContent()
+        [HttpPost("CodeDeaultblogsContent")]
+        public async Task<DataResult> CodeDeaultblogsContent()
         {
             var codedeaultblogList = new List<CodeDeaultblogs>();
 
