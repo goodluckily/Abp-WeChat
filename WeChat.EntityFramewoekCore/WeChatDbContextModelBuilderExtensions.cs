@@ -205,6 +205,7 @@ namespace WeChat.EntityFramewoekCore
 
                 b.ConfigureByConvention();
             });
+
             //掘金
             builder.Entity<JueJinblogs>(b =>
             {

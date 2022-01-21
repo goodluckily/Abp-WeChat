@@ -14,7 +14,7 @@ namespace WeChat.Shared
     }
     public enum TokenEnum
     {
-        [EnumMember(Value = "JSToken")]
+        [EnumMember(Value = "Token")]
         Token = 1,
         [EnumMember(Value = "JSToken")]
         JsToken = 2,

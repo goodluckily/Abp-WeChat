@@ -21,16 +21,17 @@ namespace WeChat.Host.Filter
         //之前
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            var action = context.RouteData.Values["action"];
-            var controller = context.RouteData.Values["controller"];
+            var controller = context.RouteData.Values["controller"]?.ToString();
+            var action = context.RouteData.Values["action"]?.ToString();
             var method = context.HttpContext.Request.Method;
             var route = controller + "/" + action;
 
-            if (!route.ToLower().Equals("user/login"))
+            if (!route.ToLower().Equals("user/login") && !controller.ToLower().Equals("health"))
             {
                 var userId = AuthCommon.GetUserId(context.HttpContext.User);
+                //操作日志 记录
+                _logger.LogInformation(method + "    " + route);
             }
-            _logger.LogInformation(method + "    " + route);
             base.OnActionExecuting(context);
         }
 

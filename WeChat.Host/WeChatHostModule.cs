@@ -25,6 +25,7 @@ using WeChat.Application;
 using WeChat.Shared;
 using WeChat.EntityFramewoekCore;
 using WeChat.Host.Filter;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace WeChat.Host
 {
@@ -36,15 +37,15 @@ namespace WeChat.Host
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
-        typeof(WeChatSwaggerModule)//使用自己定义的 Swagger 模块
+        typeof(WeChatSwaggerModule),//使用自己定义的 Swagger 模块
+        typeof(BackgroundJobsModule)//hangfire 定时任务的添加
         )]
     public class WeChatHostModule : AbpModule
     {
-
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
-
+            var mySqlConnectionString = ConfigCommon.Configuration["ConnectionStrings:WeChat"];
 
             #region 静态类的配置文件
             //var configuration = BuildConfiguration();
@@ -214,6 +215,24 @@ namespace WeChat.Host
                 options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString; //mysql 使用
             });
             #endregion
+
+
+            #region 健康检查
+
+            //db
+            services.AddHealthChecks().AddMySql(
+                connectionString: mySqlConnectionString,
+                name: "sql",
+                failureStatus: HealthStatus.Degraded,
+                tags: new string[] { "db", "sql", "mysql" },
+                System.TimeSpan.FromMinutes(3));
+
+            services.AddHealthChecksUI(setupSettings: set =>
+            {
+                set.SetEvaluationTimeInSeconds(10);//将 UI 配置为每 10 秒轮询一次健康检查更新
+                set.AddHealthCheckEndpoint("HealthCheck", "/Health/Index");
+            }).AddMySqlStorage(mySqlConnectionString);
+            #endregion
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
@@ -242,6 +261,10 @@ namespace WeChat.Host
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
+                endpoints.MapHealthChecksUI(option =>
+                {
+                    option.UIPath = "/hc-ui";
+                });
             });
         }
 

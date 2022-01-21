@@ -22,8 +22,8 @@ namespace WeChat.Host
             try
             {
                 //确保NLog.config中连接字符串与appsettings.json中同步
-                var ConnectionStr = ConfigCommon.GetConfig<string>("ConnectionStrings:WeChat");
-                NLogCommon.EnsureNlogConfig("NLog.config", ConnectionStr);
+                var mySqlConnectionString = ConfigCommon.GetConfig<string>("ConnectionStrings:WeChat");
+                NLogCommon.EnsureNlogConfig("NLog.config", mySqlConnectionString);
                 //其他项目启动时需要做的事情
                 //code
                 NLogCommon.WriteDBLog(NLog.LogLevel.Trace, LogTypeEnum.Web, "网站启动成功");

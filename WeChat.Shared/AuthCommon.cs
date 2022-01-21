@@ -119,7 +119,6 @@ namespace WeChat.Shared
                 var hour = Math.Round(time, 2);
                 //RedisService.SetTValue(key, token, hour);
             }
-
         }
     }
 }
