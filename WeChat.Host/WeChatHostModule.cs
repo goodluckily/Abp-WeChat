@@ -109,10 +109,19 @@ namespace WeChat.Host
             {
                 optios.UseMySQL();
                 //optios.UseSqlServer();
-
                 //Microsoft.EntityFrameworkCore.Proxies //需要安装Buget包
                 //optios.DbContextOptions.UseLazyLoadingProxies(); //启用延时加载
             });
+
+            #region 依据数据库类型 配置 Guid
+            //SequentialAtEnd（默认）适用于SQL Server。
+            //SequentialAsString由MySQL和PostgreSQL 使用。
+            //SequentialAsBinary由Oracle 使用
+            Configure<AbpSequentialGuidGeneratorOptions>(options =>
+            {
+                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString; //mysql 使用
+            });
+            #endregion
 
             #endregion
 
@@ -206,32 +215,32 @@ namespace WeChat.Host
 
             #endregion
 
-            #region 依据数据类型 配置 Guid
-            //SequentialAtEnd（默认）适用于SQL Server。
-            //SequentialAsString由MySQL和PostgreSQL 使用。
-            //SequentialAsBinary由Oracle 使用
-            Configure<AbpSequentialGuidGeneratorOptions>(options =>
-            {
-                options.DefaultSequentialGuidType = SequentialGuidType.SequentialAsString; //mysql 使用
-            });
-            #endregion
 
+            #region 健康检查 移除
+            //Nuget包
+            //AspNetCore.HealthChecks.MySql
+            //AspNetCore.HealthChecks.UI
+            //AspNetCore.HealthChecks.UI.Client
+            //AspNetCore.HealthChecks.UI.InMemory.Storage
+            //AspNetCore.HealthChecks.UI.MySql.Storage
 
-            #region 健康检查
+            //services.AddControllersWithViews();
+            //services.AddHealthChecks();
+            //services.AddHealthChecksUI().AddInMemoryStorage();
 
-            //db
-            services.AddHealthChecks().AddMySql(
-                connectionString: mySqlConnectionString,
-                name: "sql",
-                failureStatus: HealthStatus.Degraded,
-                tags: new string[] { "db", "sql", "mysql" },
-                System.TimeSpan.FromMinutes(3));
+            ////db
+            ////services.AddHealthChecks().AddMySql(
+            ////    connectionString: mySqlConnectionString,
+            ////    name: "sql",
+            ////    failureStatus: HealthStatus.Degraded,
+            ////    tags: new string[] { "db", "sql", "mysql" },
+            ////    System.TimeSpan.FromMinutes(3));
 
-            services.AddHealthChecksUI(setupSettings: set =>
-            {
-                set.SetEvaluationTimeInSeconds(10);//将 UI 配置为每 10 秒轮询一次健康检查更新
-                set.AddHealthCheckEndpoint("HealthCheck", "/Health/Index");
-            }).AddMySqlStorage(mySqlConnectionString);
+            //services.AddHealthChecksUI(setupSettings: set =>
+            //{
+            //    set.SetEvaluationTimeInSeconds(10);//将 UI 配置为每 10 秒轮询一次健康检查更新
+            //    set.AddHealthCheckEndpoint("HealthCheck", "/health");
+            //}).AddMySqlStorage(mySqlConnectionString);
             #endregion
         }
 
@@ -258,14 +267,19 @@ namespace WeChat.Host
 
             app.UseSession();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                endpoints.MapHealthChecksUI(option =>
-                {
-                    option.UIPath = "/hc-ui";
-                });
             });
+
+            #region 健康检查移除
+            //app.UseHealthChecks("/health");
+            //endpoints.MapHealthChecksUI(option =>
+            //{
+            //    option.UIPath = "/hc-ui";
+            //});
+            #endregion
         }
 
         //private static IConfigurationRoot BuildConfiguration()

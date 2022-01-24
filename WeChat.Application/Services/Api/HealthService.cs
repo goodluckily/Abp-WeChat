@@ -12,14 +12,14 @@ using Volo.Abp.Application.Services;
 
 namespace WeChat.Application.Services.Api
 {
-    [Route("Health")]
+    [Route("health")]
     public class HealthService : ApplicationService
     {
         /// <summary>
         /// 健康检查
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Index")]
+        [HttpGet]
         public string Get()
         {
             return "ok";
