@@ -18,6 +18,8 @@ namespace WeChat.EntityFramewoekCore
         {
             var services = context.Services;
             //services.AddAbpDbContext<WeChatDbContext>();
+
+            services.AddDefaultRepositories();
         }
     }
 }
