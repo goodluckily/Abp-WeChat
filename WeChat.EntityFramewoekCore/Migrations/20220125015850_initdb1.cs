@@ -2,7 +2,7 @@
 
 namespace WeChat.EntityFramewoekCore.Migrations
 {
-    public partial class init2 : Migration
+    public partial class initdb1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

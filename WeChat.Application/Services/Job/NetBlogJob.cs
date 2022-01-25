@@ -74,9 +74,7 @@ namespace WeChat.Application.Services.Job
             });
             newNetcnblogs.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
             var netBlogsList = await _netcnblogsRepository.CreateNetcnblogsAsync(newNetcnblogs);

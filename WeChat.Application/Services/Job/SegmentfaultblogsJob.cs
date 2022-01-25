@@ -51,9 +51,7 @@ namespace WeChat.Application.Services.Job
 
             segmentfaultblogList.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
 

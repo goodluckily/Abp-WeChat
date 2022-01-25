@@ -8,7 +8,7 @@ using WeChat.Shared;
 
 namespace WeChat.Domain
 {
-    public class Cnblogs : BaseEntity
+    public class Cnblogs : BaseJobEntity
     {
         public string? Title { get; set; }
         public string? Img { get; set; }

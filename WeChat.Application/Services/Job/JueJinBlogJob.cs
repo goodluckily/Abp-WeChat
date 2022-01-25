@@ -52,9 +52,7 @@ namespace WeChat.Application.Services.Job
 
             cnblogs.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
             var data = await _jueJinblogsRepository.CreateJueJinblogsAsync(cnblogs);

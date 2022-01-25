@@ -56,9 +56,7 @@ namespace WeChat.Application.Services.Job
 
             csdnblogs.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
 
@@ -99,9 +97,7 @@ namespace WeChat.Application.Services.Job
 
             csdnblogs.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
 

@@ -2,7 +2,7 @@
 
 namespace WeChat.Domain
 {
-    public class Csdnblogs : BaseEntity
+    public class Csdnblogs : BaseJobEntity
     {
         public string? Title { get; set; }
         public string? Img { get; set; }

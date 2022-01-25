@@ -55,9 +55,7 @@ namespace WeChat.Application.Services.Job
 
             OsChinablogsList.ForEach(x =>
             {
-                x.CreateUserId = currenmtUserId;
                 x.CreateTime = thisDataTime;
-                x.IsActive = true;
                 x.IsDel = false;
             });
 

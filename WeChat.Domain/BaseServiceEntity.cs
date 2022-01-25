@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace WeChat.Domain
 {
-    public class BaseEntity : Entity<Guid>
+    public class BaseServiceEntity : Entity<Guid>
     {
         public Guid? CreateUserId { get; set; }
 
@@ -19,11 +19,11 @@ namespace WeChat.Domain
         public bool? IsActive { get; set; } = true;
         public bool? IsDel { get; set; } = false;
 
-        public BaseEntity()
+        public BaseServiceEntity()
         {
 
         }
-        public BaseEntity(Guid id) : base(id)
+        public BaseServiceEntity(Guid id) : base(id)
         {
 
         }

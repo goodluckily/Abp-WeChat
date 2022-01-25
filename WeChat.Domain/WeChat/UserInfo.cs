@@ -7,7 +7,7 @@ using Volo.Abp.Domain.Entities;
 
 namespace WeChat.Domain
 {
-    public class UserInfo : BaseEntity
+    public class UserInfo : BaseServiceEntity
     {
         public string LoginName { get; set; }
         public string PassWrod { get; set; }

@@ -10,8 +10,8 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    [Migration("20220119094543_init2")]
-    partial class init2
+    [Migration("20220125015850_initdb1")]
+    partial class initdb1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,6 +24,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.CTO51blogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -36,21 +37,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -82,6 +71,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Cnblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -107,21 +97,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -154,6 +132,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.CodeDeaultblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -174,18 +153,6 @@ namespace WeChat.EntityFramewoekCore.Migrations
 
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -215,6 +182,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Csdnblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -240,9 +208,6 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("CreatedAt")
                         .HasColumnType("longtext")
                         .HasComment("创建");
@@ -251,18 +216,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .HasColumnType("int")
                         .HasComment("点赞数");
 
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -290,6 +246,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.ItHomeblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -302,21 +259,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -348,6 +293,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.JueJinblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -373,15 +319,6 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int?>("GiveLikeNum")
                         .HasColumnType("int")
                         .HasComment("点赞数");
@@ -393,9 +330,6 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -424,6 +358,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Log", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Exception")
@@ -472,6 +407,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.OsChinablogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -497,21 +433,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -544,6 +468,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Role", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<DateTime?>("CreateTime")
@@ -581,6 +506,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Segmentfaultblogs", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<int?>("AnalyzingType")
@@ -606,25 +532,13 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.Property<DateTime?>("CreateTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid?>("CreateUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int?>("DiggNum")
                         .HasColumnType("int")
                         .HasComment("点赞数");
 
-                    b.Property<DateTime?>("EditTime")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<Guid?>("EditUserId")
-                        .HasColumnType("char(36)");
-
                     b.Property<string>("Img")
                         .HasColumnType("longtext")
                         .HasComment("主图");
-
-                    b.Property<bool?>("IsActive")
-                        .HasColumnType("tinyint(1)");
 
                     b.Property<bool?>("IsDel")
                         .HasColumnType("tinyint(1)");
@@ -645,6 +559,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.Token", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Access_Token")
@@ -695,6 +610,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
             modelBuilder.Entity("WeChat.Domain.UserInfo", b =>
                 {
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
                     b.Property<string>("AvatarUrl")

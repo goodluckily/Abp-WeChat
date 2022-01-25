@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WeChat.EntityFramewoekCore.Migrations
 {
-    public partial class init1 : Migration
+    public partial class initdb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,11 +32,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
                     ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -64,11 +60,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     LikeNum = table.Column<int>(type: "int", nullable: true),
                     CollectionNum = table.Column<int>(type: "int", nullable: true),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -102,11 +94,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
                     ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -134,11 +122,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "时间"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -166,11 +150,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ReleaseTime = table.Column<DateTime>(type: "datetime(6)", nullable: true, comment: "发布时间"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -202,11 +182,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
                     HotIndex = table.Column<double>(type: "double", nullable: true, comment: "热门系数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -270,11 +246,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     ReadNum = table.Column<int>(type: "int", nullable: true, comment: "阅读数"),
                     LikeNum = table.Column<int>(type: "int", nullable: true, comment: "喜欢数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -324,11 +296,7 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     DiggNum = table.Column<int>(type: "int", nullable: true, comment: "点赞数"),
                     CommentNum = table.Column<int>(type: "int", nullable: true, comment: "评论数"),
                     AnalyzingType = table.Column<int>(type: "int", nullable: true),
-                    CreateUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
                     CreateTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    EditUserId = table.Column<Guid>(type: "char(36)", nullable: true, collation: "ascii_general_ci"),
-                    EditTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: true),
                     IsDel = table.Column<bool>(type: "tinyint(1)", nullable: true)
                 },
                 constraints: table =>
@@ -415,17 +383,17 @@ namespace WeChat.EntityFramewoekCore.Migrations
             migrationBuilder.InsertData(
                 table: "Role",
                 columns: new[] { "Id", "CreateTime", "CreateUserId", "Description", "EditTime", "EditUserId", "IsActive", "IsDel", "Name" },
-                values: new object[] { new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"), new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(5395), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), "最高权限管理者", null, null, true, false, "管理者" });
+                values: new object[] { new Guid("3a01a11e-1e35-4880-b206-ad62329a4184"), new DateTime(2022, 1, 25, 9, 54, 43, 894, DateTimeKind.Local).AddTicks(2541), new Guid("3a01a11e-1e34-8971-9886-f79630c8a118"), "最高权限管理者", null, null, true, false, "管理者" });
 
             migrationBuilder.InsertData(
                 table: "UserInfo",
                 columns: new[] { "Id", "AvatarUrl", "CreateTime", "CreateUserId", "EditTime", "EditUserId", "Email", "IsActive", "IsDel", "LoginName", "NickName", "PassWrod", "Phone" },
-                values: new object[] { new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), null, new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(2809), null, null, null, null, true, true, "admin", "管理员", "123456", null });
+                values: new object[] { new Guid("3a01a11e-1e34-8971-9886-f79630c8a118"), null, new DateTime(2022, 1, 25, 9, 54, 43, 893, DateTimeKind.Local).AddTicks(8212), null, null, null, null, true, true, "admin", "管理员", "123456", null });
 
             migrationBuilder.InsertData(
                 table: "UserAndRoleMap",
                 columns: new[] { "RoleId", "UserId", "CreateTime", "CreateUserId" },
-                values: new object[] { new Guid("3a0183da-724c-b2c8-775c-5ef99ef7ff89"), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb"), new DateTime(2022, 1, 19, 17, 31, 49, 708, DateTimeKind.Local).AddTicks(6431), new Guid("3a0183da-724b-8103-de3c-1c9af2316abb") });
+                values: new object[] { new Guid("3a01a11e-1e35-4880-b206-ad62329a4184"), new Guid("3a01a11e-1e34-8971-9886-f79630c8a118"), new DateTime(2022, 1, 25, 9, 54, 43, 894, DateTimeKind.Local).AddTicks(3980), new Guid("3a01a11e-1e34-8971-9886-f79630c8a118") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserAndRoleMap_RoleId",

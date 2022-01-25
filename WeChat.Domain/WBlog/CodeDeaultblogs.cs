@@ -3,7 +3,7 @@ using WeChat.Shared;
 
 namespace WeChat.Domain
 {
-    public class CodeDeaultblogs : BaseEntity
+    public class CodeDeaultblogs : BaseJobEntity
     {
         public string? Title { get; set; }
         public string? ContentUrl { get; set; }
