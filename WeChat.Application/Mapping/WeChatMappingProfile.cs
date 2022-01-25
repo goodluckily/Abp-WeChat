@@ -16,14 +16,14 @@ namespace WeChat.Application.Mapping
         public WeChatMappingProfile()
         {
             CreateMap<Token, TokenLapseDto>().ReverseMap();
-            CreateMap<Cnblogs, NetcnblogsDto>().ReverseMap();
-            CreateMap<JueJinblogs, JueJinblogsDto>().ReverseMap();
-            CreateMap<Csdnblogs, CsdnblogsDto>().ReverseMap();
-            CreateMap<Segmentfaultblogs, SegmentfaultblogsDto>().ReverseMap();
-            CreateMap<ItHomeblogs, ItHomeblogsDto>().ReverseMap();
-            CreateMap<CodeDeaultblogs, CodeDeaultblogsDto>().ReverseMap();
-            CreateMap<OsChinablogs, OsChinablogsDto>().ReverseMap();
-            CreateMap<CTO51blogs, CTO51blogsDto>().ReverseMap();
+            //CreateMap<Cnblogs, NetcnblogsDto>().ReverseMap();
+            //CreateMap<JueJinblogs, JueJinblogsDto>().ReverseMap();
+            //CreateMap<Csdnblogs, CsdnblogsDto>().ReverseMap();
+            //CreateMap<Segmentfaultblogs, SegmentfaultblogsDto>().ReverseMap();
+            //CreateMap<ItHomeblogs, ItHomeblogsDto>().ReverseMap();
+            //CreateMap<CodeDeaultblogs, CodeDeaultblogsDto>().ReverseMap();
+            //CreateMap<OsChinablogs, OsChinablogsDto>().ReverseMap();
+            //CreateMap<CTO51blogs, CTO51blogsDto>().ReverseMap();
         }
     }
 }

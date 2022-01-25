@@ -7,6 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
+using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -35,13 +36,13 @@ namespace WeChat.Application.Services.Job
             var result = OsChinaCrawler.GetOsChinaBlogContent();
 
             //数据转换
-            var dbSegmentfaults = ObjectMapper.Map<List<OsChinablogsDto>, List<OsChinablogs>>(result);
+            var dbSegmentfaults = result.Adapt<List<OsChinablogs>>();// ObjectMapper.Map<List<OsChinablogsDto>, List<OsChinablogs>>(result);
 
             //自己去重
             dbSegmentfaults = dbSegmentfaults.Where((x, i) => dbSegmentfaults.FindIndex(z => z.Author == x.Author && z.Title == x.Title) == i).ToList();
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
+            //var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _osChinablogsRepository.GetOsChinablogsAll();

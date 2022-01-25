@@ -7,7 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
-
+using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -29,6 +29,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("CsdnBlogContent")]
+        [BathBackgroundJob("CsdnOtherJob", "corn表达式", "jobs")]
         public async Task<DataResult> CsdnBlogContent()
         {
             var csdnblogs = new List<Csdnblogs>();
@@ -36,13 +37,13 @@ namespace WeChat.Application.Services.Job
             var result = await CsdnCrawler.GetCsdnOtherContentAsync();
 
             //数据转换
-            var dbCsdnblogs = ObjectMapper.Map<List<CsdnblogsDto>, List<Csdnblogs>>(result);
+            var dbCsdnblogs = result.Adapt<List<Csdnblogs>>();//ObjectMapper.Map<List<CsdnblogsDto>, List<Csdnblogs>>(result);
 
             //自己去重
             dbCsdnblogs = dbCsdnblogs.Where((x, i) => dbCsdnblogs.FindIndex(z => z.Author == x.Author && z.Title == x.Title) == i).ToList();
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
+            //var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _csdnblogsRepository.GetCsdnblogsAll();
@@ -70,6 +71,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("CsdnTuiJianContent")]
+        [BathBackgroundJob("CsdnTuiJianJob", "corn表达式", "jobs")]
         public async Task<DataResult> CsdnTuiJianContent()
         {
             var csdnblogs = new List<Csdnblogs>();
@@ -77,13 +79,13 @@ namespace WeChat.Application.Services.Job
             var result = await CsdnCrawler.GetCsdnTuiJianContentAsync();
 
             //数据转换
-            var dbCsdnblogs = ObjectMapper.Map<List<CsdnblogsDto>, List<Csdnblogs>>(result);
+            var dbCsdnblogs = result.Adapt<List<Csdnblogs>>();// ObjectMapper.Map<List<CsdnblogsDto>, List<Csdnblogs>>(result);
 
             //自己去重
             dbCsdnblogs = dbCsdnblogs.Where((x, i) => dbCsdnblogs.FindIndex(z => z.Author == x.Author && z.Title == x.Title) == i).ToList();
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
+            //var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _csdnblogsRepository.GetCsdnblogsAll();
@@ -105,8 +107,6 @@ namespace WeChat.Application.Services.Job
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
             return Json(data);
         }
-
-
 
     }
 }

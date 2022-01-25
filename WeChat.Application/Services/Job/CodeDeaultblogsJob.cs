@@ -7,6 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
+using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -23,6 +24,7 @@ namespace WeChat.Application.Services.Job
             _codeDeaultblogsRepository = codeDeaultblogsRepository;
         }
 
+        [BathBackgroundJob("CodeDeaultJob", "corn表达式", "jobs")]
         [HttpPost("CodeDeaultblogsContent")]
         public async Task<DataResult> CodeDeaultblogsContent()
         {
@@ -31,13 +33,13 @@ namespace WeChat.Application.Services.Job
             var result = CodeDeaultCrawler.GetCodeDeaultContent();
 
             //数据转换
-            var dbcodedeaults = ObjectMapper.Map<List<CodeDeaultblogsDto>, List<CodeDeaultblogs>>(result);
+            var dbcodedeaults = result.Adapt<List<CodeDeaultblogs>>();// ObjectMapper.Map<List<CodeDeaultblogsDto>, List<CodeDeaultblogs>>(result);
 
             //自己去重
             dbcodedeaults = dbcodedeaults.Where((x, i) => dbcodedeaults.FindIndex(z => z.Title == x.Title) == i).ToList();
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
+            //var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _codeDeaultblogsRepository.GetCodeDeaultblogsAll();

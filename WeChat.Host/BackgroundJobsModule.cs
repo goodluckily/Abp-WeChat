@@ -10,6 +10,7 @@ using WeChat.Shared;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using WeChat.Host.Hangfire;
 
 namespace WeChat.Host
 {
@@ -65,12 +66,16 @@ namespace WeChat.Host
             });
 
             //开始使用Hangfire服务
-            app.UseHangfireServer();
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                //WorkerCount 并发任务数 用的是默认的20
+                WorkerCount = 5,
+                ServerName = "WeChat_Hangfire",//服务器名称
+                Queues = new[] { "jobs", "apis", "default" },//队列名称，只能为小写
+            });
 
-            //var service = context.ServiceProvider;
-            //service.UseWallpaperJob();
-            //service.UseHotNewsJob();
-            //service.UsePuppeteerTestJob();
+            var service = context.ServiceProvider;
+            service.UseBathHangfireJob();
         }
     }
 }

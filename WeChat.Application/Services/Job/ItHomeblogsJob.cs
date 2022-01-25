@@ -8,6 +8,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using System.Threading;
+using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -73,13 +74,13 @@ namespace WeChat.Application.Services.Job
 
             var itHomeblogList = new List<ItHomeblogs>();
             //数据转换
-            var dbitHomes = ObjectMapper.Map<List<ItHomeblogsDto>, List<ItHomeblogs>>(result);
+            var dbitHomes = result.Adapt<List<ItHomeblogs>>();// ObjectMapper.Map<List<ItHomeblogsDto>, List<ItHomeblogs>>(result);
 
             //自己去重
             dbitHomes = dbitHomes.Where((x, i) => dbitHomes.FindIndex(z => z.Title == x.Title) == i).ToList();
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
+            //var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _itHomeblogsRepository.GetItHomeblogsAll();
