@@ -55,7 +55,6 @@ namespace WeChat.Http.WeiChatApi
         }
 
 
-
         /// <summary>
         /// 获取AccessToken
         /// http://mp.weixin.qq.com/wiki/index.php?title=%E8%8E%B7%E5%8F%96access_token
@@ -78,7 +77,6 @@ namespace WeChat.Http.WeiChatApi
         ///http://mp.weixin.qq.com/wiki/0/2ad4b6bfd29f30f71d39616c2a0fcedc.html
         /// </summary>
         /// <param name="access_token"></param>
-        /// <returns>{"ip_list":["127.0.0.1","127.0.0.1"]}</returns>
         public static dynamic GetCallbackIP(string access_token)
         {
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/getcallbackip?access_token={0}", access_token);
@@ -136,7 +134,6 @@ namespace WeChat.Http.WeiChatApi
             if (!result.IsSuccessStatusCode) return string.Empty;
             return DynamicJson.Parse(result.Content.ReadAsStringAsync().Result);
         }
-
 
 
         //创建草稿
@@ -206,6 +203,24 @@ namespace WeChat.Http.WeiChatApi
             var resultString = client.SendAsync(message).Result.Content.ReadAsStringAsync().Result;
 
             return DynamicJson.Parse("");
+        }
+
+
+
+
+        /// <summary>
+        /// 获取 微信服务器IP地址
+        /// </summary>
+        /// <param name="token"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static dynamic GetApiDomainIp(string token)
+        {
+            var url = string.Format("https://api.weixin.qq.com/cgi-bin/get_api_domain_ip?access_token={0}", token);
+            var client = new HttpClient();
+            var result = client.GetAsync(url).Result;
+            if (!result.IsSuccessStatusCode) return string.Empty;
+            return DynamicJson.Parse(result.Content.ReadAsStringAsync().Result);
         }
 
         private static MultipartFormDataContent BuildUploadContent(string fieldName, string fileName, Stream fileStream)

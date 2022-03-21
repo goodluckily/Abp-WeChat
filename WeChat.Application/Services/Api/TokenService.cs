@@ -14,6 +14,7 @@ using AutoMapper;
 using Volo.Abp.Guids;
 using WeChat.Shared;
 using Microsoft.AspNetCore.Authorization;
+using WeChat.Http.WeiChatApi;
 
 namespace WeChat.Application.Services
 {
@@ -41,6 +42,20 @@ namespace WeChat.Application.Services
         public async Task<DataResult> GetWeChatToken()
         {
             return Json(await GetTokenAsync());
+        }
+
+        /// <summary>
+        /// 获取微信API接口 IP地址
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("GetApiDomainIp")]
+        public async Task<DataResult> GetApiDomainIp()
+        {
+            var token = await GetTokenAsync();
+            var aaa = BasicAPI.GetCallbackIP(token);
+            var bbb = BasicAPI.GetApiDomainIp(token);
+            return Json(aaa);
         }
 
         /// <summary>

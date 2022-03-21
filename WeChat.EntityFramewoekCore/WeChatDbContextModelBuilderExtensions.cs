@@ -124,42 +124,38 @@ namespace WeChat.EntityFramewoekCore
             });
 
             #region 用户相关的 种子数据 (暂时关闭 除非需要初始化整个数据的时候再打开)
-            //var userInfo = new UserInfo(_guidGenerator.Create())
-            //{
-            //    LoginName = "admin",
-            //    PassWrod = "123456",
-            //    NickName = "管理员",
-            //    IsActive = true,
-            //    IsDel = true,
-            //    CreateTime = DateTime.Now,
-            //};
-            //var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
-            //{
-            //    Name = "管理者",
-            //    Description = "最高权限管理者",
-            //    CreateUserId = userInfo.Id,
-            //    CreateTime = DateTime.Now,
-            //    IsActive = true,
-            //    IsDel = false
-            //};
-            //var userAndroleMap = new UserAndRoleMap()
-            //{
-            //    UserId = userInfo.Id,
-            //    RoleId = role.Id,
-            //    CreateUserId = userInfo.Id,
-            //    CreateTime = DateTime.Now
-            //};
+            var userInfo = new UserInfo(_guidGenerator.Create())
+            {
+                LoginName = "admin",
+                PassWrod = "123456",
+                NickName = "管理员",
+                IsActive = true,
+                IsDel = true,
+                CreateTime = DateTime.Now,
+            };
+            var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
+            {
+                Name = "管理者",
+                Description = "最高权限管理者",
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now,
+                IsActive = true,
+                IsDel = false
+            };
+            var userAndroleMap = new UserAndRoleMap()
+            {
+                UserId = userInfo.Id,
+                RoleId = role.Id,
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now
+            };
 
-            ////种子数据
-            //b.HasData(userAndroleMap);
-            ////种子数据
-            //b.HasData(role);
-            ////种子数据
-            //b.HasData(userInfo);
             #endregion
 
             builder.Entity<UserInfo>(b =>
             {
+                //种子数据
+                b.HasData(userInfo);
                 b.ToTable(nameof(UserInfo));
                 b.Property(f => f.LoginName).HasMaxLength(50).IsRequired();
                 b.Property(f => f.PassWrod).HasMaxLength(150).IsRequired();
@@ -172,6 +168,8 @@ namespace WeChat.EntityFramewoekCore
 
             builder.Entity<Role>(b =>
             {
+                //种子数据
+                b.HasData(role);
                 b.ToTable(nameof(Role));
                 b.Property(f => f.Name).HasMaxLength(50);
                 b.Property(f => f.Description).HasMaxLength(150).HasComment("说明");
@@ -180,6 +178,8 @@ namespace WeChat.EntityFramewoekCore
 
             builder.Entity<UserAndRoleMap>(b =>
             {
+                //种子数据
+                b.HasData(userAndroleMap);
                 b.ConfigureByConvention();
             });
 

@@ -499,6 +499,18 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Role");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3a02be28-f198-95f2-ad4d-fef210658f9a"),
+                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 928, DateTimeKind.Local).AddTicks(9087),
+                            CreateUserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
+                            Description = "最高权限管理者",
+                            IsActive = true,
+                            IsDel = false,
+                            Name = "管理者"
+                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.Segmentfaultblogs", b =>
@@ -603,6 +615,15 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("UserAndRoleMap");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
+                            RoleId = new Guid("3a02be28-f198-95f2-ad4d-fef210658f9a"),
+                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 929, DateTimeKind.Local).AddTicks(248),
+                            CreateUserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e")
+                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.UserInfo", b =>
@@ -659,6 +680,18 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("UserInfo");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
+                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 928, DateTimeKind.Local).AddTicks(5894),
+                            IsActive = true,
+                            IsDel = true,
+                            LoginName = "admin",
+                            NickName = "管理员",
+                            PassWrod = "123456"
+                        });
                 });
 
             modelBuilder.Entity("WeChat.Domain.UserAndRoleMap", b =>
