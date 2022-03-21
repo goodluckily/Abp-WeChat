@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -177,6 +178,35 @@ namespace WeChat.Http.WeiChatApi
 
 
 
+        /// <summary>
+        /// 获取发布文章列表
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <returns></returns>
+        public static dynamic PostFreePublish(string access_token)
+        {
+            var url = string.Format("https://api.weixin.qq.com/cgi-bin/freepublish/batchget?access_token=", access_token);
+
+
+            //var result = client.PostAsync(url, strcontent).Result;
+            //if (!result.IsSuccessStatusCode) return string.Empty;
+            //var resultString = result.Content.ReadAsStringAsync().Result;
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //StringContent strcontent = new StringContent(JsonConvert.SerializeObject("aa"), Encoding.UTF8, "application/json");
+            StringContent strcontent = new StringContent("", Encoding.UTF8, "application/json");
+            var message = new HttpRequestMessage(HttpMethod.Post, url);
+
+            //设置cookie信息
+            //message.Headers.Add("Cookie", "token=" + token);
+            //设置contetn
+            //message.Content = strcontent;
+            //发送请求
+            var resultString = client.SendAsync(message).Result.Content.ReadAsStringAsync().Result;
+
+            return DynamicJson.Parse("");
+        }
 
         private static MultipartFormDataContent BuildUploadContent(string fieldName, string fileName, Stream fileStream)
         {

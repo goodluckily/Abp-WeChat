@@ -149,6 +149,13 @@ namespace WeChat.EntityFramewoekCore
             //    CreateUserId = userInfo.Id,
             //    CreateTime = DateTime.Now
             //};
+
+            ////种子数据
+            //b.HasData(userAndroleMap);
+            ////种子数据
+            //b.HasData(role);
+            ////种子数据
+            //b.HasData(userInfo);
             #endregion
 
             builder.Entity<UserInfo>(b =>

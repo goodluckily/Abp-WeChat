@@ -13,6 +13,7 @@ using Volo.Abp.ObjectMapping;
 using AutoMapper;
 using Volo.Abp.Guids;
 using WeChat.Shared;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services
 {
@@ -35,7 +36,7 @@ namespace WeChat.Application.Services
         /// </summary>
         /// <param name="tokenLapse"></param>
         /// <returns></returns>
-
+        [AllowAnonymous]
         [HttpGet("getWeChatToken")]
         public async Task<DataResult> GetWeChatToken()
         {

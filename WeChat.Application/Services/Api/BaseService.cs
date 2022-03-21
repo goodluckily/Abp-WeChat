@@ -11,6 +11,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WeiChatApi;
 
+
 namespace WeChat.Application.Services
 {
     [Authorize]

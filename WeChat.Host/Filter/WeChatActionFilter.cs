@@ -38,7 +38,12 @@ namespace WeChat.Host.Filter
             {
                 var userId = AuthCommon.GetUserId(context.HttpContext.User);
                 //操作日志 记录
-                _logger.LogInformation(method + "    " + route);
+                _logger.LogInformation(method + "   " + route);
+            }
+            else
+            {
+                //控制台打印
+                Console.WriteLine(method + "   " + route);
             }
             base.OnActionExecuting(context);
         }
