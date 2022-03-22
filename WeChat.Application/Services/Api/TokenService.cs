@@ -47,7 +47,7 @@ namespace WeChat.Application.Services
         }
 
         /// <summary>
-        /// 手动创建 NiKoKoL Test
+        /// 手动创建 NiKoKoL NiKoKoL
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -58,7 +58,7 @@ namespace WeChat.Application.Services
         }
 
         /// <summary>
-        /// 手动创建 测试号的 Token
+        /// 手动创建 测试号的 Test
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
