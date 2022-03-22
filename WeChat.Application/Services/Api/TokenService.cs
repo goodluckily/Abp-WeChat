@@ -18,6 +18,9 @@ using WeChat.Http.WeiChatApi;
 
 namespace WeChat.Application.Services
 {
+    /// <summary>
+    /// Token相关的测试
+    /// </summary>
     [Route("Token")]
     public class TokenService : BaseService //ITokenService 
     {
@@ -35,13 +38,34 @@ namespace WeChat.Application.Services
         /// <summary>
         /// 手动创建 WeChat Token
         /// </summary>
-        /// <param name="tokenLapse"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpGet("getWeChatToken")]
         public async Task<DataResult> GetWeChatToken()
         {
             return Json(await GetTokenAsync());
+        }
+
+        /// <summary>
+        /// 手动创建 NiKoKoL Test
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("GetWeChatTokenByNiKoKoL")]
+        public async Task<DataResult> GetWeChatTokenByNiKoKoL()
+        {
+            return Json(await GetTokenAsync(WeiChatEnum.NiKoKoL));
+        }
+
+        /// <summary>
+        /// 手动创建 测试号的 Token
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        [HttpGet("GetWeChatTokenByTest")]
+        public async Task<DataResult> GetWeChatTokenByTest()
+        {
+            return Json(await GetTokenAsync(WeiChatEnum.Test));
         }
 
         /// <summary>

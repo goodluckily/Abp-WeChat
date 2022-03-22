@@ -73,19 +73,12 @@ namespace WeChat.Http.Helper
         /// </summary>
         /// <param name="url"></param>
         /// <returns></returns>
-        public static string PostRequestStr(string url, string contentStr)
+        public static string PostRequestStr(string url, string contentStr = "")
         {
-            try
-            {
-                StringContent sc = new StringContent(contentStr);
-                sc.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");//todo
-                var response = httpClient.PostAsync(new Uri(url), sc).Result;
-                return response.Content.ReadAsStringAsync().Result;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            StringContent sc = new StringContent(contentStr);
+            sc.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");//todo
+            var response = httpClient.PostAsync(new Uri(url), sc).Result;
+            return response.Content.ReadAsStringAsync().Result;
         }
         #endregion
 

@@ -23,7 +23,7 @@ namespace WeChat.Application.Services.Api
         [HttpGet("Get")]
         public async Task<DataResult> GetStudentList()
         {
-            var token = await GetTokenAsync();
+            var token = await GetTokenAsync(WeiChatEnum.Test);
             var afsadf = BasicAPI.PostFreePublish(token);
             return Json("");
         }

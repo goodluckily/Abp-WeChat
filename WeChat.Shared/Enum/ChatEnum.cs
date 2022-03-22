@@ -11,6 +11,10 @@ namespace WeChat.Shared
     {
         [EnumMember(Value = "CodeShare")]
         CodeShare = 1,
+        [EnumMember(Value = "NiKoKoL")]
+        NiKoKoL = 2,
+        [EnumMember(Value = "Test")]
+        Test = 3,
     }
     public enum TokenEnum
     {

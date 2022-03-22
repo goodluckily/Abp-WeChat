@@ -52,9 +52,9 @@ namespace WeChat.Application.Services
 
 
         [RemoteService(false)]
-        public async Task<string> GetTokenAsync()
+        public async Task<string> GetTokenAsync(WeiChatEnum weiChatEnum = WeiChatEnum.CodeShare)
         {
-            var tokenDB = await _tokenRepository.GetTokenByType();
+            var tokenDB = await _tokenRepository.GetTokenByType(weiChatEnum);
             string tokenStr = string.Empty;
             var locaTime = DateTime.Now;
             if (tokenDB != null)
@@ -77,7 +77,7 @@ namespace WeChat.Application.Services
                 var result = GetAccessTokenAndTime();
                 var addToken = await _tokenRepository.CreateTokenAsync(new Token()
                 {
-                    WeiChatType = WeiChatEnum.CodeShare,
+                    WeiChatType = weiChatEnum,
                     TokenType = TokenEnum.Token,
                     Access_Token = result.access_token,
                     Expires_In = result.expires_in,
