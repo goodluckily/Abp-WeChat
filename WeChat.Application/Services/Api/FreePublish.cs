@@ -21,16 +21,16 @@ namespace WeChat.Application.Services.Api
         /// 获取发布文章内容
         /// </summary>
         /// <returns></returns>
-        [HttpGet("Get")]
+        [HttpGet("GetStudentList")]
         public async Task<DataResult> GetStudentList()
         {
-            var token = await GetTokenAsync(WeiChatEnum.Test);
+            var token = await GetTokenAsync(WeiChatEnum.NiKoKoL);
             Dictionary<string, object> dic = new();
-            dic.Add("type", "image");
             dic.Add("offset", 0);
             dic.Add("count", 20);
-            var result = WeChatApi.PostFreePublish(token, dic);
-            return Json(result);
+            //dic.Add("no_content", 0);
+            //var result = WeChatApi.PostFreePublish(token, dic);
+            return Json("");
         }
     }
 }

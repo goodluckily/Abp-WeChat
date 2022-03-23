@@ -231,7 +231,50 @@ namespace WeChat.Http.WeiChatApi
         public static dynamic PostFreePublish(string access_token, Dictionary<string, object> dic)
         {
             dic = dic ?? new Dictionary<string, object>();
+            var url = string.Format("https://api.weixin.qq.com/cgi-bin/freepublish/batchget?access_token={0}", access_token);
+            var httpClientHelper = new HttpClientHelper();
+            var result = httpClientHelper.PostResponse(url, dic);
+            return DynamicJson.Parse(result);
+        }
+
+        #endregion
+
+        #region 素材
+
+        /// <summary>
+        /// 获取素材列表
+        /// </summary>
+        /// <param name="access_token"></param>
+        /// <param name="dic"></param>
+        /// <returns></returns>
+        public static dynamic PostBatchgetMaterial(string access_token, Dictionary<string, object> dic)
+        {
+            dic = dic ?? new Dictionary<string, object>();
             var url = string.Format("https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token={0}", access_token);
+            var httpClientHelper = new HttpClientHelper();
+            var result = httpClientHelper.PostResponse(url, dic);
+            return DynamicJson.Parse(result);
+        }
+        #endregion
+
+        #region 草稿
+
+        public static dynamic PostBatchgetCgi(string access_token, Dictionary<string, object> dic)
+        {
+            dic = dic ?? new Dictionary<string, object>();
+            var url = string.Format("https://api.weixin.qq.com/cgi-bin/draft/batchget?access_token={0}", access_token);
+            var httpClientHelper = new HttpClientHelper();
+            var result = httpClientHelper.PostResponse(url, dic);
+            return DynamicJson.Parse(result);
+        }
+        #endregion
+
+        #region 群发任务列表
+
+        public static dynamic PostGuideMassendJoblist(string access_token, Dictionary<string, object> dic)
+        {
+            dic = dic ?? new Dictionary<string, object>();
+            var url = string.Format("https://api.weixin.qq.com/cgi-bin/guide/getguidemassendjoblist?access_token={0}", access_token);
             var httpClientHelper = new HttpClientHelper();
             var result = httpClientHelper.PostResponse(url, dic);
             return DynamicJson.Parse(result);

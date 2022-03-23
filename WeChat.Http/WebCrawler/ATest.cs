@@ -13,9 +13,9 @@ namespace WeChat.Http.WebCrawler
 {
     public class ATest
     {
-        public async Task jiexiContent()
+        public static async Task jiexiHttpClientContent(string url)
         {
-            var url = "https://tmsearch.uspto.gov/bin/gate.exe?f=login&p_lang=english&p_d=trmk";
+            //url = "https://tmsearch.uspto.gov/bin/gate.exe?f=login&p_lang=english&p_d=trmk";
 
             try
             {
@@ -55,16 +55,6 @@ namespace WeChat.Http.WebCrawler
                 formData.Add(new StringContent("search"), "a_default");
                 formData.Add(new StringContent("Submit"), "a_search");
 
-                //var dic = new Dictionary<String, String>();
-                //dic.Add("f", "toc");
-                //dic.Add("state", state[1]);
-                //dic.Add("p_search", "search");
-                //dic.Add("p_s_All", "");
-                //dic.Add("p_s_ALL", "parigo");
-                //dic.Add("a_default", "search");
-                //dic.Add("a_search", "Submit");
-
-
                 var adfa1sdf = await httpClient.PostAsync(url, formData);
 
                 var asdfas = await adfa1sdf.Content.ReadAsStringAsync();
@@ -76,6 +66,34 @@ namespace WeChat.Http.WebCrawler
             {
                 var e = "";
             }
+        }
+
+        public static void jiexiHtmlAgilityPackContent(string url)
+        {
+
+            ////从url中加载
+            //HtmlDocument doc = web.Load(url);
+            //var aa = doc.ToString();
+
+            var httpClient = new HttpClient();
+            var html = httpClient.GetStringAsync(url).Result.Replace("data-src", "src");
+
+            HtmlDocument doc = new HtmlDocument();
+            doc.LoadHtml(html);
+
+            //foreach (var script in doc.DocumentNode.Descendants("script").ToList())
+            //    script.ParentNode.RemoveChild(script, false);
+
+            //foreach (var style in doc.DocumentNode.Descendants("style").ToList())
+            //    style.ParentNode.RemoveChild(style, false);
+
+
+            //foreach (var link in doc.DocumentNode.Descendants("link").ToList())
+            //    link.ParentNode.RemoveChild(link, false);
+
+
+            var html111 = doc.DocumentNode.OuterHtml;
+
         }
     }
 }

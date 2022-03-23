@@ -25,7 +25,12 @@ namespace WeChat.Http.WebCrawler.Tests
 
             //OsChinaCrawler.GetOsChinaBlogContent();
 
-            var aa = CTO51Crawler.Get51CTOContentAsync().Result;
+            //var aa = CTO51Crawler.Get51CTOContentAsync().Result;
+
+            var url = "https://mp.weixin.qq.com/s/n9SU3BgIYFJiUgk2ZD8y7A";
+
+            ATest.jiexiHtmlAgilityPackContent(url);
+
         }
     }
 }
