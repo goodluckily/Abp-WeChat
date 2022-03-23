@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HtmlAgilityPack;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using WeChat.Shared;
-using WeChat.Http.Helper;
 
 
 namespace WeChat.Http.WebCrawler

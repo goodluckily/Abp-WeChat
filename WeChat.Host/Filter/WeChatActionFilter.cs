@@ -28,7 +28,7 @@ namespace WeChat.Host.Filter
         {
             var actionDescriptor = context.ActionDescriptor;
             //判断拥有此特性的话 就不需要再获取用户信息了
-            var isAllowAnonymous = actionDescriptor.EndpointMetadata.Any(x => x is AllowAnonymousAttribute);
+            var isAllowAnonymous = actionDescriptor.EndpointMetadata.Any(x => x is AllowAnonymousAttribute || x is NonActionAttribute);
 
             var controller = context.RouteData.Values["controller"]?.ToString();
             var action = context.RouteData.Values["action"]?.ToString();

@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using HtmlAgilityPack;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WeChat.Http.HttpHelper;
 using WeChat.Shared;
-using WeChat.Http.Helper;
 
 namespace WeChat.Http.WebCrawler
 {
@@ -97,8 +97,9 @@ namespace WeChat.Http.WebCrawler
 
             //对大50个数据
             var json = "{\"limit\":60,\"recommend_mode\":1,\"sort_type\":600}";
+            var httpClientHelper = new HttpClientHelper();
 
-            var result = CommonHelper.PostRequestStr(apiUrl, json);
+            var result = httpClientHelper.PostResponse(apiUrl, json);
 
             var juejinUrl = "https://juejin.cn";
             var nuewsUserUrl = juejinUrl + "/user/";

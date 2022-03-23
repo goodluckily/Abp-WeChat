@@ -9,9 +9,9 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WeChat.Http.Helper
+namespace WeChat.Http.HttpHelper
 {
-    public class HttpHelper
+    public class HttpWebHelper
     {
         /// <summary>
         /// url为请求的网址，param参数为需要查询的条件（服务端接收的参数，没有则为null）
@@ -20,7 +20,7 @@ namespace WeChat.Http.Helper
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static string Get(string url, Dictionary<string, string> param = null, Dictionary<string, string> headers = null)
+        public string Get(string url, Dictionary<string, string> param = null, Dictionary<string, string> headers = null)
         {
             if (param != null) //有参数的情况下，拼接url
             {
@@ -59,7 +59,7 @@ namespace WeChat.Http.Helper
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static string Post(string url, Dictionary<string, string> param, Dictionary<string, string> headers = null)
+        public string Post(string url, Dictionary<string, string> param, Dictionary<string, string> headers = null)
         {
             #region 写日记
             string parameterSt = "";
@@ -126,7 +126,7 @@ namespace WeChat.Http.Helper
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static string Post(string url, Dictionary<String, object> param, Dictionary<string, string> headers = null)
+        public string Post(string url, Dictionary<String, object> param, Dictionary<string, string> headers = null)
         {
             #region 写日记
             string parameterSt = "";
@@ -190,7 +190,7 @@ namespace WeChat.Http.Helper
         /// <param name="param"></param>
         /// <param name="paramStr"></param>
         /// <returns></returns>
-        public static MemoryStream PostFile(string url, Dictionary<String, object> param, string paramStr = null)
+        public MemoryStream PostFile(string url, Dictionary<String, object> param, string paramStr = null)
         {
 
             HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest; //创建请求
@@ -251,7 +251,7 @@ namespace WeChat.Http.Helper
         /// <param name="param"></param>
         /// <param name="headers"></param>
         /// <returns></returns>
-        public static string Post(string url, string param, Dictionary<string, string> headers = null)
+        public string Post(string url, string param, Dictionary<string, string> headers = null)
         {
             #region 写日记
             string parameterSt = param;
@@ -299,7 +299,7 @@ namespace WeChat.Http.Helper
         /// 获取IP地址
         /// </summary>
         /// <returns></returns>
-        public static string GetIpAddress(HttpContext context)
+        public string GetIpAddress(HttpContext context)
         {
             string result = String.Empty;
 

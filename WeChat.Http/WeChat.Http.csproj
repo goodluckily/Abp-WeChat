@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="WeiChatApi\ApiUtility.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\WeChat.Shared\WeChat.Shared.csproj" />
     <ProjectReference Include="..\WeChat.Shared\WeChat.Shared.csproj" />
   </ItemGroup>

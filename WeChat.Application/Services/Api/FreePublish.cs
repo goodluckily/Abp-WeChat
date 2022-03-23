@@ -11,6 +11,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WeiChatApi;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace WeChat.Application.Services.Api
 {
@@ -24,8 +25,12 @@ namespace WeChat.Application.Services.Api
         public async Task<DataResult> GetStudentList()
         {
             var token = await GetTokenAsync(WeiChatEnum.Test);
-            var afsadf = BasicAPI.PostFreePublish(token);
-            return Json("");
+            Dictionary<string, object> dic = new();
+            dic.Add("type", "image");
+            dic.Add("offset", 0);
+            dic.Add("count", 20);
+            var result = WeChatApi.PostFreePublish(token, dic);
+            return Json(result);
         }
     }
 }

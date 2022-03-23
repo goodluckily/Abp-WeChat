@@ -10,11 +10,12 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WeiChatApi;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace WeChat.Application.Services
 {
     [Authorize]
+    [NonController]
     public class BaseService : ApplicationService
     {
         public ITokenRepository _tokenRepository { get; init; }
@@ -26,11 +27,12 @@ namespace WeChat.Application.Services
 
         }
 
+        #region 用户相关
         /// <summary>
         /// 获取当前用户Id
         /// </summary>
         /// <returns></returns>
-        [RemoteService(false)]
+        [NonAction]
         public Guid CurrentUserId()
         {
             var claimsUser = _httpContextAccessor.HttpContext?.User;
@@ -42,7 +44,7 @@ namespace WeChat.Application.Services
         /// 获取当前用户 信息
         /// </summary>
         /// <returns></returns>
-        [RemoteService(false)]
+        [NonAction]
         public UserInfo CurrentUserInfo()
         {
             var userId = CurrentUserId();
@@ -50,8 +52,15 @@ namespace WeChat.Application.Services
             return userinfo;
         }
 
+        #endregion
 
-        [RemoteService(false)]
+        #region Token
+        /// <summary>
+        /// 获取token 过期则自动刷新token
+        /// </summary>
+        /// <param name="weiChatEnum"></param>
+        /// <returns></returns>
+        [NonAction]
         public async Task<string> GetTokenAsync(WeiChatEnum weiChatEnum = WeiChatEnum.CodeShare)
         {
             var tokenDB = await _tokenRepository.GetTokenByType(weiChatEnum);
@@ -88,26 +97,16 @@ namespace WeChat.Application.Services
             return tokenStr;
         }
 
-        [RemoteService(false)]
-        public string GetContent(string path)
-        {
-            string json = string.Empty;
-            using (FileStream fs = new FileStream(path, FileMode.Open, System.IO.FileAccess.Read, FileShare.ReadWrite))
-            {
-                UTF8Encoding utf8 = new UTF8Encoding();
-                using (StreamReader sr = new StreamReader(fs, utf8))
-                {
-                    json = sr.ReadToEnd().ToString();
-                }
-            }
-            return json;
-        }
-
+        /// <summary>
+        /// 私有
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         private (string access_token, double expires_in) GetAccessTokenAndTime()
         {
             var appid = ConfigCommon.Configuration["WeChatConfig:Appid"];
             var AppSecret = ConfigCommon.Configuration["WeChatConfig:AppSecret"];
-            var accessDynamic = BasicAPI.GetAccessToken(appid, AppSecret);
+            var accessDynamic = WeChatApi.GetAccessToken(appid, AppSecret);
             var val = (string)accessDynamic.ToString();
             if (val.Contains("errcode"))
             {
@@ -118,32 +117,29 @@ namespace WeChat.Application.Services
             return (access_token, expires_in);
         }
 
-        private string GetJsToken()
-        {
-            return "";
-        }
+        #endregion
 
         #region 返回值封装
 
-        [RemoteService(false)]
+        [NonAction]
         public DataResult Json(object data, string message = "")
         {
             var result = new DataResult(true, data, message);
             return result;
         }
-        [RemoteService(false)]
+        [NonAction]
         public DataResult Json(long total, object data, string message = "")
         {
             var result = new DataResult(true, total, data, message);
             return result;
         }
-        [RemoteService(false)]
+        [NonAction]
         public DataResult Ok(string message)
         {
             var result = new DataResult(true, message);
             return result;
         }
-        [RemoteService(false)]
+        [NonAction]
         public DataResult Error(string message)
         {
             var result = new DataResult(false, message);

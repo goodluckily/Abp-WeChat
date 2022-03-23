@@ -47,7 +47,7 @@ namespace WeChat.Application.Services
         }
 
         /// <summary>
-        /// 手动创建 NiKoKoL Test
+        /// 手动创建 NiKoKoL 的Token
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -58,7 +58,7 @@ namespace WeChat.Application.Services
         }
 
         /// <summary>
-        /// 手动创建 测试号的 Token
+        /// 手动创建 Test 的Token 
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
@@ -77,8 +77,8 @@ namespace WeChat.Application.Services
         public async Task<DataResult> GetApiDomainIp()
         {
             var token = await GetTokenAsync();
-            var aaa = BasicAPI.GetCallbackIP(token);
-            var bbb = BasicAPI.GetApiDomainIp(token);
+            var aaa = WeChatApi.GetCallbackIP(token);
+            var bbb = WeChatApi.GetApiDomainIp(token);
             return Json(aaa);
         }
 
