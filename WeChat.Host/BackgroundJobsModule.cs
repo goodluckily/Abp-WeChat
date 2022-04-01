@@ -74,8 +74,9 @@ namespace WeChat.Host
                 Queues = new[] { "jobs", "apis", "default" },//队列名称，只能为小写
             });
 
+            //模拟调用
             var service = context.ServiceProvider;
-            service.UseBathHangfireJob();
+            service.UseBathHangfireJob().Wait();
         }
     }
 }
