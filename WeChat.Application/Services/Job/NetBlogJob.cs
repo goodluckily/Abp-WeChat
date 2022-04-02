@@ -15,19 +15,21 @@ namespace WeChat.Application.Services.Job
     /// 博客园
     /// </summary>
     [Route("NetBlogJob")]
-    public class NetBlogJob : BaseService
+    public class NetBlogJob : BaseJobService
     {
-        private readonly INetcnblogsRepository _netcnblogsRepository;
-        public NetBlogJob(INetcnblogsRepository netcnblogsRepository)
-        {
-            _netcnblogsRepository = netcnblogsRepository;
-        }
+        public INetcnblogsRepository _netcnblogsRepository { get; init; }
+
+        //private readonly INetcnblogsRepository _netcnblogsRepository;
+        //public NetBlogJob(INetcnblogsRepository netcnblogsRepository)
+        //{
+        //    _netcnblogsRepository = netcnblogsRepository;
+        //}
 
         [HttpGet("getAll")]
         public async Task<DataResult> GetAllAysnc()
         {
             var netBlogsList = await _netcnblogsRepository.GetAllAsync();
-            return Json(netBlogsList);
+            return Result.Json(netBlogsList);
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace WeChat.Application.Services.Job
             var dbNetblogs = blogNetResult.Adapt<List<Cnblogs>>(); //ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNetResult);
             var clientDBNetCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.NET);
             var netBlogsList = await CreateCnBlogsData(dbNetblogs, clientDBNetCnblogsList);
-            return Json(netBlogsList);
+            return Result.Json(netBlogsList);
         }
 
         /// <summary>
@@ -59,7 +61,7 @@ namespace WeChat.Application.Services.Job
             var blogNews = blogNewsResut.Adapt<List<Cnblogs>>(); //ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNewsResut);
             var clientDBNewsCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.ReDian);
             var netNewsList = await CreateCnBlogsData(blogNews, clientDBNewsCnblogsList);
-            return Json(netNewsList);
+            return Result.Json(netNewsList);
         }
 
         private async Task<List<Cnblogs>> CreateCnBlogsData(List<Cnblogs> dbNetblogs, List<Cnblogs> clientDBNetcnblogsList)

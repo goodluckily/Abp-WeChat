@@ -11,24 +11,26 @@ using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
+
     /// <summary>
     /// 稀土掘金
     /// </summary>
     [Route("JueJinBlogJob")]
-    public class JueJinBlogJob : BaseService
+    public class JueJinBlogJob : BaseJobService
     {
-        private readonly IJueJinblogsRepository _jueJinblogsRepository;
+        public IJueJinblogsRepository _jueJinblogsRepository { get; init; }
 
-        public JueJinBlogJob(IJueJinblogsRepository jueJinblogsRepository)
-        {
-            _jueJinblogsRepository = jueJinblogsRepository;
-        }
+        //private readonly IJueJinblogsRepository _jueJinblogsRepository;
+        //public JueJinBlogJob(IJueJinblogsRepository jueJinblogsRepository)
+        //{
+        //    _jueJinblogsRepository = jueJinblogsRepository;
+        //}
 
         [HttpGet("getJueJinblogsAll")]
         public async Task<DataResult> GetJueJinblogsAllAsync()
         {
             var data = await _jueJinblogsRepository.GetJueJinblogsAll();
-            return Json(data);
+            return Result.Json(data);
         }
 
         [HttpPost("JueJinblogs")]
@@ -57,7 +59,7 @@ namespace WeChat.Application.Services.Job
                 x.IsDel = false;
             });
             var data = await _jueJinblogsRepository.CreateJueJinblogsAsync(cnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

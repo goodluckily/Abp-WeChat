@@ -14,7 +14,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hangfire.MySqlStorage" Version="2.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.12" />
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="4.0.0" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="5.0.12" />
@@ -31,9 +30,6 @@
 		<PackageReference Include="Volo.Abp.Autofac" Version="5.0.1" />
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore.MySQL" Version="4.4.4" />
 		<PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="4.4.4" />
-		<PackageReference Include="Hangfire.Dashboard.BasicAuthorization" Version="1.0.2" />
-		<PackageReference Include="Volo.Abp.BackgroundJobs.HangFire" Version="3.0.2" />
-		<PackageReference Include="HangFire.SqlServer" Version="1.7.11" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,6 +43,10 @@
 		</Content>
 	</ItemGroup>
 
-	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+	<ProjectExtensions>
+		<VisualStudio>
+			<UserProperties appsettings_1json__JsonSchema="" />
+		</VisualStudio>
+	</ProjectExtensions>
 
 </Project>

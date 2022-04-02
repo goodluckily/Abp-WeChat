@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Reflection;
 using System.IO;
 using System;
+using Microsoft.AspNetCore.Hosting;
 
 namespace WeChat.Host
 {
@@ -15,7 +16,7 @@ namespace WeChat.Host
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
             var services = context.Services;
-
+            var hostingEnvironment = services.GetHostingEnvironment(); // == services.GetSingletonInstance<IWebHostEnvironment>();
             // 添加Swagger API文档
             services.AddSwaggerGen(options =>
             {
@@ -45,7 +46,6 @@ namespace WeChat.Host
                     options.IncludeXmlComments(xmlapipath, true);
             });
         }
-
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();

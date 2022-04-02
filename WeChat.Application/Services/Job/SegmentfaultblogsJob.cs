@@ -15,14 +15,15 @@ namespace WeChat.Application.Services.Job
     /// 思否
     /// </summary>
     [Route("Segmentfaultblogs")]
-    public class SegmentfaultblogsJob : BaseService
+    public class SegmentfaultblogsJob : BaseJobService
     {
-        private readonly ISegmentfaultblogsRepository _segmentfaultblogsRepository;
+        public ISegmentfaultblogsRepository _segmentfaultblogsRepository { get; init; }
 
-        public SegmentfaultblogsJob(ISegmentfaultblogsRepository segmentfaultblogsRepository)
-        {
-            _segmentfaultblogsRepository = segmentfaultblogsRepository;
-        }
+        //private readonly ISegmentfaultblogsRepository _segmentfaultblogsRepository;
+        //public SegmentfaultblogsJob(ISegmentfaultblogsRepository segmentfaultblogsRepository)
+        //{
+        //    _segmentfaultblogsRepository = segmentfaultblogsRepository;
+        //}
 
         [HttpPost("SegmentfaultblogsContent")]
         public async Task<DataResult> SegmentfaultblogsContent()
@@ -58,7 +59,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _segmentfaultblogsRepository.CreateSegmentfaultblogsAsync(segmentfaultblogList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

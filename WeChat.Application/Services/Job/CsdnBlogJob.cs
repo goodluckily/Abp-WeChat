@@ -15,14 +15,15 @@ namespace WeChat.Application.Services.Job
     /// CSDN
     /// </summary>
     [Route("CsdnBlogJob")]
-    public class CsdnBlogJob : BaseService
+    public class CsdnBlogJob : BaseJobService
     {
-        private readonly ICsdnblogsRepository _csdnblogsRepository;
+        public ICsdnblogsRepository _csdnblogsRepository { get; init; }
 
-        public CsdnBlogJob(ICsdnblogsRepository csdnblogsRepository)
-        {
-            _csdnblogsRepository = csdnblogsRepository;
-        }
+        //private readonly ICsdnblogsRepository _csdnblogsRepository;
+        //public CsdnBlogJob(ICsdnblogsRepository csdnblogsRepository)
+        //{
+        //    _csdnblogsRepository = csdnblogsRepository;
+        //}
 
         /// <summary>
         /// 其他
@@ -63,7 +64,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
 
     }

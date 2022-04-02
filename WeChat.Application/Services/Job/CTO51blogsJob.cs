@@ -15,14 +15,15 @@ namespace WeChat.Application.Services.Job
     /// 51 CTO
     /// </summary>
     [Route("CTO51blogsJob")]
-    public class CTO51blogsJob : BaseService
+    public class CTO51blogsJob : BaseJobService
     {
-        private readonly ICTO51blogsRepository _cTO51BlogsRepository;
+        public ICTO51blogsRepository _cTO51BlogsRepository { get; init; }
 
-        public CTO51blogsJob(ICTO51blogsRepository cTO51BlogsRepository)
-        {
-            _cTO51BlogsRepository = cTO51BlogsRepository;
-        }
+        //private readonly ICTO51blogsRepository _cTO51BlogsRepository;
+        //public CTO51blogsJob(ICTO51blogsRepository cTO51BlogsRepository)
+        //{
+        //    _cTO51BlogsRepository = cTO51BlogsRepository;
+        //}
 
         /// <summary>
         /// 保存51 CTO 数据信息
@@ -62,7 +63,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _cTO51BlogsRepository.CreateCTO51blogsAsync(CTO51blogsList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

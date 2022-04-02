@@ -16,13 +16,27 @@ namespace WeChat.Application.Services
 {
     [Authorize]
     [NonController]
-    public class BaseService : ApplicationService
+    public class BaseApiService : ApplicationService
     {
+        /// <summary>
+        /// token仓储
+        /// </summary>
         public ITokenRepository _tokenRepository { get; init; }
+        /// <summary>
+        /// http统一
+        /// </summary>
         public IHttpContextAccessor _httpContextAccessor { get; init; }
+        /// <summary>
+        /// user仓储
+        /// </summary>
         public IUserInfoRepository _userInfoRepository { get; init; }
+        /// <summary>
+        /// 返回结果统一
+        /// </summary>
+        public IResultService Result { get; init; }
 
-        public BaseService()
+        public ICodeDeaultblogsRepository _codeDeaultblogsRepository;
+        public BaseApiService()
         {
 
         }
@@ -115,35 +129,6 @@ namespace WeChat.Application.Services
             var access_token = accessDynamic.access_token;
             var expires_in = accessDynamic.expires_in;
             return (access_token, expires_in);
-        }
-
-        #endregion
-
-        #region 返回值封装
-
-        [NonAction]
-        public DataResult Json(object data, string message = "")
-        {
-            var result = new DataResult(true, data, message);
-            return result;
-        }
-        [NonAction]
-        public DataResult Json(long total, object data, string message = "")
-        {
-            var result = new DataResult(true, total, data, message);
-            return result;
-        }
-        [NonAction]
-        public DataResult Ok(string message)
-        {
-            var result = new DataResult(true, message);
-            return result;
-        }
-        [NonAction]
-        public DataResult Error(string message)
-        {
-            var result = new DataResult(false, message);
-            return result;
         }
 
         #endregion

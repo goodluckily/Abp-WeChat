@@ -21,7 +21,7 @@ namespace WeChat.Application.Services.Api
     /// <summary>
     /// 文章发布
     /// </summary>
-    public class FreePublish : BaseService
+    public class FreePublish : BaseApiService
     {
         /// <summary>
         /// 获取发布文章内容
@@ -42,7 +42,7 @@ namespace WeChat.Application.Services.Api
             //var adfasf = JsonConvert.DeserializeObject<JObject>(ss);
 
 
-            return Json("");
+            return Result.Json("");
         }
     }
 }

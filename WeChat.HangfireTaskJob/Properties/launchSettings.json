@@ -1,0 +1,14 @@
+﻿{
+  "profiles": {
+    "WeChat.HangfireTaskJob": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "launchBrowser": true,
+      "launchUrl": "job",
+      "applicationUrl": "http://localhost:6699/",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

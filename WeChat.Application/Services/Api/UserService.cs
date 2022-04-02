@@ -14,7 +14,7 @@ using WeChat.Shared;
 namespace WeChat.Application.Services
 {
     [Route("User")]
-    public class UserService : BaseService
+    public class UserService : BaseApiService
     {
         private readonly IUserInfoRepository _userInfoRepository;
         private readonly IRoleRepository _roleRepository;
@@ -68,9 +68,9 @@ namespace WeChat.Application.Services
                 _httpContextAccessor.HttpContext.Response.Cookies.Append("Authtoken", token, cOptions);
                 _httpContextAccessor.HttpContext.Response.Cookies.Append("RoleValue", rolesStr, cOptions);
                 NLogCommon.WriteFileLog(NLog.LogLevel.Info, LogTypeEnum.Web, "登陆成功", user.Id.ToString());
-                return Json(token);
+                return Result.Json(token);
             }
-            return Error("用户登录失败，账号密码错误");
+            return Result.Error("用户登录失败，账号密码错误");
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace WeChat.Application.Services
         {
             var id = CurrentUserId();
             var user = CurrentUserInfo();
-            return Json(user);
+            return Result.Json(user);
         }
 
         /// <summary>
@@ -93,21 +93,21 @@ namespace WeChat.Application.Services
         public async Task<DataResult> GetUserList()
         {
             var users = await _userInfoRepository.GetAllAsync();
-            return Json(users);
+            return Result.Json(users);
         }
 
         [HttpGet("GetRoleList")]
         public async Task<DataResult> GetRoleList()
         {
             var users = await _roleRepository.GetAllAsync();
-            return Json(users);
+            return Result.Json(users);
         }
 
         [HttpGet("GetUserAndRoleMapsList")]
         public async Task<DataResult> GetUserAndRoleMapsList()
         {
             var users = await _userAndRoleMapsRepository.GetAllAsync();
-            return Json(users);
+            return Result.Json(users);
         }
 
 

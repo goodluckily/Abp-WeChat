@@ -15,14 +15,15 @@ namespace WeChat.Application.Services.Job
     /// 开源中国
     /// </summary>
     [Route("OsChinablogsJob")]
-    public class OsChinablogsJob : BaseService
+    public class OsChinablogsJob : BaseJobService
     {
-        private readonly IOsChinablogsRepository _osChinablogsRepository;
+        public IOsChinablogsRepository _osChinablogsRepository { get; init; }
 
-        public OsChinablogsJob(IOsChinablogsRepository osChinablogsRepository)
-        {
-            _osChinablogsRepository = osChinablogsRepository;
-        }
+        //private readonly IOsChinablogsRepository _osChinablogsRepository;
+        //public OsChinablogsJob(IOsChinablogsRepository osChinablogsRepository)
+        //{
+        //    _osChinablogsRepository = osChinablogsRepository;
+        //}
 
         /// <summary>
         /// 开源中国 博客文章
@@ -62,7 +63,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _osChinablogsRepository.CreateOsChinablogsAsync(OsChinablogsList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

@@ -8,6 +8,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using Mapster;
+using Autofac.Extras.DynamicProxy;
 
 namespace WeChat.Application.Services.Job
 {
@@ -15,17 +16,19 @@ namespace WeChat.Application.Services.Job
     /// CodeDeault
     /// </summary>
     [Route("CodeDeaultblogsJob")]
-    public class CodeDeaultblogsJob : BaseService
+    public class CodeDeaultblogsJob : BaseJobService
     {
-        private readonly ICodeDeaultblogsRepository _codeDeaultblogsRepository;
+        public ICodeDeaultblogsRepository _codeDeaultblogsRepository { get; init; }
 
-        public CodeDeaultblogsJob(ICodeDeaultblogsRepository codeDeaultblogsRepository)
-        {
-            _codeDeaultblogsRepository = codeDeaultblogsRepository;
-        }
+        //private readonly ICodeDeaultblogsRepository _codeDeaultblogsRepository;
+        //public CodeDeaultblogsJob(ICodeDeaultblogsRepository codeDeaultblogsRepository)
+        //{
+        //    _codeDeaultblogsRepository = codeDeaultblogsRepository;
+        //    _codeDeaultblogsRepository = codeDeaultblogsRepository;
+        //}
 
-        [BathBackgroundJob("CodeDeaultJob", "corn表达式", "jobs")]
         [HttpPost("CodeDeaultblogsContent")]
+        [BathBackgroundJob("CodeDeaultblogsJob", "corn表达式", "jobs")]
         public async Task<DataResult> CodeDeaultblogsContent()
         {
             var codedeaultblogList = new List<CodeDeaultblogs>();
@@ -59,7 +62,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _codeDeaultblogsRepository.CreateCodeDeaultblogsAsync(codedeaultblogList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

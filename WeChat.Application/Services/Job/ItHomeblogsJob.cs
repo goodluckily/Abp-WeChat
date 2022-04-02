@@ -16,14 +16,15 @@ namespace WeChat.Application.Services.Job
     /// IT之家
     /// </summary>
     [Route("ItHomeblogsJob")]
-    public class ItHomeblogsJob : BaseService
+    public class ItHomeblogsJob : BaseJobService
     {
-        private readonly IItHomeblogsRepository _itHomeblogsRepository;
+        public IItHomeblogsRepository _itHomeblogsRepository { get; init; }
 
-        public ItHomeblogsJob(IItHomeblogsRepository itHomeblogsRepository)
-        {
-            _itHomeblogsRepository = itHomeblogsRepository;
-        }
+        //private readonly IItHomeblogsRepository _itHomeblogsRepository;
+        //public ItHomeblogsJob(IItHomeblogsRepository itHomeblogsRepository)
+        //{
+        //    _itHomeblogsRepository = itHomeblogsRepository;
+        //}
 
         /// <summary>
         /// 获取It之家 微软资讯
@@ -33,7 +34,7 @@ namespace WeChat.Application.Services.Job
         public async Task<DataResult> GetItHomeblogsAll()
         {
             var data = await _itHomeblogsRepository.GetItHomeblogsAll();
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
@@ -47,7 +48,7 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>

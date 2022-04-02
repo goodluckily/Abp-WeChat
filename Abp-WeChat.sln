@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Http", "WeChat.Http\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeChat.Http.Tests", "WeChat.Http.Tests\WeChat.Http.Tests.csproj", "{0BD2D076-B511-4B3B-B2DA-562AF726F919}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeChat.HangfireTaskJob", "WeChat.HangfireTaskJob\WeChat.HangfireTaskJob.csproj", "{D6633187-2613-4750-9173-1FAF1214D4BC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{0BD2D076-B511-4B3B-B2DA-562AF726F919}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BD2D076-B511-4B3B-B2DA-562AF726F919}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BD2D076-B511-4B3B-B2DA-562AF726F919}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6633187-2613-4750-9173-1FAF1214D4BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6633187-2613-4750-9173-1FAF1214D4BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6633187-2613-4750-9173-1FAF1214D4BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6633187-2613-4750-9173-1FAF1214D4BC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

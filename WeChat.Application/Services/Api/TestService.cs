@@ -12,7 +12,7 @@ namespace WeChat.Application.Services.Api
     /// 测试控制器
     /// </summary>
     [AllowAnonymous]
-    public class TestService : BaseService
+    public class TestService : BaseApiService
     {
         /// <summary>
         /// 获取学生信息
@@ -29,7 +29,7 @@ namespace WeChat.Application.Services.Api
                 new {Id=4,Name="DD",Age=44,Address="广州" },
                 new {Id=5,Name="EE",Age=55,Address="重庆" },
             };
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }
