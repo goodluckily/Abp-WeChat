@@ -57,14 +57,14 @@ namespace WeChat.HangfireTaskJob.HangJob
 
                     Console.WriteLine("ok");
                 }
+
+                //2.得到定时任务 特性下的方法
+
+                //3.依据参数 执行方法
+                //RecurringJob.AddOrUpdate("powerfuljob", () => Console.Write("Powerful!"), "0 12 * */2");
+
+
             }
-
-            //2.得到定时任务 特性下的方法
-
-            //3.依据参数 执行方法
-            //RecurringJob.AddOrUpdate("powerfuljob", () => Console.Write("Powerful!"), "0 12 * */2");
-
-
         }
 
         public static void GetConfigurationJobManagerRun()
