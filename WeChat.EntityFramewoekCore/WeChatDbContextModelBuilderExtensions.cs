@@ -16,7 +16,6 @@ namespace WeChat.EntityFramewoekCore
     {
         public static void ConfigureWarehouse(this ModelBuilder builder, IGuidGenerator _guidGenerator)
         {
-
             #region 示例
 
             ////简单的 一对多
@@ -123,39 +122,8 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.LogLevel).HasMaxLength(50).HasComment("日志等级");
             });
 
-            #region 用户相关的 种子数据 (暂时关闭 除非需要初始化整个数据的时候再打开)
-            var userInfo = new UserInfo(_guidGenerator.Create())
-            {
-                LoginName = "admin",
-                PassWrod = "123456",
-                NickName = "管理员",
-                IsActive = true,
-                IsDel = true,
-                CreateTime = DateTime.Now,
-            };
-            var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
-            {
-                Name = "管理者",
-                Description = "最高权限管理者",
-                CreateUserId = userInfo.Id,
-                CreateTime = DateTime.Now,
-                IsActive = true,
-                IsDel = false
-            };
-            var userAndroleMap = new UserAndRoleMap()
-            {
-                UserId = userInfo.Id,
-                RoleId = role.Id,
-                CreateUserId = userInfo.Id,
-                CreateTime = DateTime.Now
-            };
-
-            #endregion
-
             builder.Entity<UserInfo>(b =>
             {
-                //种子数据
-                b.HasData(userInfo);
                 b.ToTable(nameof(UserInfo));
                 b.Property(f => f.LoginName).HasMaxLength(50).IsRequired();
                 b.Property(f => f.PassWrod).HasMaxLength(150).IsRequired();
@@ -168,8 +136,7 @@ namespace WeChat.EntityFramewoekCore
 
             builder.Entity<Role>(b =>
             {
-                //种子数据
-                b.HasData(role);
+
                 b.ToTable(nameof(Role));
                 b.Property(f => f.Name).HasMaxLength(50);
                 b.Property(f => f.Description).HasMaxLength(150).HasComment("说明");
@@ -178,8 +145,6 @@ namespace WeChat.EntityFramewoekCore
 
             builder.Entity<UserAndRoleMap>(b =>
             {
-                //种子数据
-                b.HasData(userAndroleMap);
                 b.ConfigureByConvention();
             });
 
@@ -193,6 +158,9 @@ namespace WeChat.EntityFramewoekCore
                         j.HasKey(x => new { x.UserId, x.RoleId });
                     }
                 );
+
+            //初始话种子数据方法
+
 
             //博客园
             builder.Entity<Cnblogs>(b =>
@@ -317,6 +285,64 @@ namespace WeChat.EntityFramewoekCore
                 b.Property(f => f.SourceType).HasComment("来源类型");
                 b.Property(f => f.KeyWords).HasComment("关键词");
                 b.ConfigureByConvention();
+            });
+
+
+            //初始化数据库种子数据
+            //InitDbUserRelationSeedData(builder, _guidGenerator);
+        }
+
+        /// <summary>
+        /// 用户相关的 种子数据 (暂时关闭 除非需要初始化整个数据的时候再打开)
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <param name="_guidGenerator"></param>
+        private static void InitDbUserRelationSeedData(ModelBuilder builder, IGuidGenerator _guidGenerator)
+        {
+
+            var userInfo = new UserInfo(_guidGenerator.Create())
+            {
+                LoginName = "admin",
+                PassWrod = "123456",
+                NickName = "管理员",
+                IsActive = true,
+                IsDel = true,
+                CreateTime = DateTime.Now,
+            };
+            var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
+            {
+                Name = "管理者",
+                Description = "最高权限管理者",
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now,
+                IsActive = true,
+                IsDel = false
+            };
+
+            var userAndroleMap = new UserAndRoleMap()
+            {
+                UserId = userInfo.Id,
+                RoleId = role.Id,
+                CreateUserId = userInfo.Id,
+                CreateTime = DateTime.Now
+            };
+
+            builder.Entity<UserInfo>(b =>
+            {
+                //种子数据
+                b.HasData(userInfo);
+            });
+
+            builder.Entity<Role>(b =>
+            {
+                //种子数据
+                b.HasData(role);
+            });
+
+            builder.Entity<UserAndRoleMap>(b =>
+            {
+                //种子数据
+                b.HasData(userAndroleMap);
             });
         }
     }
