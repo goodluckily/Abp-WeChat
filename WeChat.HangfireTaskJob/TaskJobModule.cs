@@ -135,3 +135,15 @@ namespace WeChat.HangfireTaskJob
         }
     }
 }
+
+
+
+//2.得到定时任务 特性下的方法
+
+//3.依据参数 执行方法
+//RecurringJob.AddOrUpdate("powerfuljob", () => Console.Write("Powerful!"), "0 12 * */2");
+
+//2022/04/03 代办
+//尝试Job任务依然使用授权
+//1.dynamic 调用内部方法跳过授权 看能不能行
+//2.可能得switch配置方法调用了
