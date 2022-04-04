@@ -67,7 +67,6 @@ namespace WeChat.Application.Services.Job
         {
             var newNetcnblogs = new List<Cnblogs>();
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
             dbNetblogs.ForEach(item =>
             {

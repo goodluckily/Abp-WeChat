@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace WeChat.Host
 {
-    [DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
+    //[DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
     public class BackgroundJobsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
@@ -65,7 +65,13 @@ namespace WeChat.Host
             });
 
             //开始使用Hangfire服务
-            app.UseHangfireServer();
+            app.UseHangfireServer(new BackgroundJobServerOptions
+            {
+                //WorkerCount 并发任务数 用的是默认的20
+                WorkerCount = 5,
+                ServerName = "WeChat_Hangfire",//服务器名称
+                Queues = new[] { "jobs", "apis", "default" },//队列名称，只能为小写
+            });
 
             //var service = context.ServiceProvider;
             //service.UseWallpaperJob();

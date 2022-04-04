@@ -40,7 +40,6 @@ namespace WeChat.Application.Services.Job
             var dbJueJinblogs = ObjectMapper.Map<List<JueJinblogsDto>, List<JueJinblogs>>(result);
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _jueJinblogsRepository.GetJueJinblogsAll();
