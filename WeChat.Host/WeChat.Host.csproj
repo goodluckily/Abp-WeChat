@@ -6,6 +6,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Remove="WeChat\**" />
+		<Content Remove="WeChat\**" />
+		<EmbeddedResource Remove="WeChat\**" />
+		<None Remove="WeChat\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Remove="CodeFirst.txt" />
 	</ItemGroup>
 
@@ -39,6 +46,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\WeChat.Application\WeChat.Application.csproj" />
 		<ProjectReference Include="..\WeChat.EntityFramewoekCore\WeChat.EntityFramewoekCore.csproj" />
+		<ProjectReference Include="..\WeChat.Http\WeChat.Http.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
