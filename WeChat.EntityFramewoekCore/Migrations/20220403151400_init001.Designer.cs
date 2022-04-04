@@ -10,8 +10,8 @@ using WeChat.EntityFramewoekCore;
 namespace WeChat.EntityFramewoekCore.Migrations
 {
     [DbContext(typeof(WeChatDbContext))]
-    [Migration("20220321101820_init-service")]
-    partial class initservice
+    [Migration("20220403151400_init001")]
+    partial class init001
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -505,9 +505,9 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a02be28-f198-95f2-ad4d-fef210658f9a"),
-                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 928, DateTimeKind.Local).AddTicks(9087),
-                            CreateUserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
+                            Id = new Guid("3a03022a-4eb8-4fab-7d8b-7a3d1a9a513e"),
+                            CreateTime = new DateTime(2022, 4, 3, 23, 13, 59, 992, DateTimeKind.Local).AddTicks(9640),
+                            CreateUserId = new Guid("3a03022a-4eb8-fef4-33c0-be5f1f8ec581"),
                             Description = "最高权限管理者",
                             IsActive = true,
                             IsDel = false,
@@ -621,10 +621,10 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
-                            RoleId = new Guid("3a02be28-f198-95f2-ad4d-fef210658f9a"),
-                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 929, DateTimeKind.Local).AddTicks(248),
-                            CreateUserId = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e")
+                            UserId = new Guid("3a03022a-4eb8-fef4-33c0-be5f1f8ec581"),
+                            RoleId = new Guid("3a03022a-4eb8-4fab-7d8b-7a3d1a9a513e"),
+                            CreateTime = new DateTime(2022, 4, 3, 23, 13, 59, 993, DateTimeKind.Local).AddTicks(629),
+                            CreateUserId = new Guid("3a03022a-4eb8-fef4-33c0-be5f1f8ec581")
                         });
                 });
 
@@ -686,8 +686,8 @@ namespace WeChat.EntityFramewoekCore.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("3a02be28-f198-0363-50f2-1ff89282a93e"),
-                            CreateTime = new DateTime(2022, 3, 21, 18, 18, 19, 928, DateTimeKind.Local).AddTicks(5894),
+                            Id = new Guid("3a03022a-4eb8-fef4-33c0-be5f1f8ec581"),
+                            CreateTime = new DateTime(2022, 4, 3, 23, 13, 59, 992, DateTimeKind.Local).AddTicks(7368),
                             IsActive = true,
                             IsDel = true,
                             LoginName = "admin",
