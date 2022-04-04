@@ -44,7 +44,13 @@ namespace WeChat.Host
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureLogging(logging =>
+                })
+                .ConfigureServices(services =>
+                {
+                    //后台任务
+                    services.AddHostedService<WorkService>();
+                })
+                .ConfigureLogging(logging =>
                 {
                     logging.ClearProviders();
                     logging.AddConsole();
