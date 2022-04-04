@@ -7,7 +7,6 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
-using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -42,7 +41,7 @@ namespace WeChat.Application.Services.Job
             //.NET 专题
             var blogNetResult = CnblogesCrawler.GetNetCnblogsContent();
             //数据转换
-            var dbNetblogs = blogNetResult.Adapt<List<Cnblogs>>(); //ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNetResult);
+            var dbNetblogs = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNetResult);
             var clientDBNetCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.NET);
             var netBlogsList = await CreateCnBlogsData(dbNetblogs, clientDBNetCnblogsList);
             return Result.Json(netBlogsList);
@@ -58,7 +57,7 @@ namespace WeChat.Application.Services.Job
             //热门新闻
             var blogNewsResut = CnblogesCrawler.GetToDayNewsCnblogsContent();
             //数据转换
-            var blogNews = blogNewsResut.Adapt<List<Cnblogs>>(); //ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNewsResut);
+            var blogNews = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNewsResut);
             var clientDBNewsCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.ReDian);
             var netNewsList = await CreateCnBlogsData(blogNews, clientDBNewsCnblogsList);
             return Result.Json(netNewsList);
@@ -68,7 +67,7 @@ namespace WeChat.Application.Services.Job
         {
             var newNetcnblogs = new List<Cnblogs>();
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            //var currenmtUserId = CurrentUserId();
+            var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
             dbNetblogs.ForEach(item =>
             {

@@ -7,7 +7,6 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using WeChat.Domain;
-using Mapster;
 
 namespace WeChat.Application.Services.Job
 {
@@ -38,10 +37,10 @@ namespace WeChat.Application.Services.Job
         {
             var result = JuejinCrawler.GetJuejinNewsContentForApi();
             //数据转换
-            var dbJueJinblogs = result.Adapt<List<JueJinblogs>>(); //ObjectMapper.Map<List<JueJinblogsDto>, List<JueJinblogs>>(result);
+            var dbJueJinblogs = ObjectMapper.Map<List<JueJinblogsDto>, List<JueJinblogs>>(result);
 
             //事先检查数据库存不存在 同作者 标题的文章 一样的话 就不保存
-            //var currenmtUserId = CurrentUserId();
+            var currenmtUserId = CurrentUserId();
             var thisDataTime = DateTime.Now;
 
             var clientDBlogsList = await _jueJinblogsRepository.GetJueJinblogsAll();
