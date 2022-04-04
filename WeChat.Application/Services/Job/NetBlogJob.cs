@@ -36,6 +36,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("Netcnblogs")]
+        [BathBackgroundJob]
         public async Task<DataResult> Netcnblogs()
         {
             //.NET 专题
@@ -52,6 +53,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("Newscnblogs")]
+        [BathBackgroundJob]
         public async Task<DataResult> Newscnblogs()
         {
             //热门新闻

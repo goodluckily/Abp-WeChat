@@ -29,6 +29,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("OsChinablogsContent")]
+        [BathBackgroundJob]
         public async Task<DataResult> OsChinablogsContent()
         {
             var OsChinablogsList = new List<OsChinablogs>();

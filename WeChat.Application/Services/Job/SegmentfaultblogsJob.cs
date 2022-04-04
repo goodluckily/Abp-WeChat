@@ -25,6 +25,7 @@ namespace WeChat.Application.Services.Job
         //}
 
         [HttpPost("SegmentfaultblogsContent")]
+        [BathBackgroundJob]
         public async Task<DataResult> SegmentfaultblogsContent()
         {
             var segmentfaultblogList = new List<Segmentfaultblogs>();

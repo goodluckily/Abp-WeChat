@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 namespace WeChat.Host
 {
-    //[DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
+    [DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
     public class BackgroundJobsModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)

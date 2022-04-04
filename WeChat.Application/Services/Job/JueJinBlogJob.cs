@@ -32,7 +32,12 @@ namespace WeChat.Application.Services.Job
             return Result.Json(data);
         }
 
+        /// <summary>
+        /// 掘金博客任务
+        /// </summary>
+        /// <returns></returns>
         [HttpPost("JueJinblogs")]
+        [BathBackgroundJob]
         public async Task<DataResult> JueJinblogs()
         {
             var result = JuejinCrawler.GetJuejinNewsContentForApi();

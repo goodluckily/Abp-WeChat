@@ -41,6 +41,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("ItHomeblogsContent")]
+        [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsContent()
         {
             var result = ItHomeCrawler.GetItHomeNews();
@@ -55,6 +56,7 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpPost("ItHomeblogsMicrosoftContent")]
+        [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsMicrosoftContent()
         {
             var result = ItHomeCrawler.GetItHomeMicrosoftNews();

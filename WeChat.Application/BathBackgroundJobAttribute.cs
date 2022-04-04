@@ -25,16 +25,13 @@ namespace WeChat.Application
         }
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            //得到控制器的jobName 以构造擦传入的为准
+            ////得到控制器的jobName 以构造擦传入的为准
+            //string controller = context.RouteData.Values["Controller"]?.ToString();
+            //string action = context.RouteData.Values["Action"]?.ToString();
+            //string method = context.HttpContext.Request.Method;
+            //var aa = context.ActionDescriptor.DisplayName;
 
-            string controller = context.RouteData.Values["Controller"].ToString();
-            string action = context.RouteData.Values["Action"].ToString();
-            string method = context.HttpContext.Request.Method;
-
-
-            var aa = context.ActionDescriptor.DisplayName;
-
-            context.ActionArguments["test"] = "测试";
+            //context.ActionArguments["test"] = "测试";
         }
 
         public void OnActionExecuted(ActionExecutedContext context)
