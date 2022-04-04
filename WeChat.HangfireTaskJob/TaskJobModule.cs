@@ -147,3 +147,6 @@ namespace WeChat.HangfireTaskJob
 //尝试Job任务依然使用授权
 //1.dynamic 调用内部方法跳过授权 看能不能行
 //2.可能得switch配置方法调用了
+
+
+//可以尝试 ui和定时服务分开
