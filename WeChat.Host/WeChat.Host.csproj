@@ -46,7 +46,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\WeChat.Application\WeChat.Application.csproj" />
 		<ProjectReference Include="..\WeChat.EntityFramewoekCore\WeChat.EntityFramewoekCore.csproj" />
-		<ProjectReference Include="..\WeChat.Http\WeChat.Http.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
