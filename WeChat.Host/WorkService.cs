@@ -25,13 +25,15 @@ namespace WeChat.Host
     {
         private readonly ILogger<WorkService> _logger;
         private readonly IServiceProvider _provider;
+        private readonly IHostEnvironment _hostEnvironment;
         private readonly HttpClientHelper httpClientHelper;
         private readonly string JobHostAddress = "";
 
-        public WorkService(ILogger<WorkService> logger, IServiceProvider serviceProvider)
+        public WorkService(ILogger<WorkService> logger, IServiceProvider serviceProvider, IHostEnvironment hostEnvironment)
         {
             _logger = logger;
             _provider = serviceProvider;
+            _hostEnvironment = hostEnvironment;
             httpClientHelper = new HttpClientHelper();
             JobHostAddress = ConfigCommon.Configuration["JobHostAddress"];
 
@@ -44,59 +46,65 @@ namespace WeChat.Host
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("WorkService is starting.");
-
-            #region old版本 注释 !!!
-            //while (!stoppingToken.IsCancellationRequested)
-            //{
-            //    _logger.LogInformation($"WorkService is running.{DateTime.Now}");
-
-            //    #region MyRegion
-            //    //do something
-            //    //RecurringJob.AddOrUpdate("Test", () => Console.WriteLine($"Test is running.{DateTime.Now}"), Cron.Minutely, timeZone: TimeZoneInfo.Local);
-            //    //RecurringJob.AddOrUpdate("CodeDeaultblogsContent", () => _codeDeaultblogsJob.CodeDeaultblogsContent().Wait(), Cron.Daily(18, 40), TimeZoneInfo.Local);
-            //    //await BathHangfireJobAsync(); 
-            //    #endregion
-
-            //    #region Old
-            //    //动态
-            //    //dynamic configuration = _provider.GetRequiredService(typeof(CodeDeaultblogsJob));
-            //    //这里可能需要反射
-            //    //await configuration.CodeDeaultblogsContent(); 
-            //    #endregion
-
-            //    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-            //    await Task.Delay(new TimeSpan(0, 30, 0), stoppingToken);
-            //}
-            #endregion
-
-            #region 模拟
-            ////可以之后的这个是可以的 哈哈 url请求数据
-            //RecurringJob.AddOrUpdate("baidu", () => Console.WriteLine("baidu"), "0 */2 * * * ?", TimeZoneInfo.Local);// 每隔2分钟执行一次
-            //RecurringJob.AddOrUpdate("tengxun", () => Console.WriteLine("tengxun"), "0 */3 * * * ?", TimeZoneInfo.Local);// 每隔3分钟执行一次 
-            #endregion
-
-            var routeJobs = GetApplicationJobRoutes.GetJobRoutes();
-            var nowTime = DateTime.Now;
-            var startTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 19, 30, 0);
-            var endTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 20, 30, 0);
-
-            //批量添加Job任务
-            while (!stoppingToken.IsCancellationRequested)
+            //非Dev环境下运行
+            if (!_hostEnvironment.IsDevelopment())
             {
+                _logger.LogInformation("WorkService is starting.");
 
-                foreach (var jobPath in routeJobs)
+                #region old版本 注释 !!!
+                //while (!stoppingToken.IsCancellationRequested)
+                //{
+                //    _logger.LogInformation($"WorkService is running.{DateTime.Now}");
+
+                //    #region MyRegion
+                //    //do something
+                //    //RecurringJob.AddOrUpdate("Test", () => Console.WriteLine($"Test is running.{DateTime.Now}"), Cron.Minutely, timeZone: TimeZoneInfo.Local);
+                //    //RecurringJob.AddOrUpdate("CodeDeaultblogsContent", () => _codeDeaultblogsJob.CodeDeaultblogsContent().Wait(), Cron.Daily(18, 40), TimeZoneInfo.Local);
+                //    //await BathHangfireJobAsync(); 
+                //    #endregion
+
+                //    #region Old
+                //    //动态
+                //    //dynamic configuration = _provider.GetRequiredService(typeof(CodeDeaultblogsJob));
+                //    //这里可能需要反射
+                //    //await configuration.CodeDeaultblogsContent(); 
+                //    #endregion
+
+                //    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
+                //    await Task.Delay(new TimeSpan(0, 30, 0), stoppingToken);
+                //}
+                #endregion
+
+                #region 模拟
+                ////可以之后的这个是可以的 哈哈 url请求数据
+                //RecurringJob.AddOrUpdate("baidu", () => Console.WriteLine("baidu"), "0 */2 * * * ?", TimeZoneInfo.Local);// 每隔2分钟执行一次
+                //RecurringJob.AddOrUpdate("tengxun", () => Console.WriteLine("tengxun"), "0 */3 * * * ?", TimeZoneInfo.Local);// 每隔3分钟执行一次 
+                #endregion
+
+                //得到Job任务的所有路由地址
+                var routeJobs = GetApplicationJobRoutes.GetJobRoutes();
+
+                //随机时间范围设置
+                var nowTime = DateTime.Now;
+                var startTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 19, 30, 0);
+                var endTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 20, 30, 0);
+
+                //批量添加Job任务
+                while (!stoppingToken.IsCancellationRequested)
                 {
-                    //获取分钟时间
-                    var randomTim = GetRandomTime(startTime, endTime);
-                    _logger.LogWarning("aa============" + randomTim.ToString());
-                    RecurringJob.AddOrUpdate(jobPath, () => PostApiRequestJobService(jobPath), Cron.Daily(randomTim.Hour, randomTim.Minute), TimeZoneInfo.Local);
+                    foreach (var jobPath in routeJobs)
+                    {
+                        //获取分钟时间
+                        var randomTim = GetRandomTime(startTime, endTime);
+                        _logger.LogWarning("aa============" + randomTim.ToString());
+                        RecurringJob.AddOrUpdate(jobPath, () => PostApiRequestJobService(jobPath), Cron.Daily(randomTim.Hour, randomTim.Minute), TimeZoneInfo.Local);
+                    }
+                    _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
+                    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
+                    await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
                 }
-                _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
-                //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-                await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
+                _logger.LogInformation("WorkService is stopping.");
             }
-            _logger.LogInformation("WorkService is stopping.");
         }
 
         /// <summary>

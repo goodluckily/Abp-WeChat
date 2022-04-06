@@ -268,7 +268,6 @@ namespace WeChat.Host
 
             app.UseSession();
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();

@@ -49,8 +49,28 @@
 ##### WeChat.Web UI之类的
 
 - React
+
 - Vue
+
 - JQ
 
+  
 
 #### 现在数据库采用的是MySql
+
+
+
+#### Api项目-目前规划以及进度
+
+1. 用户模块
+   - 简单的==JWT用户授权登陆==的接口验证已经完成, 默认登陆Admin,123456 ==暂未处理用户权限相关==
+2. Job定时任务模块
+   - 采用的是==Hangfire== 采用MySql作为任务存储,自带UI管理页面,后台开启==泛型Host==,AddHostService处理Job任务
+   - 特需说明,本来想动态反射特性去处理Job任务的,后台过于麻烦,使用的Api方式的HttpPost请求,采用ActionFilter去每一个请求进行ServiceKey的md5进行验证,增加安全保护,相当于自己调用自己
+3. 系统其他相关设置
+   - Code-First 集成种子数据,默认生成 用户--角色之间的关系
+   - MySql数据库,Abp里面的Guid相关设置
+   - 微信Token获取,以及刷新之间的关系处理
+   - 统一封装Api的返回结果
+   - 异常自定义Filter,全局统一检测并把异常消息通过NLog保到MySql数据库
+   - Nlog的集成,日志消息持久化到数据库
