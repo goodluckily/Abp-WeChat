@@ -132,6 +132,5 @@ namespace WeChat.Application.Services
         }
 
         #endregion
-
     }
 }

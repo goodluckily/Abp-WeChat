@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -93,6 +95,25 @@ namespace WeChat.Http.HttpHelper
                 sc.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/x-www-form-urlencoded");
                 var response = httpClient.PostAsync(new Uri(url), sc).Result;
                 return response.Content.ReadAsStringAsync().Result;
+            }
+        }
+
+        /// <summary>
+        /// post请求返回的字符串(Job请求Api时专用)
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
+        public string PostResponseForJobApi(string url)
+        {
+            using (HttpClient httpClient = new HttpClient())
+            {
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/plain"));
+                httpClient.DefaultRequestHeaders.AcceptLanguage.Add(new StringWithQualityHeaderValue("zh-CN"));
+                StringContent sc = new StringContent("");
+                sc.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                var response = httpClient.PostAsync(new Uri(url), sc).Result;
+                var data = response.Content.ReadAsStringAsync().Result;
+                return JsonConvert.DeserializeObject(data).ToString();
             }
         }
 

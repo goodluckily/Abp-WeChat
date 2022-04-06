@@ -31,7 +31,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("CsdnBlogContent")]
         [BathBackgroundJob]
-        public async Task<DataResult> CsdnBlogContent()
+        public async Task<DataResult> CsdnBlogContent([FromBody] string key)
         {
             var csdnblogs = new List<Csdnblogs>();
 
@@ -72,7 +72,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("CsdnTuiJianContent")]
         [BathBackgroundJob]
-        public async Task<DataResult> CsdnTuiJianContent()
+        public async Task<DataResult> CsdnTuiJianContent([FromBody] string key)
         {
             var csdnblogs = new List<Csdnblogs>();
 

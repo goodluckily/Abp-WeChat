@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc.Filters;
+using WeChat.Shared;
 
 namespace WeChat.Application
 {
@@ -25,13 +26,24 @@ namespace WeChat.Application
         }
         public void OnActionExecuting(ActionExecutingContext context)
         {
+            context.ActionArguments.TryGetValue("key", out object keyValue);
+            string reKey = keyValue != null ? keyValue.ToString() : "";
+            if (!IsServerMd5(reKey))
+                throw new Exception("请求Key错误");
+
             ////得到控制器的jobName 以构造擦传入的为准
             //string controller = context.RouteData.Values["Controller"]?.ToString();
             //string action = context.RouteData.Values["Action"]?.ToString();
             //string method = context.HttpContext.Request.Method;
             //var aa = context.ActionDescriptor.DisplayName;
-
             //context.ActionArguments["test"] = "测试";
+        }
+
+        public bool IsServerMd5(string reponseKey)
+        {
+            var str = ConfigCommon.Configuration["JobExecutionApiKey"].ToString();
+            var serverKey = StringCommon.Md5(str);
+            return reponseKey == serverKey;
         }
 
         public void OnActionExecuted(ActionExecutedContext context)

@@ -27,13 +27,11 @@ namespace WeChat.Application.Services.Job
         //}
 
         [HttpPost("CodeDeaultblogsContent")]
-        [BathBackgroundJob("CodeDeaultblogsJob", "corn表达式", "jobs")]
-        public async Task<DataResult> CodeDeaultblogsContent()
+        [BathBackgroundJob("CodeDeaultblogsJob")]
+        public async Task<DataResult> CodeDeaultblogsContent(string key)
         {
             var codedeaultblogList = new List<CodeDeaultblogs>();
-
             var result = CodeDeaultCrawler.GetCodeDeaultContent();
-
             //数据转换
             var dbcodedeaults = ObjectMapper.Map<List<CodeDeaultblogsDto>, List<CodeDeaultblogs>>(result);
 

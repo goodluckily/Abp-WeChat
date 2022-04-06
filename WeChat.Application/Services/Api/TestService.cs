@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WeChat.Http.HttpHelper;
 
 namespace WeChat.Application.Services.Api
 {
@@ -30,6 +31,18 @@ namespace WeChat.Application.Services.Api
                 new {Id=5,Name="EE",Age=55,Address="重庆" },
             };
             return Result.Json(data);
+        }
+
+        /// <summary>
+        /// 测试Job的Key是否正确
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("testRequestUrl")]
+        public DataResult Get(string key)
+        {
+            var http = new HttpClientHelper();
+            var result = http.PostResponseForJobApi($"http://127.0.0.1:9999/CodeDeaultblogsJob/CodeDeaultblogsContent?key={key}");
+            return Result.Json(result);
         }
     }
 }

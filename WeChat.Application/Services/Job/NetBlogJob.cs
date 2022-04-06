@@ -37,7 +37,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("Netcnblogs")]
         [BathBackgroundJob]
-        public async Task<DataResult> Netcnblogs()
+        public async Task<DataResult> Netcnblogs([FromBody] string key)
         {
             //.NET 专题
             var blogNetResult = CnblogesCrawler.GetNetCnblogsContent();
@@ -54,7 +54,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("Newscnblogs")]
         [BathBackgroundJob]
-        public async Task<DataResult> Newscnblogs()
+        public async Task<DataResult> Newscnblogs([FromBody] string key)
         {
             //热门新闻
             var blogNewsResut = CnblogesCrawler.GetToDayNewsCnblogsContent();

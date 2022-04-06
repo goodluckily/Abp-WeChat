@@ -213,6 +213,21 @@ namespace WeChat.Shared
             return sb.ToString();
         }
 
+        /// <summary>
+        /// 对一个字符串进行Md5加密
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string Md5(string str)
+        {
+            byte[] b = System.Text.Encoding.UTF8.GetBytes(str);
+            b = new System.Security.Cryptography.MD5CryptoServiceProvider().ComputeHash(b);
+            string ret = "";
+            for (int i = 0; i < b.Length; i++)
+                ret += b[i].ToString("x").PadLeft(2, '0');
+            return ret;
+        }
+
         ///<summary>
         ///检查字符串中是否包含Sql注入关键字
         /// <param name="_key">被检查的字符串</param>

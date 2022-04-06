@@ -73,9 +73,11 @@ namespace WeChat.Host
             var nowTime = DateTime.Now;
             var startTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 19, 30, 0);
             var endTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, 20, 30, 0);
+
             //批量添加Job任务
             while (!stoppingToken.IsCancellationRequested)
             {
+
                 foreach (var jobPath in routeJobs)
                 {
                     //获取分钟时间
@@ -85,7 +87,7 @@ namespace WeChat.Host
                 }
                 _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
                 //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-                await Task.Delay(new TimeSpan(1, 0, 0), stoppingToken);
+                await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
             }
             _logger.LogInformation("WorkService is stopping.");
         }
@@ -97,11 +99,19 @@ namespace WeChat.Host
         public void PostApiRequestJobService(string servicePath)
         {
             var loadJobUrl = JobHostAddress + servicePath;
-            var result = httpClientHelper.PostResponse(loadJobUrl, "");
+            var serverKey = ConfigCommon.Configuration["JobExecutionApiKey"].ToString();
+            var md5Key = StringCommon.Md5(serverKey);
+            loadJobUrl = loadJobUrl + "?key=" + md5Key;
+            var result = httpClientHelper.PostResponseForJobApi(loadJobUrl);
             _logger.LogInformation($"{servicePath}-------->{result}");
         }
 
-        //获取指定时间范围内的随机时间
+        /// <summary>
+        /// 获取指定时间范围内的随机时间
+        /// </summary>
+        /// <param name="startTime"></param>
+        /// <param name="endTime"></param>
+        /// <returns></returns>
         public DateTime GetRandomTime(DateTime startTime, DateTime endTime)
         {
             var random = new Random();
