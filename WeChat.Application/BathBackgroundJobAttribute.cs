@@ -39,10 +39,15 @@ namespace WeChat.Application
             //context.ActionArguments["test"] = "测试";
         }
 
+        /// <summary>
+        /// key比较
+        /// </summary>
+        /// <param name="reponseKey"></param>
+        /// <returns></returns>
         public bool IsServerMd5(string reponseKey)
         {
-            var str = ConfigCommon.Configuration["JobExecutionApiKey"].ToString();
-            var serverKey = StringCommon.Md5(str);
+            var strConfig = ConfigCommon.Configuration["JobExecutionApiKey"].ToString();
+            var serverKey = StringCommon.Md5(strConfig);
             return reponseKey == serverKey;
         }
 

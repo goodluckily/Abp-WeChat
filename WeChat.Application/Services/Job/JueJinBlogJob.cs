@@ -26,7 +26,7 @@ namespace WeChat.Application.Services.Job
         //}
 
         [HttpGet("getJueJinblogsAll")]
-        public async Task<DataResult> GetJueJinblogsAllAsync([FromBody] string key)
+        public async Task<DataResult> GetJueJinblogsAllAsync(string key)
         {
             var data = await _jueJinblogsRepository.GetJueJinblogsAll();
             return Result.Json(data);
@@ -38,7 +38,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("JueJinblogs")]
         [BathBackgroundJob]
-        public async Task<DataResult> JueJinblogs([FromBody] string key)
+        public async Task<DataResult> JueJinblogs(string key)
         {
             var result = JuejinCrawler.GetJuejinNewsContentForApi();
             //数据转换

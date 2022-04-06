@@ -42,7 +42,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("ItHomeblogsContent")]
         [BathBackgroundJob]
-        public async Task<DataResult> ItHomeblogsContent([FromBody] string key)
+        public async Task<DataResult> ItHomeblogsContent(string key)
         {
             var result = ItHomeCrawler.GetItHomeNews();
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
@@ -57,7 +57,7 @@ namespace WeChat.Application.Services.Job
         /// <returns></returns>
         [HttpPost("ItHomeblogsMicrosoftContent")]
         [BathBackgroundJob]
-        public async Task<DataResult> ItHomeblogsMicrosoftContent([FromBody] string key)
+        public async Task<DataResult> ItHomeblogsMicrosoftContent(string key)
         {
             var result = ItHomeCrawler.GetItHomeMicrosoftNews();
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
