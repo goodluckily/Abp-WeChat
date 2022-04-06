@@ -17,6 +17,7 @@ using WeChat.Application;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using WeChat.Host.Job;
+using Microsoft.AspNetCore.Http;
 
 namespace WeChat.Host
 {
@@ -33,6 +34,12 @@ namespace WeChat.Host
             _provider = serviceProvider;
             httpClientHelper = new HttpClientHelper();
             JobHostAddress = ConfigCommon.Configuration["JobHostAddress"];
+
+            #region 统一地址的其他方式(注释)
+            //IHttpContextFactory httpContextFactory
+            //1.也可以使用标头的方式设置 BaseAddress
+            //2.然后请求直接配置地址 /path 就可以了 
+            #endregion
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)

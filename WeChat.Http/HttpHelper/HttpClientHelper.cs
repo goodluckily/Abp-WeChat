@@ -245,6 +245,5 @@ namespace WeChat.Http.HttpHelper
             return result;
         }
         #endregion
-
     }
 }

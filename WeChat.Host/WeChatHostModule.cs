@@ -146,6 +146,8 @@ namespace WeChat.Host
             });
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.TryAddSingleton<IHttpContextFactory>();
+
             services.AddHttpContextAccessor();
 
             #endregion
