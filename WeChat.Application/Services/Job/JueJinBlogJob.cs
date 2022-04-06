@@ -26,7 +26,7 @@ namespace WeChat.Application.Services.Job
         //}
 
         [HttpGet("getJueJinblogsAll")]
-        public async Task<DataResult> GetJueJinblogsAllAsync(string key)
+        public async Task<DataResult> GetJueJinblogsAllAsync()
         {
             var data = await _jueJinblogsRepository.GetJueJinblogsAll();
             return Result.Json(data);
