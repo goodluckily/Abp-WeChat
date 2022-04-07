@@ -38,7 +38,7 @@ namespace WeChat.Host
         typeof(WeChatEntityFrameworkCoreModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
         typeof(WeChatSwaggerModule), //使用自己定义的 Swagger 模块
-        typeof(BackgroundJobsModule)//
+        typeof(HangfireJobModule)// Hangfire Job 使用模块
         )]
     public class WeChatHostModule : AbpModule
     {
