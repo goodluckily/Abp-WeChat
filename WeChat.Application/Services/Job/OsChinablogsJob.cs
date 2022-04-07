@@ -7,6 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services.Job
 {
@@ -14,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// 开源中国
     /// </summary>
     [Route("OsChinablogsJob")]
-    public class OsChinablogsJob : BaseJobService
+    public class OsChinablogsJob : BaseApiService
     {
         public IOsChinablogsRepository _osChinablogsRepository { get; init; }
 
@@ -29,12 +30,13 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetOsChinablogsAsyncAll")]
-        public async Task<DataResult> GetOsChinablogsAsyncAll() => Result.Json(await _osChinablogsRepository.GetOsChinablogsAll());
+        public async Task<DataResult> GetOsChinablogsAsyncAll() => Json(await _osChinablogsRepository.GetOsChinablogsAll());
 
         /// <summary>
         /// 开源中国 博客文章
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("OsChinablogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> OsChinablogsContent(string key)
@@ -69,7 +71,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _osChinablogsRepository.CreateOsChinablogsAsync(OsChinablogsList);
-            return Result.Json(data);
+            return Json(data);
         }
     }
 }

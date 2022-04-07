@@ -43,7 +43,7 @@ namespace WeChat.Application.Services
         [HttpGet("getWeChatToken")]
         public async Task<DataResult> GetWeChatToken()
         {
-            return Result.Json(await GetTokenAsync());
+            return Json(await GetTokenAsync());
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace WeChat.Application.Services
         [HttpGet("GetWeChatTokenByNiKoKoL")]
         public async Task<DataResult> GetWeChatTokenByNiKoKoL()
         {
-            return Result.Json(await GetTokenAsync(WeiChatEnum.NiKoKoL));
+            return Json(await GetTokenAsync(WeiChatEnum.NiKoKoL));
         }
 
         /// <summary>
@@ -65,7 +65,7 @@ namespace WeChat.Application.Services
         [HttpGet("GetWeChatTokenByTest")]
         public async Task<DataResult> GetWeChatTokenByTest()
         {
-            return Result.Json(await GetTokenAsync(WeiChatEnum.Test));
+            return Json(await GetTokenAsync(WeiChatEnum.Test));
         }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace WeChat.Application.Services
             var token = await GetTokenAsync();
             var aaa = WeChatApi.GetCallbackIP(token);
             var bbb = WeChatApi.GetApiDomainIp(token);
-            return Result.Json(aaa);
+            return Json(aaa);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace WeChat.Application.Services
 
             var dbTokenModel = await _tokenRepository.CreateTokenAsync(tokenDb);
             var dto = ObjectMapper.Map<Domain.Token, TokenLapseDto>(dbTokenModel);
-            return Result.Json(dto);
+            return Json(dto);
         }
 
         [HttpGet("getDBTokenAll")]
@@ -104,7 +104,7 @@ namespace WeChat.Application.Services
             var guid = _guidGenerator.Create();
             var dbTokenModel = _tokenRepository.GetAll().ToList();
             var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
-            return Result.Json(dto);
+            return Json(dto);
         }
 
         #region 自定义封装返回 测试
@@ -129,7 +129,7 @@ namespace WeChat.Application.Services
         {
             var dbTokenModel = _tokenRepository.GetAll().ToList();
             var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
-            return Result.Json(dto);
+            return Json(dto);
         }
 
         /// <summary>
@@ -141,7 +141,7 @@ namespace WeChat.Application.Services
         {
             var dbTokenModel = _tokenRepository.GetAll().ToList();
             var dto = ObjectMapper.Map<List<Domain.Token>, List<TokenLapseDto>>(dbTokenModel);
-            return Result.Json(dto.Count, dto);
+            return Json(dto.Count, dto);
         }
 
         /// <summary>
@@ -151,7 +151,7 @@ namespace WeChat.Application.Services
         [HttpGet("test3")]
         public DataResult test3()
         {
-            return Result.Ok("操作成功");
+            return Ok("操作成功");
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace WeChat.Application.Services
         [HttpGet("test4")]
         public DataResult test4()
         {
-            return Result.Error("操作失败");
+            return Error("操作失败");
         }
         #endregion
     }

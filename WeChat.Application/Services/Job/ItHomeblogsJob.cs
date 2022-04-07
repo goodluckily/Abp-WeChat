@@ -8,6 +8,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using System.Threading;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services.Job
 {
@@ -15,7 +16,7 @@ namespace WeChat.Application.Services.Job
     /// IT之家
     /// </summary>
     [Route("ItHomeblogsJob")]
-    public class ItHomeblogsJob : BaseJobService
+    public class ItHomeblogsJob : BaseApiService
     {
         public IItHomeblogsRepository _itHomeblogsRepository { get; init; }
 
@@ -33,13 +34,14 @@ namespace WeChat.Application.Services.Job
         public async Task<DataResult> GetItHomeblogsAll()
         {
             var data = await _itHomeblogsRepository.GetItHomeblogsAll();
-            return Result.Json(data);
+            return Json(data);
         }
 
         /// <summary>
         /// 获取 It之家的 IT资讯最新
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("ItHomeblogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsContent(string key)
@@ -48,13 +50,14 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Result.Json(data);
+            return Json(data);
         }
 
         /// <summary>
         /// 获取It之家 微软资讯
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("ItHomeblogsMicrosoftContent")]
         [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsMicrosoftContent(string key)
@@ -63,7 +66,7 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Result.Json(data);
+            return Json(data);
         }
 
         /// <summary>

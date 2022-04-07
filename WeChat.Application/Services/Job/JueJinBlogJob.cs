@@ -7,6 +7,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
 using WeChat.Domain;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services.Job
 {
@@ -15,7 +16,7 @@ namespace WeChat.Application.Services.Job
     /// 稀土掘金
     /// </summary>
     [Route("JueJinBlogJob")]
-    public class JueJinBlogJob : BaseJobService
+    public class JueJinBlogJob : BaseApiService
     {
         public IJueJinblogsRepository _jueJinblogsRepository { get; init; }
 
@@ -33,13 +34,14 @@ namespace WeChat.Application.Services.Job
         public async Task<DataResult> GetJueJinblogsAllAsync()
         {
             var data = await _jueJinblogsRepository.GetJueJinblogsAll();
-            return Result.Json(data);
+            return Json(data);
         }
 
         /// <summary>
         /// 掘金博客任务
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("JueJinblogs")]
         [BathBackgroundJob]
         public async Task<DataResult> JueJinblogs(string key)
@@ -66,7 +68,7 @@ namespace WeChat.Application.Services.Job
                 x.IsDel = false;
             });
             var data = await _jueJinblogsRepository.CreateJueJinblogsAsync(cnblogs);
-            return Result.Json(data);
+            return Json(data);
         }
     }
 }

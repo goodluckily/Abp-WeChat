@@ -30,10 +30,6 @@ namespace WeChat.Application.Services
         /// user仓储
         /// </summary>
         public IUserInfoRepository _userInfoRepository { get; init; }
-        /// <summary>
-        /// 返回结果统一
-        /// </summary>
-        public IResultService Result { get; init; }
 
         public ICodeDeaultblogsRepository _codeDeaultblogsRepository;
         public BaseApiService()
@@ -131,6 +127,34 @@ namespace WeChat.Application.Services
             return (access_token, expires_in);
         }
 
+        #endregion
+
+        #region 返回值封装
+
+        [NonAction]
+        public virtual DataResult Json(object data, string message = "")
+        {
+            var result = new DataResult(true, data, message);
+            return result;
+        }
+        [NonAction]
+        public virtual DataResult Json(long total, object data, string message = "")
+        {
+            var result = new DataResult(true, total, data, message);
+            return result;
+        }
+        [NonAction]
+        public virtual DataResult Ok(string message)
+        {
+            var result = new DataResult(true, message);
+            return result;
+        }
+        [NonAction]
+        public virtual DataResult Error(string message)
+        {
+            var result = new DataResult(false, message);
+            return result;
+        }
         #endregion
     }
 }

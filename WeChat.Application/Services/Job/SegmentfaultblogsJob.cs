@@ -7,6 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services.Job
 {
@@ -14,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// 思否
     /// </summary>
     [Route("Segmentfaultblogs")]
-    public class SegmentfaultblogsJob : BaseJobService
+    public class SegmentfaultblogsJob : BaseApiService
     {
         public ISegmentfaultblogsRepository _segmentfaultblogsRepository { get; init; }
 
@@ -29,9 +30,10 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetSegmentfaultblogsAll")]
-        public async Task<DataResult> GetSegmentfaultblogsAsyncAll() => Result.Json(await _segmentfaultblogsRepository.GetSegmentfaultblogsAll());
+        public async Task<DataResult> GetSegmentfaultblogsAsyncAll() => Json(await _segmentfaultblogsRepository.GetSegmentfaultblogsAll());
 
 
+        [AllowAnonymous]
         [HttpPost("SegmentfaultblogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> SegmentfaultblogsContent(string key)
@@ -66,7 +68,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _segmentfaultblogsRepository.CreateSegmentfaultblogsAsync(segmentfaultblogList);
-            return Result.Json(data);
+            return Json(data);
         }
     }
 }

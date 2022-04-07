@@ -7,7 +7,7 @@ using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WebCrawler;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace WeChat.Application.Services.Job
 {
@@ -15,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// CSDN
     /// </summary>
     [Route("CsdnBlogJob")]
-    public class CsdnBlogJob : BaseJobService
+    public class CsdnBlogJob : BaseApiService
     {
         public ICsdnblogsRepository _csdnblogsRepository { get; init; }
 
@@ -30,12 +30,13 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetCsdnblogsAll")]
-        public async Task<DataResult> GetCsdnblogsAll() => Result.Json(await _csdnblogsRepository.GetCsdnblogsAll());
+        public async Task<DataResult> GetCsdnblogsAll() => Json(await _csdnblogsRepository.GetCsdnblogsAll());
 
         /// <summary>
         /// 其他
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("CsdnBlogContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CsdnBlogContent(string key)
@@ -70,13 +71,14 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Result.Json(data);
+            return Json(data);
         }
 
         /// <summary>
         /// 推荐
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost("CsdnTuiJianContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CsdnTuiJianContent(string key)
@@ -111,7 +113,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Result.Json(data);
+            return Json(data);
         }
     }
 }
