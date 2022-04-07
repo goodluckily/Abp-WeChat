@@ -21,9 +21,10 @@ namespace WeChat.Host.Filter
         }
 
         /// <summary>
-        /// Action 之前
+        /// Action 之
         /// </summary>
         /// <param name="context"></param>
+        /// <remarks>AllowAnonymous特性下的得不到用户Id</remarks>
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             var actionDescriptor = context.ActionDescriptor;
@@ -34,17 +35,16 @@ namespace WeChat.Host.Filter
             var action = context.RouteData.Values["action"]?.ToString();
             var method = context.HttpContext.Request.Method;
             var route = controller + "/" + action;
+            var userId = string.Empty;
             if (!isAllowAnonymous)
             {
-                var userId = AuthCommon.GetUserId(context.HttpContext.User);
-                //操作日志 记录
-                _logger.LogInformation(method + "   " + route);
+                var userIdGuid = AuthCommon.GetUserId(context.HttpContext.User);
+                userId = userIdGuid == Guid.Empty ? string.Empty : userIdGuid.ToString();
             }
-            else
-            {
-                //控制台打印
-                Console.WriteLine(method + "   " + route);
-            }
+            //控制台---->操作日志记录
+            _logger.LogInformation(method + "   " + route);
+            //数据库---->所有请求地址记录
+            NLogCommon.WriteDBLog(NLog.LogLevel.Info, LogTypeEnum.ApiRequest, route, userId);
             base.OnActionExecuting(context);
         }
 
@@ -56,7 +56,7 @@ namespace WeChat.Host.Filter
         {
             base.OnActionExecuted(context);
 
-            #region 注释
+            #region 得到请求参数之类的注释
             //var action = context.RouteData.Values["action"];
             //var controller = context.RouteData.Values["controller"];
             //var contentType = context.HttpContext.Request.ContentType;

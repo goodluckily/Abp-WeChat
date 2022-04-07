@@ -103,7 +103,7 @@ namespace WeChat.Shared
             //应该要先验证token的可用性
             var claimsIdentity = user.Identity as ClaimsIdentity;
             var value = claimsIdentity.FindFirst(ClaimTypes.Actor)?.Value;
-            var userId = Guid.Parse(value);
+            var userId = value != null ? Guid.Parse(value) : Guid.Empty;
             return userId;
         }
 

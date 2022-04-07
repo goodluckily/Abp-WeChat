@@ -24,6 +24,14 @@ namespace WeChat.Application.Services.Job
         //    _cTO51BlogsRepository = cTO51BlogsRepository;
         //}
 
+
+        /// <summary>
+        /// CTO51blogs信息抓取 All 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetCTO51blogsAll")]
+        public async Task<DataResult> GetCTO51blogsAll() => Result.Json(await _cTO51BlogsRepository.GetCTO51blogsAll());
+
         /// <summary>
         /// 保存51 CTO 数据信息
         /// </summary>

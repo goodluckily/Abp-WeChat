@@ -26,6 +26,14 @@ namespace WeChat.Application.Services.Job
         //    _codeDeaultblogsRepository = codeDeaultblogsRepository;
         //}
 
+        /// <summary>
+        /// CodeDeaultblogs信息抓取 All 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetCodeDeaultblogsAll")]
+        public async Task<DataResult> GetCodeDeaultblogsAsyncAll() => Result.Json(await _codeDeaultblogsRepository.GetCodeDeaultblogsAll());
+
+
         [HttpPost("CodeDeaultblogsContent")]
         [BathBackgroundJob("CodeDeaultblogsJob")]
         public async Task<DataResult> CodeDeaultblogsContent(string key)

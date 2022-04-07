@@ -24,8 +24,12 @@ namespace WeChat.Application.Services.Job
         //    _netcnblogsRepository = netcnblogsRepository;
         //}
 
-        [HttpGet("getAll")]
-        public async Task<DataResult> GetAllAysnc()
+        /// <summary>
+        /// 博客园的信息抓取
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetetNetBlogAll")]
+        public async Task<DataResult> GetNetBlogAllAysnc()
         {
             var netBlogsList = await _netcnblogsRepository.GetAllAsync();
             return Result.Json(netBlogsList);

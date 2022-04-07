@@ -26,6 +26,13 @@ namespace WeChat.Application.Services.Job
         //}
 
         /// <summary>
+        /// CsdnBlog信息抓取 All 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetCsdnblogsAll")]
+        public async Task<DataResult> GetCsdnblogsAll() => Result.Json(await _csdnblogsRepository.GetCsdnblogsAll());
+
+        /// <summary>
         /// 其他
         /// </summary>
         /// <returns></returns>

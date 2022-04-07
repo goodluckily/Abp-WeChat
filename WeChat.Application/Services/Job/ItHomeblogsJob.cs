@@ -26,7 +26,7 @@ namespace WeChat.Application.Services.Job
         //}
 
         /// <summary>
-        /// 获取It之家 微软资讯
+        /// 获取It之家信息抓取 All
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetItHomeblogsAll")]

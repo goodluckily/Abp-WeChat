@@ -25,6 +25,10 @@ namespace WeChat.Application.Services.Job
         //    _jueJinblogsRepository = jueJinblogsRepository;
         //}
 
+        /// <summary>
+        /// JueJin信息抓取 All
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("getJueJinblogsAll")]
         public async Task<DataResult> GetJueJinblogsAllAsync()
         {

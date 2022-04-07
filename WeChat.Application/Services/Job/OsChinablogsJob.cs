@@ -25,6 +25,13 @@ namespace WeChat.Application.Services.Job
         //}
 
         /// <summary>
+        /// OsChina的信息抓取 All
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetOsChinablogsAsyncAll")]
+        public async Task<DataResult> GetOsChinablogsAsyncAll() => Result.Json(await _osChinablogsRepository.GetOsChinablogsAll());
+
+        /// <summary>
         /// 开源中国 博客文章
         /// </summary>
         /// <returns></returns>

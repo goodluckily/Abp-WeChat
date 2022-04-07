@@ -24,6 +24,14 @@ namespace WeChat.Application.Services.Job
         //    _segmentfaultblogsRepository = segmentfaultblogsRepository;
         //}
 
+        /// <summary>
+        /// Segmentfault的信息抓取 All
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("GetSegmentfaultblogsAll")]
+        public async Task<DataResult> GetSegmentfaultblogsAsyncAll() => Result.Json(await _segmentfaultblogsRepository.GetSegmentfaultblogsAll());
+
+
         [HttpPost("SegmentfaultblogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> SegmentfaultblogsContent(string key)
