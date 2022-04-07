@@ -10,11 +10,15 @@ using WeChat.Shared;
 using Hangfire.Dashboard.BasicAuthorization;
 using Hangfire.MySql;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Hangfire.Heartbeat.Server;
+using Hangfire.Heartbeat;
+using Hangfire.Console;
+using Hangfire.HttpJob;
 
 namespace WeChat.Host
 {
     [DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
-    public class BackgroundJobsModule : AbpModule
+    public class HangfireJobModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
         {
@@ -26,19 +30,41 @@ namespace WeChat.Host
             services.AddHangfire(config =>
             {
                 config.UseStorage(
-                    new MySqlStorage(mySqlConnectionString,
-                    new MySqlStorageOptions
+                    new MySqlStorage(mySqlConnectionString, new MySqlStorageOptions
                     {
                         TransactionTimeout = TimeSpan.FromMinutes(5),//交易超时。默认值为 1 分钟
                         TablesPrefix = "hangfire_"//数据库中表的前缀。默认为无
-                    }));
+                    }))
+                .UseConsole()
+                .UseHangfireHttpJob();//创建Http任务
+                //集成服务器状态检查 for dashboard
+                config.UseHeartbeatPage(checkInterval: TimeSpan.FromHours(1));
             });
+
+            //开始使用Hangfire服务
+            services.AddHangfireServer(
+                additionalProcesses: new[]
+                { 
+                    //集成服务器状态检查 for service side
+                    new ProcessMonitor(checkInterval: TimeSpan.FromHours(1))
+                },
+                optionsAction: (IServiceProvider service, BackgroundJobServerOptions option) =>
+                {
+                    //WorkerCount 并发任务数 用的是默认的20
+                    option.WorkerCount = 10;
+                    option.ServerName = "WeChat_Hangfire";//服务器名称
+                    option.Queues = new[] { "jobs", "apis", "default" };//队列名称，只能为小写
+                },
+                storage: new MySqlStorage(mySqlConnectionString, new MySqlStorageOptions
+                {
+                    TransactionTimeout = TimeSpan.FromMinutes(5),//交易超时。默认值为 1 分钟
+                    TablesPrefix = "hangfire_"//数据库中表的前缀。默认为无
+                }));
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
         {
             var app = context.GetApplicationBuilder();
-
             //Hangfire 的界面显示  /hangfire 查看 "": {
             var hangfireLogin = ConfigCommon.Configuration["Hangfire:Login"];
             var hangfirePwd = ConfigCommon.Configuration["Hangfire:Password"];
@@ -63,20 +89,6 @@ namespace WeChat.Host
                 },
                 DashboardTitle = "WeChat任务调度中心"
             });
-
-            //开始使用Hangfire服务
-            app.UseHangfireServer(new BackgroundJobServerOptions
-            {
-                //WorkerCount 并发任务数 用的是默认的20
-                WorkerCount = 5,
-                ServerName = "WeChat_Hangfire",//服务器名称
-                Queues = new[] { "jobs", "apis", "default" },//队列名称，只能为小写
-            });
-
-            //var service = context.ServiceProvider;
-            //service.UseWallpaperJob();
-            //service.UseHotNewsJob();
-            //service.UsePuppeteerTestJob();
         }
     }
 }
