@@ -16,7 +16,7 @@ namespace WeChat.Application.Services.Job
     /// IT之家
     /// </summary>
     [Route("ItHomeblogsJob")]
-    public class ItHomeblogsJob : BaseApiService
+    public class ItHomeblogsJob : BaseJobService
     {
         public IItHomeblogsRepository _itHomeblogsRepository { get; init; }
 
@@ -31,17 +31,16 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetItHomeblogsAll")]
-        public async Task<DataResult> GetItHomeblogsAll()
+        public async Task<DataResult> GetItHomeblogsAll(string key)
         {
             var data = await _itHomeblogsRepository.GetItHomeblogsAll();
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
         /// 获取 It之家的 IT资讯最新
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("ItHomeblogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsContent(string key)
@@ -50,14 +49,13 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
         /// 获取It之家 微软资讯
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("ItHomeblogsMicrosoftContent")]
         [BathBackgroundJob]
         public async Task<DataResult> ItHomeblogsMicrosoftContent(string key)
@@ -66,7 +64,7 @@ namespace WeChat.Application.Services.Job
             List<ItHomeblogs> itHomeblogList = await GetAddDbBlogs(result);
             //db add
             var data = await _itHomeblogsRepository.CreateItHomeblogsAsync(itHomeblogList);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>

@@ -84,36 +84,52 @@ namespace WeChat.Host
                 //得到Job任务的所有路由地址
                 var routeJobs = GetApplicationJobRoutes.GetJobRoutes();
 
+                #region 批量添加Job任务 1.循环监听版本
+                //while (!stoppingToken.IsCancellationRequested)
+                //{
+                //    _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
 
+                //    //Job任务
+                //    AddOrUpdateRecurringJobByPath(routeJobs);
 
-                //批量添加Job任务
-                while (!stoppingToken.IsCancellationRequested)
-                {
-                    #region 随机时间范围设置
-                    var nowTime = DateTime.Now;
-                    var startHour = ConfigCommon.Configuration["JobStartHour"].TryParseToInt();
-                    var startMinute = ConfigCommon.Configuration["JobStartMinute"].TryParseToInt();
-                    var endHour = ConfigCommon.Configuration["JobEndHour"].TryParseToInt();
-                    var endMinute = ConfigCommon.Configuration["JobEndMinute"].TryParseToInt();
+                //    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
+                //    await Task.Delay(new TimeSpan(6, 0, 0), stoppingToken);
+                //} 
+                #endregion
 
-                    var startTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, startHour, startMinute, 0);
-                    var endTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, endHour, endMinute, 0);
-                    #endregion
+                //批量添加Job任务 2.放任后台任务版本
+                AddOrUpdateRecurringJobByPath(routeJobs);
 
-                    foreach (var jobPath in routeJobs)
-                    {
-                        //获取范围内的随机时间
-                        var randomTim = GetRandomTime(startTime, endTime);
-                        _logger.LogWarning("aa============" + randomTim.ToString());
-                        RecurringJob.AddOrUpdate(jobPath, () => PostApiRequestJobService(jobPath), Cron.Daily(randomTim.Hour, randomTim.Minute), TimeZoneInfo.Local);
-                    }
-
-                    _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
-                    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-                    await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
-                }
                 _logger.LogInformation("WorkService is stopping.");
             }
+        }
+
+        /// <summary>
+        /// 批量添加Job任务 
+        /// </summary>
+        /// <param name="routeJobs">Post 路由地址</param>
+        private void AddOrUpdateRecurringJobByPath(List<string> routeJobs)
+        {
+            #region 随机时间范围设置
+            var nowTime = DateTime.Now;
+            var startHour = ConfigCommon.Configuration["JobStartHour"].TryParseToInt();
+            var startMinute = ConfigCommon.Configuration["JobStartMinute"].TryParseToInt();
+            var endHour = ConfigCommon.Configuration["JobEndHour"].TryParseToInt();
+            var endMinute = ConfigCommon.Configuration["JobEndMinute"].TryParseToInt();
+
+            var startTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, startHour, startMinute, 0);
+            var endTime = new DateTime(nowTime.Year, nowTime.Month, nowTime.Day, endHour, endMinute, 0);
+            #endregion
+
+            #region 添加/更新Job任务
+            foreach (var jobPath in routeJobs)
+            {
+                //获取范围内的随机时间
+                var randomTim = GetRandomTime(startTime, endTime);
+                _logger.LogWarning("aa============" + randomTim.ToString());
+                RecurringJob.AddOrUpdate(jobPath, () => PostApiRequestJobService(jobPath), Cron.Daily(randomTim.Hour, randomTim.Minute), TimeZoneInfo.Local);
+            }
+            #endregion
         }
 
         /// <summary>

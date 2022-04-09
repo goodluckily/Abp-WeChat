@@ -30,7 +30,7 @@ namespace WeChat.Application.Services.Api
                 new {Id=4,Name="DD",Age=44,Address="广州" },
                 new {Id=5,Name="EE",Age=55,Address="重庆" },
             };
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace WeChat.Application.Services.Api
         {
             var http = new HttpClientHelper();
             var result = http.PostResponseForJobApi($"http://127.0.0.1:9999/CodeDeaultblogsJob/CodeDeaultblogsContent?key={key}");
-            return Json(result);
+            return Result.Json(result);
         }
     }
 }
