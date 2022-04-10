@@ -85,20 +85,21 @@ namespace WeChat.Host
                 var routeJobs = GetApplicationJobRoutes.GetJobRoutes();
 
                 #region 批量添加Job任务 1.循环监听版本
-                //while (!stoppingToken.IsCancellationRequested)
-                //{
-                //    _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
 
-                //    //Job任务
-                //    AddOrUpdateRecurringJobByPath(routeJobs);
+                    //Job任务
+                    AddOrUpdateRecurringJobByPath(routeJobs);
 
-                //    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-                //    await Task.Delay(new TimeSpan(6, 0, 0), stoppingToken);
-                //} 
+                    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
+                    await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
+                }
                 #endregion
 
-                //批量添加Job任务 2.放任后台任务版本
-                AddOrUpdateRecurringJobByPath(routeJobs);
+                #region 批量添加Job任务 2.放任后台任务版本 (好像不咋行)
+                //AddOrUpdateRecurringJobByPath(routeJobs);
+                #endregion
 
                 _logger.LogInformation("WorkService is stopping.");
             }
