@@ -13,11 +13,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="app_offline.htm" />
 		<None Remove="CodeFirst.txt" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Content Include="CodeFirst.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="app_offline.htm">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
