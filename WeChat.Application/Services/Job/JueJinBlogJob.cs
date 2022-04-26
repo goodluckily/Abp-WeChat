@@ -16,7 +16,7 @@ namespace WeChat.Application.Services.Job
     /// 稀土掘金
     /// </summary>
     [Route("JueJinBlogJob")]
-    public class JueJinBlogJob : BaseApiService
+    public class JueJinBlogJob : BaseJobService
     {
         public IJueJinblogsRepository _jueJinblogsRepository { get; init; }
 
@@ -31,17 +31,16 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("getJueJinblogsAll")]
-        public async Task<DataResult> GetJueJinblogsAllAsync()
+        public async Task<DataResult> GetJueJinblogsAllAsync(string key)
         {
             var data = await _jueJinblogsRepository.GetJueJinblogsAll();
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
         /// 掘金博客任务
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("JueJinblogs")]
         [BathBackgroundJob]
         public async Task<DataResult> JueJinblogs(string key)
@@ -68,7 +67,7 @@ namespace WeChat.Application.Services.Job
                 x.IsDel = false;
             });
             var data = await _jueJinblogsRepository.CreateJueJinblogsAsync(cnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

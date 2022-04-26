@@ -11,6 +11,7 @@ using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Http.WeiChatApi;
 using Microsoft.AspNetCore.Mvc;
+using WeChat.Application.Result;
 
 namespace WeChat.Application.Services
 {
@@ -31,7 +32,11 @@ namespace WeChat.Application.Services
         /// </summary>
         public IUserInfoRepository _userInfoRepository { get; init; }
 
-        public ICodeDeaultblogsRepository _codeDeaultblogsRepository;
+        /// <summary>
+        /// 返回值包装
+        /// </summary>
+        public IResultService Result { get; init; }
+
         public BaseApiService()
         {
 
@@ -129,32 +134,5 @@ namespace WeChat.Application.Services
 
         #endregion
 
-        #region 返回值封装
-
-        [NonAction]
-        public virtual DataResult Json(object data, string message = "")
-        {
-            var result = new DataResult(true, data, message);
-            return result;
-        }
-        [NonAction]
-        public virtual DataResult Json(long total, object data, string message = "")
-        {
-            var result = new DataResult(true, total, data, message);
-            return result;
-        }
-        [NonAction]
-        public virtual DataResult Ok(string message)
-        {
-            var result = new DataResult(true, message);
-            return result;
-        }
-        [NonAction]
-        public virtual DataResult Error(string message)
-        {
-            var result = new DataResult(false, message);
-            return result;
-        }
-        #endregion
     }
 }

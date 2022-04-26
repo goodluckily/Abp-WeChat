@@ -15,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// CSDN
     /// </summary>
     [Route("CsdnBlogJob")]
-    public class CsdnBlogJob : BaseApiService
+    public class CsdnBlogJob : BaseJobService
     {
         public ICsdnblogsRepository _csdnblogsRepository { get; init; }
 
@@ -30,13 +30,13 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetCsdnblogsAll")]
-        public async Task<DataResult> GetCsdnblogsAll() => Json(await _csdnblogsRepository.GetCsdnblogsAll());
+        public async Task<DataResult> GetCsdnblogsAll(string key) => Result.Json(await _csdnblogsRepository.GetCsdnblogsAll());
 
         /// <summary>
         /// 其他
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
+
         [HttpPost("CsdnBlogContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CsdnBlogContent(string key)
@@ -71,14 +71,13 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
 
         /// <summary>
         /// 推荐
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("CsdnTuiJianContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CsdnTuiJianContent(string key)
@@ -113,7 +112,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _csdnblogsRepository.CreateCsdnblogsAsync(csdnblogs);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

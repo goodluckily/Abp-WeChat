@@ -15,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// 51 CTO
     /// </summary>
     [Route("CTO51blogsJob")]
-    public class CTO51blogsJob : BaseApiService
+    public class CTO51blogsJob : BaseJobService
     {
         public ICTO51blogsRepository _cTO51BlogsRepository { get; init; }
 
@@ -31,13 +31,12 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetCTO51blogsAll")]
-        public async Task<DataResult> GetCTO51blogsAll() => Json(await _cTO51BlogsRepository.GetCTO51blogsAll());
+        public async Task<DataResult> GetCTO51blogsAll(string key) => Result.Json(await _cTO51BlogsRepository.GetCTO51blogsAll());
 
         /// <summary>
         /// 保存51 CTO 数据信息
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("CTO51blogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CTO51blogsContentAsync(string key)
@@ -72,7 +71,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _cTO51BlogsRepository.CreateCTO51blogsAsync(CTO51blogsList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

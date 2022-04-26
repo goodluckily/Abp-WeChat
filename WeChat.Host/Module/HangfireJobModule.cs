@@ -14,10 +14,14 @@ using Hangfire.Heartbeat.Server;
 using Hangfire.Heartbeat;
 using Hangfire.Console;
 using Hangfire.HttpJob;
+using Volo.Abp.AutoMapper;
 
 namespace WeChat.Host
 {
-    [DependsOn(typeof(AbpBackgroundJobsHangfireModule))]
+    [DependsOn(
+        typeof(AbpBackgroundJobsHangfireModule),
+        typeof(AbpAutoMapperModule)
+        )]
     public class HangfireJobModule : AbpModule
     {
         public override void ConfigureServices(ServiceConfigurationContext context)
@@ -26,6 +30,8 @@ namespace WeChat.Host
             var configuration = services.GetConfiguration();
             var hostingEnvironment = services.GetHostingEnvironment();
 
+            //1.插件的Http请求Nuget包注释
+            //2.系统cup ram的可视化注释
             var mySqlConnectionString = ConfigCommon.Configuration["ConnectionStrings:WeChat"];
             services.AddHangfire(config =>
             {
@@ -34,32 +40,33 @@ namespace WeChat.Host
                     {
                         TransactionTimeout = TimeSpan.FromMinutes(5),//交易超时。默认值为 1 分钟
                         TablesPrefix = "hangfire_"//数据库中表的前缀。默认为无
-                    }))
-                .UseConsole()
-                .UseHangfireHttpJob();//创建Http任务
-                //集成服务器状态检查 for dashboard
-                config.UseHeartbeatPage(checkInterval: TimeSpan.FromHours(1));
+                    }));
+                //.UseConsole()
+                //.UseHangfireHttpJob();//创建Http任务
+                ////集成服务器状态检查 for dashboard
+                //config.UseHeartbeatPage(checkInterval: TimeSpan.FromHours(1));
             });
 
             //开始使用Hangfire服务
             services.AddHangfireServer(
-                additionalProcesses: new[]
-                { 
-                    //集成服务器状态检查 for service side
-                    new ProcessMonitor(checkInterval: TimeSpan.FromHours(1))
-                },
+                //additionalProcesses: new[]
+                //{ 
+                //    //集成服务器状态检查 for service side
+                //    new ProcessMonitor(checkInterval: TimeSpan.FromHours(1))
+                //},
                 optionsAction: (IServiceProvider service, BackgroundJobServerOptions option) =>
                 {
                     //WorkerCount 并发任务数 用的是默认的20
                     option.WorkerCount = 10;
                     option.ServerName = "WeChat_Hangfire";//服务器名称
                     option.Queues = new[] { "jobs", "apis", "default" };//队列名称，只能为小写
-                },
-                storage: new MySqlStorage(mySqlConnectionString, new MySqlStorageOptions
-                {
-                    TransactionTimeout = TimeSpan.FromMinutes(5),//交易超时。默认值为 1 分钟
-                    TablesPrefix = "hangfire_"//数据库中表的前缀。默认为无
-                }));
+                }
+                //storage: new MySqlStorage(mySqlConnectionString, new MySqlStorageOptions
+                //{
+                //    TransactionTimeout = TimeSpan.FromMinutes(5),//交易超时。默认值为 1 分钟
+                //    TablesPrefix = "hangfire_"//数据库中表的前缀。默认为无
+                //})
+                );
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)

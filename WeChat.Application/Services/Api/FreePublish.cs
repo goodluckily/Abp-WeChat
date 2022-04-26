@@ -42,7 +42,7 @@ namespace WeChat.Application.Services.Api
             //var adfasf = JsonConvert.DeserializeObject<JObject>(ss);
 
 
-            return Json("");
+            return Result.Json("");
         }
     }
 }

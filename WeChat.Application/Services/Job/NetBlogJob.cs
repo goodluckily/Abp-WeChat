@@ -15,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// 博客园
     /// </summary>
     [Route("NetBlogJob")]
-    public class NetBlogJob : BaseApiService
+    public class NetBlogJob : BaseJobService
     {
         public INetcnblogsRepository _netcnblogsRepository { get; init; }
 
@@ -30,17 +30,16 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetetNetBlogAll")]
-        public async Task<DataResult> GetNetBlogAllAysnc()
+        public async Task<DataResult> GetNetBlogAllAysnc(string key)
         {
             var netBlogsList = await _netcnblogsRepository.GetAllAsync();
-            return Json(netBlogsList);
+            return Result.Json(netBlogsList);
         }
 
         /// <summary>
         /// 博客园 .NET技术专题文章
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("Netcnblogs")]
         [BathBackgroundJob]
         public async Task<DataResult> Netcnblogs(string key)
@@ -51,14 +50,13 @@ namespace WeChat.Application.Services.Job
             var dbNetblogs = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNetResult);
             var clientDBNetCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.NET);
             var netBlogsList = await CreateCnBlogsData(dbNetblogs, clientDBNetCnblogsList);
-            return Json(netBlogsList);
+            return Result.Json(netBlogsList);
         }
 
         /// <summary>
         /// 博客园 新闻最新发布文章
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("Newscnblogs")]
         [BathBackgroundJob]
         public async Task<DataResult> Newscnblogs(string key)
@@ -69,7 +67,7 @@ namespace WeChat.Application.Services.Job
             var blogNews = ObjectMapper.Map<List<NetcnblogsDto>, List<Cnblogs>>(blogNewsResut);
             var clientDBNewsCnblogsList = await _netcnblogsRepository.GetAllAsync(AnalyzingEnum.ReDian);
             var netNewsList = await CreateCnBlogsData(blogNews, clientDBNewsCnblogsList);
-            return Json(netNewsList);
+            return Result.Json(netNewsList);
         }
 
         private async Task<List<Cnblogs>> CreateCnBlogsData(List<Cnblogs> dbNetblogs, List<Cnblogs> clientDBNetcnblogsList)

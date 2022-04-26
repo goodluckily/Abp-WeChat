@@ -16,7 +16,7 @@ namespace WeChat.Application.Services.Job
     /// CodeDeault
     /// </summary>
     [Route("CodeDeaultblogsJob")]
-    public class CodeDeaultblogsJob : BaseApiService
+    public class CodeDeaultblogsJob : BaseJobService
     {
         public ICodeDeaultblogsRepository _codeDeaultblogsRepository { get; init; }
 
@@ -32,10 +32,9 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetCodeDeaultblogsAll")]
-        public async Task<DataResult> GetCodeDeaultblogsAsyncAll() => Json(await _codeDeaultblogsRepository.GetCodeDeaultblogsAll());
+        public async Task<DataResult> GetCodeDeaultblogsAsyncAll(string key) => Result.Json(await _codeDeaultblogsRepository.GetCodeDeaultblogsAll());
 
 
-        [AllowAnonymous]
         [HttpPost("CodeDeaultblogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> CodeDeaultblogsContent(string key)
@@ -70,7 +69,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _codeDeaultblogsRepository.CreateCodeDeaultblogsAsync(codedeaultblogList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }

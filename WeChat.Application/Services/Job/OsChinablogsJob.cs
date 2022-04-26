@@ -15,7 +15,7 @@ namespace WeChat.Application.Services.Job
     /// 开源中国
     /// </summary>
     [Route("OsChinablogsJob")]
-    public class OsChinablogsJob : BaseApiService
+    public class OsChinablogsJob : BaseJobService
     {
         public IOsChinablogsRepository _osChinablogsRepository { get; init; }
 
@@ -30,13 +30,12 @@ namespace WeChat.Application.Services.Job
         /// </summary>
         /// <returns></returns>
         [HttpGet("GetOsChinablogsAsyncAll")]
-        public async Task<DataResult> GetOsChinablogsAsyncAll() => Json(await _osChinablogsRepository.GetOsChinablogsAll());
+        public async Task<DataResult> GetOsChinablogsAsyncAll(string key) => Result.Json(await _osChinablogsRepository.GetOsChinablogsAll());
 
         /// <summary>
         /// 开源中国 博客文章
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpPost("OsChinablogsContent")]
         [BathBackgroundJob]
         public async Task<DataResult> OsChinablogsContent(string key)
@@ -71,7 +70,7 @@ namespace WeChat.Application.Services.Job
 
             //db add
             var data = await _osChinablogsRepository.CreateOsChinablogsAsync(OsChinablogsList);
-            return Json(data);
+            return Result.Json(data);
         }
     }
 }
