@@ -12,6 +12,7 @@ namespace WeChat.Application.Services
 {
 
     [NonController]
+    [AllowAnonymous]
     [CheckKeyBackgroundJob]//自定义特性的权限key验证
     public class BaseJobService : ApplicationService
     {
