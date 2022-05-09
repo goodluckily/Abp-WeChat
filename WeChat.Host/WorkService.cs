@@ -93,7 +93,7 @@ namespace WeChat.Host
                     AddOrUpdateRecurringJobByPath(routeJobs);
 
                     //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
-                    await Task.Delay(new TimeSpan(3, 0, 0), stoppingToken);
+                    await Task.Delay(new TimeSpan(2, 0, 0), stoppingToken);
                 }
                 #endregion
 
