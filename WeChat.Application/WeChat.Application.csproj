@@ -12,6 +12,7 @@
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.40" />
 		<PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor" Version="2.2.0" />
 		<PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.4" />
 		<PackageReference Include="Volo.Abp.Core" Version="5.0.0" />
 		<PackageReference Include="Volo.Abp.Ddd.Application" Version="4.4.4" />
@@ -21,6 +22,10 @@
 	<ItemGroup>
 		<ProjectReference Include="..\WeChat.Domain\WeChat.Domain.csproj" />
 		<ProjectReference Include="..\WeChat.Http\WeChat.Http.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Folder Include="Services\Email\" />
 	</ItemGroup>
 
 </Project>

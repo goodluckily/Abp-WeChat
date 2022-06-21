@@ -1,0 +1,73 @@
+﻿@using WeChat.Domain
+
+@model List<Log>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .table-bordered {
+            --bs-table-bg: transparent;
+            --bs-table-accent-bg: transparent;
+            --bs-table-striped-color: #212529;
+            --bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+            --bs-table-active-color: #212529;
+            --bs-table-active-bg: rgba(0, 0, 0, 0.1);
+            --bs-table-hover-color: #212529;
+            --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+            vertical-align: top;
+            border-color: #dee2e6;
+        }
+
+        .thead {
+            background-color: #efefef;
+        }
+
+        .header-content {
+            background: url('cid:header');
+            padding: 5px;
+            margin: 5px;
+            text-align: center;
+            font-size: 2em;
+            color: #464646;
+        }
+
+        td {
+            border-width: 0 1px;
+            text-align: center;
+        }
+
+        tr, td {
+            border-color: inherit;
+            border-style: solid;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h4>@ViewData["Name"]</h4>
+        <h4>@ViewData["Address"]</h4>
+        <h4>@ViewData["Age"]</h4>
+        <img style="width:200px;height:200px;" src="https://img2020.cnblogs.com/blog/1211838/202111/1211838-20211118195427136-1210427557.png" />
+    </div>
+    <div>
+        <table class="table-bordered">
+            <tr class="thead">
+                <th>Id</th>
+                <th>Name</th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="color:red;font-size:20px;">@item.Id</td>
+                    <td>@item.Message</td>
+                    <td>@item.MachineIp</td>
+                </tr>
+            }
+        </table>
+    </div>
+</body>
+</html>

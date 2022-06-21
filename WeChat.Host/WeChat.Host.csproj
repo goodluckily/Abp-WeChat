@@ -15,6 +15,8 @@
 	<ItemGroup>
 		<None Remove="app_offline.htm" />
 		<None Remove="CodeFirst.txt" />
+		<None Remove="Views\TemplateRazor\Images\No.svg" />
+		<None Remove="Views\TemplateRazor\No.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -23,6 +25,9 @@
 
 	<ItemGroup>
 	  <EmbeddedResource Include="app_offline.htm">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Views\TemplateRazor\Images\No.svg">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </EmbeddedResource>
 	</ItemGroup>
@@ -67,6 +72,9 @@
 	<ItemGroup>
 		<Content Update="NLog.config">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
+		<Content Update="Views\TemplateRazor\TestList.cshtml">
+		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
 	</ItemGroup>
 

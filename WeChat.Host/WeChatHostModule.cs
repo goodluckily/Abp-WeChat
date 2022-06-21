@@ -243,6 +243,9 @@ namespace WeChat.Host
             //    set.AddHealthCheckEndpoint("HealthCheck", "/health");
             //}).AddMySqlStorage(mySqlConnectionString);
             #endregion
+
+
+            //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
