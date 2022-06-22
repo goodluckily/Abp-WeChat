@@ -57,7 +57,7 @@ namespace WeChat.Host
                 optionsAction: (IServiceProvider service, BackgroundJobServerOptions option) =>
                 {
                     //WorkerCount 并发任务数 用的是默认的20
-                    option.WorkerCount = 10;
+                    option.WorkerCount = 20;
                     option.ServerName = "WeChat_Hangfire";//服务器名称
                     option.Queues = new[] { "jobs", "apis", "default" };//队列名称，只能为小写
                 }
