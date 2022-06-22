@@ -26,6 +26,8 @@ using WeChat.Shared;
 using WeChat.EntityFramewoekCore;
 using WeChat.Host.Filter;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Volo.Abp.BlobStoring;
+using Volo.Abp.BlobStoring.FileSystem;
 
 namespace WeChat.Host
 {
@@ -243,6 +245,19 @@ namespace WeChat.Host
             //    set.AddHealthCheckEndpoint("HealthCheck", "/health");
             //}).AddMySqlStorage(mySqlConnectionString);
             #endregion
+
+
+            //BLOB存储文档
+            Configure<AbpBlobStoringOptions>(options =>
+            {
+                options.Containers.ConfigureDefault(container =>
+                {
+                    container.UseFileSystem(fileSystem =>
+                    {
+                        fileSystem.BasePath = "C:\\my-files";
+                    });
+                });
+            });
 
 
             //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));

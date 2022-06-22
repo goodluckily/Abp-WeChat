@@ -8,9 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Volo.Abp.Users;
 using WeChat.Domain;
 using WeChat.Http.HttpHelper;
 using WeChat.Shared;
+using Volo.Abp.BlobStoring;
+using Microsoft.AspNetCore.Http;
 
 namespace WeChat.Application.Services.Api
 {
@@ -23,15 +26,23 @@ namespace WeChat.Application.Services.Api
         private IRazorViewEngine _razorViewEngine;
         private IServiceProvider _serviceProvider;
         private ITempDataProvider _tempDataProvider;
+        private readonly ICurrentUser _currentUser;
+
+        private readonly IBlobContainer _blobContainer;
 
         public TestService(
             IRazorViewEngine engine,
             IServiceProvider serviceProvider,
-            ITempDataProvider tempDataProvider)
+            ITempDataProvider tempDataProvider,
+            ICurrentUser currentUser,
+            BlobContainerFactory blobContainerFactory)
         {
             this._razorViewEngine = engine;
             this._serviceProvider = serviceProvider;
             this._tempDataProvider = tempDataProvider;
+            _currentUser = currentUser;
+
+            _blobContainer = blobContainerFactory.Create("profile-pictures");
         }
 
         /// <summary>
@@ -114,5 +125,24 @@ namespace WeChat.Application.Services.Api
             stream.Position = 0;
             return new FileStreamResult(stream, "application/pdf") { FileDownloadName = $"{DateTime.Now.Ticks}.pdf" };
         }
+
+        [HttpPost("SaveProfilePictureAsync")]
+        public async Task<DataResult> SaveProfilePictureAsync(IFormFile file)
+        {
+            //获取file的文件流
+            var bytes = file.OpenReadStream();
+            var blobName = CurrentUser.GetId().ToString();
+            await _blobContainer.SaveAsync(blobName, bytes);
+            return Result.Json("11");
+        }
+
+        [HttpGet("GetProfilePictureAsync")]
+        public async Task<byte[]> GetProfilePictureAsync()
+        {
+            var blobName = CurrentUser.GetId().ToString();
+            var aaaaa = await _blobContainer.GetAllBytesOrNullAsync(blobName);
+            return aaaaa;
+        }
+
     }
 }
