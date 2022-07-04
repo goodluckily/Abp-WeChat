@@ -2,7 +2,7 @@
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
-EXPOSE 8888/tcp
+EXPOSE 9999/tcp
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
@@ -23,5 +23,5 @@ RUN dotnet publish "WeChat.Host.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENV ASPNETCORE_URLS=http://+:8888 
+ENV ASPNETCORE_URLS=http://+:9999 
 ENTRYPOINT ["dotnet", "WeChat.Host.dll"]
