@@ -8,7 +8,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Security.Claims;
 
 namespace WeChat.Shared
 {
@@ -93,9 +92,9 @@ namespace WeChat.Shared
             return new[] {
                 new Claim("RefreshTime",DateTime.Now.AddMinutes(refreshTime).ToString()),
                 new Claim("ExpireTime",DateTime.Now.AddMinutes(expireTime).ToString()),
-                new Claim(AbpClaimTypes.UserId, UserId),
-                new Claim(AbpClaimTypes.UserName,UserName),
-                new Claim(AbpClaimTypes.Role,roleId)
+                new Claim(ClaimTypes.Actor, UserId),
+                new Claim(ClaimTypes.Name,UserName),
+                new Claim(ClaimTypes.Role,roleId)
             };
         }
 
@@ -103,7 +102,7 @@ namespace WeChat.Shared
         {
             //应该要先验证token的可用性
             var claimsIdentity = user.Identity as ClaimsIdentity;
-            var value = claimsIdentity.FindFirst(AbpClaimTypes.UserId)?.Value;
+            var value = claimsIdentity.FindFirst(ClaimTypes.Actor)?.Value;
             var userId = value != null ? Guid.Parse(value) : Guid.Empty;
             return userId;
         }

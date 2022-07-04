@@ -8,7 +8,6 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Volo.Abp.Users;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 
@@ -21,21 +20,13 @@ namespace WeChat.Application.Services
         private readonly IRoleRepository _roleRepository;
         private readonly IUserAndRoleMapsRepository _userAndRoleMapsRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly ICurrentUser _currentUser;
 
-        public UserService(
-            IUserInfoRepository userInfoRepository,
-            IRoleRepository roleRepository,
-            IUserAndRoleMapsRepository userAndRoleMapsRepository,
-            IHttpContextAccessor httpContextAccessor,
-            ICurrentUser currentUser
-            )//
+        public UserService(IUserInfoRepository userInfoRepository, IRoleRepository roleRepository, IUserAndRoleMapsRepository userAndRoleMapsRepository, IHttpContextAccessor httpContextAccessor)//
         {
             _userInfoRepository = userInfoRepository;
             _roleRepository = roleRepository;
             _userAndRoleMapsRepository = userAndRoleMapsRepository;
             _httpContextAccessor = httpContextAccessor;
-            _currentUser = currentUser;
         }
 
         /// <summary>
