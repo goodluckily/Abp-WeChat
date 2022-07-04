@@ -43,8 +43,8 @@ namespace WeChat.Host
                 .UseAutofac()
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    //webBuilder.UseUrls("http://127.0.0.1:9999/", "http://localhost:9999/");
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("http://127.0.0.1:8888/", "http://localhost:8888/");
                 })
                 .ConfigureServices(services =>
                 {
