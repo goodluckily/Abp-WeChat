@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,13 +21,19 @@ namespace WeChat.Application.Services
         private readonly IRoleRepository _roleRepository;
         private readonly IUserAndRoleMapsRepository _userAndRoleMapsRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
-        public UserService(IUserInfoRepository userInfoRepository, IRoleRepository roleRepository, IUserAndRoleMapsRepository userAndRoleMapsRepository, IHttpContextAccessor httpContextAccessor)//
+        public UserService(IUserInfoRepository userInfoRepository,
+            IRoleRepository roleRepository,
+            IUserAndRoleMapsRepository userAndRoleMapsRepository,
+            IServiceScopeFactory serviceScopeFactory,
+            IHttpContextAccessor httpContextAccessor)//
         {
             _userInfoRepository = userInfoRepository;
             _roleRepository = roleRepository;
             _userAndRoleMapsRepository = userAndRoleMapsRepository;
             _httpContextAccessor = httpContextAccessor;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         /// <summary>
@@ -108,6 +115,33 @@ namespace WeChat.Application.Services
         {
             var users = await _userAndRoleMapsRepository.GetAllAsync();
             return Result.Json(users);
+        }
+
+        [HttpGet("GetTaskDataTest")]
+        public async Task<DataResult> GetTaskDataTest()
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                //Task.Run(() =>
+                //{
+                try
+                {
+                    //Task里创建了新的IServiceScope
+                    using var scope = _serviceScopeFactory.CreateScope();
+                    //通过IServiceScope创建具体实例
+                    var dbContext = scope.ServiceProvider.GetService<IUserAndRoleMapsRepository>();
+                    var list = await dbContext.GetAllAsync();
+                    Console.WriteLine($"运行{i}次:{list.Count()}");
+                }
+                catch (Exception ex)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("出错了：" + ex.Message);
+                    Console.ResetColor();
+                }
+                //});
+            }
+            return Result.Ok("run.......");
         }
 
 
