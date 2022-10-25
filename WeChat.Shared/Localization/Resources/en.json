@@ -1,0 +1,6 @@
+﻿{
+  "culture": "en", //语种
+  "texts": {
+    "HelloWorld": "Hello en-US!"
+  }
+}

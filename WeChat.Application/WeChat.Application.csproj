@@ -7,6 +7,24 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Localization\Resource\en.json" />
+	  <None Remove="Localization\Resource\zh-Hans.json" />
+	  <None Remove="Localization\Resource\zh-Hant.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Localization\Resource\en.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Localization\Resource\zh-Hans.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	  <EmbeddedResource Include="Localization\Resource\zh-Hant.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="AspectCore.Abstractions" Version="2.2.0" />
 		<PackageReference Include="Autofac.Extras.DynamicProxy" Version="6.0.1" />
 		<PackageReference Include="HtmlAgilityPack" Version="1.11.40" />

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Application;
 using Volo.Abp.AutoMapper;
+using Volo.Abp.Localization;
 using Volo.Abp.Modularity;
 using WeChat.Application.Mapping;
 using WeChat.Domain;
@@ -24,10 +25,10 @@ namespace WeChat.Application
             // Use AutoMapper for MyModule
             context.Services.AddAutoMapperObjectMapper<WeChatApplicationModule>();
 
-           Configure<AbpAutoMapperOptions>(options =>
-           {
-               options.AddProfile<WeChatMappingProfile>(validate: true);
-           });
+            Configure<AbpAutoMapperOptions>(options =>
+            {
+                options.AddProfile<WeChatMappingProfile>(validate: true);
+            });
         }
     }
 }

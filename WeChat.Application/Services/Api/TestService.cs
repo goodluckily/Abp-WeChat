@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 using WeChat.Domain;
 using WeChat.Http.HttpHelper;
 using WeChat.Shared;
+using WeChat.Shared.Localization.Exceptions;
 
 namespace WeChat.Application.Services.Api
 {
@@ -23,15 +25,19 @@ namespace WeChat.Application.Services.Api
         private IRazorViewEngine _razorViewEngine;
         private IServiceProvider _serviceProvider;
         private ITempDataProvider _tempDataProvider;
+        private readonly IStringLocalizer<LangueResource> _stringLocalizer;
 
         public TestService(
             IRazorViewEngine engine,
             IServiceProvider serviceProvider,
-            ITempDataProvider tempDataProvider)
+            ITempDataProvider tempDataProvider,
+            IStringLocalizer<LangueResource> stringLocalizer
+            )
         {
             this._razorViewEngine = engine;
             this._serviceProvider = serviceProvider;
             this._tempDataProvider = tempDataProvider;
+            _stringLocalizer = stringLocalizer;
         }
 
         /// <summary>
@@ -113,6 +119,21 @@ namespace WeChat.Application.Services.Api
             var stream = new MemoryStream(result, 0, result.Length);
             stream.Position = 0;
             return new FileStreamResult(stream, "application/pdf") { FileDownloadName = $"{DateTime.Now.Ticks}.pdf" };
+        }
+
+
+        /// <summary>
+        /// 多语言相关配置
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("TestLocalizer")]
+        public async Task<DataResult> TestLocalizer()
+        {
+            var hello = _stringLocalizer["HelloWorld","cycycy"];
+            var hello1 = _stringLocalizer["HelloWorldData","cycycy","18"];
+            var hello2 = _stringLocalizer["HelloWorldData", "18", "cycycy"];
+
+            return Result.Json(hello.Value);
         }
     }
 }

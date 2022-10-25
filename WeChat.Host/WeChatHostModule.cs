@@ -38,7 +38,7 @@ namespace WeChat.Host
         typeof(WeChatEntityFrameworkCoreModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
         typeof(WeChatSwaggerModule), //使用自己定义的 Swagger 模块
-        typeof(HangfireJobModule)// Hangfire Job 使用模块
+        typeof(HangfireJobModule) // Hangfire Job 使用模块
         )]
     public class WeChatHostModule : AbpModule
     {
@@ -73,31 +73,7 @@ namespace WeChat.Host
                        .AllowAnyMethod();
                 });
             });
-
-            //多语言设置
-            Configure<AbpLocalizationOptions>(op =>
-            {
-                op.Languages.Add(new LanguageInfo("en", "en", "English"));
-                op.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-
-                //options.Languages.Add(new LanguageInfo("ar", "ar", "العربية"));
-                //options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
-                //options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                //options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                //options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                //options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                //options.Languages.Add(new LanguageInfo("it", "it", "Italian", "it"));
-                //options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                //options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português (Brasil)"));
-                //options.Languages.Add(new LanguageInfo("ro-RO", "ro-RO", "Română"));
-                //options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                //options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                //options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
-                //options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
-                //options.Languages.Add(new LanguageInfo("de-DE", "de-DE", "Deutsch"));
-                //options.Languages.Add(new LanguageInfo("es", "es", "Español"));
-            });
-
+            
             #region DB
 
             services.AddAbpDbContext<WeChatDbContext>(options =>
@@ -243,7 +219,7 @@ namespace WeChat.Host
             //    set.AddHealthCheckEndpoint("HealthCheck", "/health");
             //}).AddMySqlStorage(mySqlConnectionString);
             #endregion
-
+            
 
             //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
         }
@@ -293,5 +269,6 @@ namespace WeChat.Host
 
         //    return builder.Build();
         //}
+        
     }
 }
