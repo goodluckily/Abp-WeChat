@@ -109,6 +109,7 @@ namespace WeChat.Host
                     options.Filters.Remove(filterEx);//1.移除 abp定义的
                 options.Filters.Add(typeof(WeChatGlobalExceptionFilter));//2.添加自己写的 异常处理
                 options.Filters.Add(typeof(WeChatActionFilter));//3.添加自己写的  控制器 AOP
+                options.Filters.Add(typeof(LocalizationResourceFilter));//3.添加自己写的  控制器 AOP
             });
 
             #region Session

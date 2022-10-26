@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Mvc;
 using WeChat.Host.Job;
 using Microsoft.AspNetCore.Http;
+using System.Diagnostics;
 
 namespace WeChat.Host
 {
@@ -46,12 +47,16 @@ namespace WeChat.Host
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+#if DEBUG
+            Console.WriteLine("Debug模式下-WorkService暂不执行");
+#else
+           
             //非Dev环境下运行
             if (!_hostEnvironment.IsDevelopment())
             {
                 _logger.LogInformation("WorkService is starting.");
 
-                #region old版本 注释 !!!
+            #region old版本 注释 !!!
                 //while (!stoppingToken.IsCancellationRequested)
                 //{
                 //    _logger.LogInformation($"WorkService is running.{DateTime.Now}");
@@ -73,18 +78,18 @@ namespace WeChat.Host
                 //    //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
                 //    await Task.Delay(new TimeSpan(0, 30, 0), stoppingToken);
                 //}
-                #endregion
+            #endregion
 
-                #region 模拟
+            #region 模拟
                 ////可以之后的这个是可以的 哈哈 url请求数据
                 //RecurringJob.AddOrUpdate("baidu", () => Console.WriteLine("baidu"), "0 */2 * * * ?", TimeZoneInfo.Local);// 每隔2分钟执行一次
                 //RecurringJob.AddOrUpdate("tengxun", () => Console.WriteLine("tengxun"), "0 */3 * * * ?", TimeZoneInfo.Local);// 每隔3分钟执行一次 
-                #endregion
+            #endregion
 
                 //得到Job任务的所有路由地址
                 var routeJobs = GetApplicationJobRoutes.GetJobRoutes();
 
-                #region 批量添加Job任务 1.循环监听版本
+            #region 批量添加Job任务 1.循环监听版本
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     _logger.LogInformation($"WorkService is UpDate.{DateTime.Now}");
@@ -95,14 +100,15 @@ namespace WeChat.Host
                     //循环检查激活/刷新的意思 这个以后改成配置文件的时候用到
                     await Task.Delay(new TimeSpan(2, 0, 0), stoppingToken);
                 }
-                #endregion
+            #endregion
 
-                #region 批量添加Job任务 2.放任后台任务版本 (好像不咋行)
+            #region 批量添加Job任务 2.放任后台任务版本 (好像不咋行)
                 //AddOrUpdateRecurringJobByPath(routeJobs);
-                #endregion
+            #endregion
 
                 _logger.LogInformation("WorkService is stopping.");
             }
+#endif
         }
 
         /// <summary>

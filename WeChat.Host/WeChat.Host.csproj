@@ -14,12 +14,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Remove="Localization\Resource\en.json" />
-	  <Content Remove="Localization\Resource\zh-Hans.json" />
-	  <Content Remove="Localization\Resource\zh-Hant.json" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Remove="app_offline.htm" />
 		<None Remove="CodeFirst.txt" />
 		<None Remove="Views\TemplateRazor\Images\No.svg" />
@@ -84,10 +78,6 @@
 		<Content Update="Views\TemplateRazor\TestList.cshtml">
 		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</Content>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Localization\Resource\AbpLocalization\" />
 	</ItemGroup>
 
 	<ProjectExtensions>
