@@ -9,6 +9,7 @@ using Volo.Abp.Modularity;
 using Volo.Abp.VirtualFileSystem;
 using WeChat.Shared.Localization.Exceptions;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace WeChat.Shared.Module
 {
@@ -38,7 +39,7 @@ namespace WeChat.Shared.Module
             {
                 options.MapCodeNamespace("WeChat", typeof(LangueResource));
             });
-
+            
         }
     }
 }

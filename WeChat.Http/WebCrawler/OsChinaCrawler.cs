@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using HtmlAgilityPack;
 using WeChat.Shared;
-
+using WeChat.Shared.Enums;
 
 namespace WeChat.Http.WebCrawler
 {

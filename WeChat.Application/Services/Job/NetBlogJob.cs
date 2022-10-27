@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 using WeChat.Http.WebCrawler;
 using Microsoft.AspNetCore.Authorization;
 

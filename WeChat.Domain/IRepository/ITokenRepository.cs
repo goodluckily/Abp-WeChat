@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Volo.Abp.DependencyInjection;
 using Volo.Abp.Domain.Repositories;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 using WeChat.Domain;
 
 namespace WeChat.Domain.IRepository

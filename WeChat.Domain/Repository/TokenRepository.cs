@@ -8,6 +8,7 @@ using Volo.Abp.Domain.Repositories;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Domain;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Domain.Repository
 {

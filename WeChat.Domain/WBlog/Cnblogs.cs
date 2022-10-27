@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Volo.Abp.Domain.Entities;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Domain
 {

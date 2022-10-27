@@ -1,15 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Text.Json.Serialization;
+using Newtonsoft.Json.Converters;
 using Volo.Abp.Domain.Entities;
 using Volo.Abp.Domain.Entities.Auditing;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Domain
 {
     public class Token : Entity<Guid>
     {
+        [JsonConverter(typeof(StringEnumConverter))]
         public WeiChatEnum WeiChatType { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
         public TokenEnum TokenType { get; set; }
         public string? Access_Token { get; set; }
         public double? Expires_In { get; set; }

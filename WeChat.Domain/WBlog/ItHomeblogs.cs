@@ -1,5 +1,6 @@
 ﻿using System;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Domain
 {

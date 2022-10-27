@@ -7,6 +7,7 @@ using System;
 using System.Net;
 using WeChat.Application;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Host.Filter
 {

@@ -1,7 +1,7 @@
 ﻿{
   "culture": "zh-Hans",
   "texts": {
-    "HelloWorld": "你好啊!zh-CN",
-    "HelloWorldData": "你好啊!zh-CN--{0},{1}"
+    "HelloWorld": "你好啊 zh-CN!",
+    "HelloWorldData": "你好啊 zh-CN!--{0},{1}"
   }
 }

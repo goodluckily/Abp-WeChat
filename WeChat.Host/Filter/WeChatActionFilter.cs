@@ -8,6 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Volo.Abp.AspNetCore.Mvc.Auditing;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Host.Filter
 {

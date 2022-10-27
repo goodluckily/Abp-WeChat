@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.Extensions.Localization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ using System.Threading.Tasks;
 using WeChat.Domain;
 using WeChat.Http.HttpHelper;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 using WeChat.Shared.Localization.Exceptions;
 
 namespace WeChat.Application.Services.Api
@@ -127,13 +129,35 @@ namespace WeChat.Application.Services.Api
         /// </summary>
         /// <returns></returns>
         [HttpGet("TestLocalizer")]
-        public async Task<DataResult> TestLocalizer()
+        public async Task<DataResult> TestLocalizer(CultureEnum cultureEnum)
         {
-            var hello = _stringLocalizer["HelloWorld","cycycy"];
-            var hello1 = _stringLocalizer["HelloWorldData","cycycy","18"];
-            var hello2 = _stringLocalizer["HelloWorldData", "18", "cycycy"];
-
-            return Result.Json(hello.Value);
+            switch (cultureEnum)
+            {
+                case CultureEnum.English:
+                    CultureInfo.CurrentCulture = new CultureInfo("en");//英文
+                    CultureInfo.CurrentUICulture = new CultureInfo("en");
+                    break;
+                case CultureEnum.zhHans:
+                    CultureInfo.CurrentCulture = new CultureInfo("zh-Hans");//简体中文
+                    CultureInfo.CurrentUICulture = new CultureInfo("zh-Hans");
+                    break;
+                case CultureEnum.zhHant:
+                    CultureInfo.CurrentCulture = new CultureInfo("zh-Hant");//繁体中文-台湾
+                    CultureInfo.CurrentUICulture = new CultureInfo("zh-Hant");
+                    break;
+                default:
+                    goto case CultureEnum.zhHans;
+            }
+            var data1 = _stringLocalizer["HelloWorld","cycycy"];
+            var data2 = _stringLocalizer["HelloWorldData","cycycy","18"];
+            var data3 = _stringLocalizer["HelloWorldData", "18", "cycycy"];
+            var data = new
+            {
+                data1,
+                data2,
+                data3
+            };
+            return Result.Json(data);
         }
     }
 }

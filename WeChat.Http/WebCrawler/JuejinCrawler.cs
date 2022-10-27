@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WeChat.Http.HttpHelper;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Http.WebCrawler
 {

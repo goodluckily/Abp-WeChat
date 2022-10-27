@@ -1,4 +1,5 @@
 ﻿using System;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Shared
 {

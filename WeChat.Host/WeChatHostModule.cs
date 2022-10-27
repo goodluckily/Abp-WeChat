@@ -47,7 +47,7 @@ namespace WeChat.Host
             var services = context.Services;
             var mySqlConnectionString = ConfigCommon.Configuration["ConnectionStrings:WeChat"];
 
-            #region 静态类的配置文件
+            #region 静态类的配置文件 注释
             //var configuration = BuildConfiguration();
             //configuration.GetSection("ConnectionStrings").Bind(new WeChatAppSetting());
             //configuration.GetSection("WeChatConfig").Bind(new WeChatAppSetting());
@@ -221,7 +221,6 @@ namespace WeChat.Host
             //}).AddMySqlStorage(mySqlConnectionString);
             #endregion
             
-
             //services.AddSingleton(typeof(IConverter), new SynchronizedConverter(new PdfTools()));
         }
 

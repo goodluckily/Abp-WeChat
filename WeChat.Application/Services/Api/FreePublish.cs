@@ -9,6 +9,7 @@ using Volo.Abp.Application.Services;
 using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 using WeChat.Http.WeiChatApi;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

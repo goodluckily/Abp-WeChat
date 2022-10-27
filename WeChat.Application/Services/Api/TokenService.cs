@@ -13,6 +13,7 @@ using Volo.Abp.ObjectMapping;
 using AutoMapper;
 using Volo.Abp.Guids;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 using Microsoft.AspNetCore.Authorization;
 using WeChat.Http.WeiChatApi;
 

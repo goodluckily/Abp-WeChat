@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Application.Services
 {

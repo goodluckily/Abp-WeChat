@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Xml.Linq;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Shared
 {

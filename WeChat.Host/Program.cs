@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NLog;
 using NLog.Web;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
 
 namespace WeChat.Host
 {

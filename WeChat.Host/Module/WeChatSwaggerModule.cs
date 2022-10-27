@@ -8,6 +8,8 @@ using System.Reflection;
 using System.IO;
 using System;
 using Microsoft.AspNetCore.Hosting;
+using WeChat.Host.Filter;
+using Hangfire;
 
 namespace WeChat.Host
 {
@@ -23,6 +25,9 @@ namespace WeChat.Host
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "WeChat API", Version = "v1" });
                 options.CustomSchemaIds(x => x.FullName);
                 options.DocInclusionPredicate((docName, description) => true);
+
+                //省略其他代码
+                //options.DocumentFilter<SwaggerEnumFilter>();
 
                 //启用swagger验证功能
                 options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()

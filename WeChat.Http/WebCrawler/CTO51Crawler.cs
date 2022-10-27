@@ -8,6 +8,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using WeChat.Shared;
+using WeChat.Shared.Enums;
+
 namespace WeChat.Http.WebCrawler
 {
     public class CTO51Crawler
