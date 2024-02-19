@@ -57,19 +57,19 @@ namespace WeChat.Http.WebCrawler
             foreach (var itemNode in itemHtmlNodes)
             {
                 //标题
-                var title = itemNode.SelectSingleNode(".//a[@class='img']/img")?.Attributes["alt"].Value.Trim();
+                var title = itemNode.SelectSingleNode(".//a[@class='img']/img")?.Attributes["alt"].Value?.Trim();
 
                 //主图
-                var img = itemNode.SelectSingleNode(".//a[@class='img']/img")?.Attributes["src"].Value.Trim();
+                var img = itemNode.SelectSingleNode(".//a[@class='img']/img")?.Attributes["src"]?.Value?.Trim();
 
                 //内容简介 介绍
                 var subContent = itemNode.SelectSingleNode(".//div[@class='m']")?.InnerText.Trim();
 
                 //内容原始文章地址
-                var contentUrl = itemNode.SelectSingleNode(".//a[@class='img']")?.Attributes["href"].Value.Trim();
+                var contentUrl = itemNode.SelectSingleNode(".//a[@class='img']")?.Attributes["href"]?.Value?.Trim();
 
                 //发布时间 item_foot
-                var itemFootContent = itemNode.SelectSingleNode(".//div[@class='c']")?.Attributes["data-ot"].Value?.Trim();
+                var itemFootContent = itemNode.SelectSingleNode(".//div[@class='c']")?.Attributes["data-ot"]?.Value?.Trim();
                 var releaseTime = itemFootContent.TryParseToDateTime();
 
                 var tagesNodes = itemNode.SelectNodes(".//div[@class='tags']/a");

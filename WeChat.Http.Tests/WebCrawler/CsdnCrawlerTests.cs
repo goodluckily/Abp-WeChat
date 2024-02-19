@@ -14,24 +14,36 @@ namespace WeChat.Http.WebCrawler.Tests
         [TestMethod()]
         public void GetCsdnOtherContentTest()
         {
-            //var aaa = CsdnCrawler.GetCsdnOtherContentAsync().Result;
+            //1 博客园
+            var aaadsfasdf = CnblogesCrawler.GetNetCnblogsContent();
 
-            //var aaaaaaaa = SegmentfaulCrawler.GetSegmentfaulCrawlerContentAsync().Result;
+            //2 码友网
+            var asfsafsafs = CodeDeaultCrawler.GetCodeDeaultContent();
 
-            //ItHomeCrwaler.GetItHomeNews();
-            //ItHomeCrwaler.GetItHomeMicrosoftNews();
+            //3 csdn
+            var aaa = CsdnCrawler.GetCsdnOtherContentAsync().Result;
 
-            //CodeDeaultCrawler.GetCodeDeaultContent();
+            //4 51CTO
+            var aa = CTO51Crawler.Get51CTOContentAsync().Result;
 
+            //5
+            var sfasfasf = ItHomeCrawler.GetItHomeNews();
 
-            //OsChinaCrawler.GetOsChinaBlogContent();
+            //6
+            //var sfasfasfsaf = JuejinCrawler.GetJuejinNewsContent();
 
-            //var aa = CTO51Crawler.Get51CTOContentAsync().Result;
+            //7
+            var fasfssfffffdf = OsChinaCrawler.GetOsChinaBlogContent();
+
+            //8
+            var aaaaadgfdfaaa = SegmentfaulCrawler.GetSegmentfaulCrawlerContentAsync().Result;
+
+            //2.
+            var sfasfsaf = CodeDeaultCrawler.GetCodeDeaultContent();
 
             //公众号文章的爬虫
-            //var url = "https://mp.weixin.qq.com/s/n9SU3BgIYFJiUgk2ZD8y7A";
-            //ATest.jiexiHtmlAgilityPackContent(url);
-
+            var url = "https://mp.weixin.qq.com/s/n9SU3BgIYFJiUgk2ZD8y7A";
+            ATest.jiexiHtmlAgilityPackContent(url);
         }
     }
 }

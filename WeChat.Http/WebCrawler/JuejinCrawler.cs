@@ -17,10 +17,10 @@ namespace WeChat.Http.WebCrawler
         public static string JuejinNewsUrl = "https://juejin.cn/news?sort=weekly_hottest";
 
         /// <summary>
-        /// 缺点 主图 地址获取不到
+        /// 无效
         /// </summary>
         /// <returns></returns>
-        [Obsolete("缺点 主图 地址获取不到", true)]
+        [Obsolete("无效", true)]
         public static List<JueJinblogsDto> GetJuejinNewsContent()
         {
             var juejinblogsList = new List<JueJinblogsDto>();
@@ -89,7 +89,7 @@ namespace WeChat.Http.WebCrawler
         /// 最新资讯
         /// </summary>
         /// <returns></returns>
-
+        [Obsolete("无效", true)]
         public static List<JueJinblogsDto> GetJuejinNewsContentForApi()
         {
             var juejinblogsList = new List<JueJinblogsDto>();
