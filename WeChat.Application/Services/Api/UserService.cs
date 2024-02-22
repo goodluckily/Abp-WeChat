@@ -82,6 +82,26 @@ namespace WeChat.Application.Services
         }
 
         /// <summary>
+        /// 退出登陆
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        [HttpPost("Logout")]
+        public DataResult Logout()
+        {
+            var id = CurrentUserId();
+            var user = CurrentUserInfo();
+            if (user is not null)
+            {
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete("Authtoken");
+                _httpContextAccessor.HttpContext.Response.Cookies.Delete("RoleValue");
+                NLogCommon.WriteFileLog(NLog.LogLevel.Info, LogTypeEnum.Web, "退出登陆", user.Id.ToString());
+                return Result.Json(true);
+            }
+            return Result.Error("用户退出登陆失败");
+        }
+
+        /// <summary>
         /// GetUserInfo
         /// </summary>
         /// <returns></returns>

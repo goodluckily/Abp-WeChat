@@ -11,6 +11,8 @@ using NLog;
 using NLog.Web;
 using WeChat.Shared;
 using WeChat.Shared.Enums;
+using Microsoft.EntityFrameworkCore;
+using WeChat.EntityFramewoekCore;
 
 namespace WeChat.Host
 {
@@ -28,6 +30,7 @@ namespace WeChat.Host
                 //其他项目启动时需要做的事情
                 //code
                 NLogCommon.WriteDBLog(NLog.LogLevel.Trace, LogTypeEnum.Web, "网站启动成功");
+
                 host.Run();
             }
             catch (Exception ex)
@@ -50,7 +53,10 @@ namespace WeChat.Host
                 .ConfigureServices(services =>
                 {
                     //后台任务
-                    services.AddHostedService<WorkService>();
+                    //services.AddHostedService<WorkService>();
+                    
+                    //初始化种子数据
+                    services.AddHostedService<InitSeedDataServer> ();
                 })
                 .ConfigureLogging(logging =>
                 {

@@ -17,10 +17,14 @@ namespace WeChat.Domain.Repository
     {
         #region DL
         private readonly IRepository<UserInfo, Guid> _userInfoRepository;
+        private readonly IRepository<Role, Guid> _roleepository;
+        private readonly IRepository<UserAndRoleMap> _userAndRoleMapRepository;
 
-        public UserInfoRepository(IRepository<UserInfo, Guid> userInfoRepository)
+        public UserInfoRepository(IRepository<UserInfo, Guid> userInfoRepository, IRepository<Role, Guid> roleepository, IRepository<UserAndRoleMap> userAndRoleMapRepository)
         {
             _userInfoRepository = userInfoRepository;
+            _roleepository = roleepository;
+            _userAndRoleMapRepository = userAndRoleMapRepository;
         }
         #endregion
 
@@ -47,6 +51,19 @@ namespace WeChat.Domain.Repository
         {
             var queryable = await _userInfoRepository.WithDetailsAsync(x => x.Roles);
             return queryable.FirstOrDefault(x => x.LoginName == loginName && x.PassWrod == passWord);
+        }
+
+        public async Task<bool> CheckUserByName(string LoginName)
+        {
+            return await _userInfoRepository.AnyAsync(x => x.LoginName == LoginName);
+        }
+
+        public async Task<bool> AddUserInfoRoleMap(UserInfo userInfo, Role role, UserAndRoleMap userAndroleMap)
+        {
+            await _userInfoRepository.InsertAsync(userInfo);
+            await _roleepository.InsertAsync(role);
+            await _userAndRoleMapRepository.InsertAsync(userAndroleMap);
+            return await Task.FromResult(true);
         }
     }
 }

@@ -17,5 +17,20 @@ namespace WeChat.Domain.IRepository
         Task<UserInfo> GetUserForRolesLogin(string loginName, string passWord);
         Task<UserInfo> GetUserInfoAsyncById(Guid userId);
         UserInfo GetUserInfoById(Guid userId);
+
+        /// <summary>
+        /// 判断登陆用户 是否存在
+        /// </summary>
+        /// <param name="roleId"></param>
+        /// <returns></returns>
+        Task<bool> CheckUserByName(string LoginName);
+
+        /// <summary>
+        /// 添加用户信息
+        /// </summary>
+        /// <param name="userInfo"></param>
+        /// <param name="role"></param>
+        /// <param name="userAndroleMap"></param>
+        Task<bool> AddUserInfoRoleMap(UserInfo userInfo, Role role, UserAndRoleMap userAndroleMap);
     }
 }

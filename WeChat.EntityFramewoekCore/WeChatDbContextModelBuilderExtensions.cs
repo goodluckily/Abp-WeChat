@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Polly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -286,9 +287,8 @@ namespace WeChat.EntityFramewoekCore
                 b.ConfigureByConvention();
             });
 
-
-            //初始化数据库种子数据
-            //InitDbUserRelationSeedData(builder, _guidGenerator);
+            //初始化数据库种子数据 数据 迁移的时候
+            //InitDbUserRelationSeedData(builder,null, _guidGenerator);
         }
 
         /// <summary>
@@ -296,53 +296,31 @@ namespace WeChat.EntityFramewoekCore
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="_guidGenerator"></param>
-        private static void InitDbUserRelationSeedData(ModelBuilder builder, IGuidGenerator _guidGenerator)
+        public static void InitDbUserRelationSeedData(ModelBuilder builder,IGuidGenerator _guidGenerator)
         {
+            var (userInfo, role, userAndroleMap) = new UserInfo(_guidGenerator.Create()).GetSeedUserData(_guidGenerator.Create());
 
-            var userInfo = new UserInfo(_guidGenerator.Create())
+            //builder HasData
+            if (builder is not null) 
             {
-                LoginName = "admin",
-                PassWrod = "123456",
-                NickName = "管理员",
-                IsActive = true,
-                IsDel = true,
-                CreateTime = DateTime.Now,
-            };
-            var role = new Role(_guidGenerator.Create())// 这里如何切换成  IGuidGenerator   _guidGenerator.Create() ???
-            {
-                Name = "管理者",
-                Description = "最高权限管理者",
-                CreateUserId = userInfo.Id,
-                CreateTime = DateTime.Now,
-                IsActive = true,
-                IsDel = false
-            };
+                builder.Entity<UserInfo>(b =>
+                {
+                    //种子数据
+                    b.HasData(userInfo);
+                });
 
-            var userAndroleMap = new UserAndRoleMap()
-            {
-                UserId = userInfo.Id,
-                RoleId = role.Id,
-                CreateUserId = userInfo.Id,
-                CreateTime = DateTime.Now
-            };
+                builder.Entity<Role>(b =>
+                {
+                    //种子数据
+                    b.HasData(role);
+                });
 
-            builder.Entity<UserInfo>(b =>
-            {
-                //种子数据
-                b.HasData(userInfo);
-            });
-
-            builder.Entity<Role>(b =>
-            {
-                //种子数据
-                b.HasData(role);
-            });
-
-            builder.Entity<UserAndRoleMap>(b =>
-            {
-                //种子数据
-                b.HasData(userAndroleMap);
-            });
+                builder.Entity<UserAndRoleMap>(b =>
+                {
+                    //种子数据
+                    b.HasData(userAndroleMap);
+                });
+            }
         }
     }
 }
