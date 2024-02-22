@@ -32,13 +32,13 @@ namespace WeChat.Host
     [DependsOn(
         typeof(AbpAspNetCoreMvcModule),
         typeof(AbpAutofacModule),
-        //typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
-        typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
+        typeof(AbpEntityFrameworkCoreSqlServerModule),//sqlserver
+        //typeof(AbpEntityFrameworkCoreMySQLModule),//mysql
         typeof(WeChatApplicationModule),
         typeof(WeChatEntityFrameworkCoreModule),
         //typeof(AbpSwashbuckleModule),//框架自带的  Swagger 模块 注释!!!
-        typeof(WeChatSwaggerModule), //使用自己定义的 Swagger 模块
-        typeof(HangfireJobModule) // Hangfire Job 使用模块
+        typeof(WeChatSwaggerModule) //使用自己定义的 Swagger 模块
+        //typeof(HangfireJobModule) // Hangfire Job 使用模块
         )]
     public class WeChatHostModule : AbpModule
     {
@@ -83,9 +83,11 @@ namespace WeChat.Host
 
             Configure<AbpDbContextOptions>(optios =>
             {
-                optios.UseMySQL();
-                //optios.UseSqlServer();
-                //Microsoft.EntityFrameworkCore.Proxies //需要安装Buget包
+                //optios.UseMySQL();
+
+                optios.UseSqlServer();
+
+                ////Microsoft.EntityFrameworkCore.Proxies //需要安装Buget包
                 //optios.DbContextOptions.UseLazyLoadingProxies(); //启用延时加载
             });
 
