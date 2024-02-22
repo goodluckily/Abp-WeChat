@@ -89,7 +89,7 @@ namespace WeChat.Http.WebCrawler
         /// 最新资讯
         /// </summary>
         /// <returns></returns>
-        [Obsolete("无效", true)]
+        [Obsolete("无效", false)]
         public static List<JueJinblogsDto> GetJuejinNewsContentForApi()
         {
             var juejinblogsList = new List<JueJinblogsDto>();
