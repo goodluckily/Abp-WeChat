@@ -22,6 +22,9 @@ namespace WeChat.Application.Result
 
         [NonAction]
         DataResult Error(string message);
+
+        [NonAction]
+        PageResult Page(int code, PageDataModel pageData);
         #endregion
     }
 }

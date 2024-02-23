@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -27,6 +28,7 @@ namespace WeChat.Http.WebCrawler
         {
             var csdnOtherList = new List<CsdnblogsDto>();
             var httpClient = new HttpClient();
+            var thisDateTime = DateTime.Now.DataTimeFormatToString();
             for (int i = 1; i <= refreshCount; i++)
             {
                 var result = await httpClient.GetStringAsync(csdnOtherUrl);
@@ -44,18 +46,30 @@ namespace WeChat.Http.WebCrawler
                         var url = item["url"]?.ToString()?.Trim();//原文Url
                         var img = item["avatarurl"]?.ToString()?.Trim();
 
+                        var imgBase64 = string.Empty;
+                        var sufixName = string.Empty;
+                        var downLoadImgName = string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(img))
+                        {
+                            (imgBase64,sufixName, downLoadImgName) = await ImageCommon.DownloadImageAsBase64(img, httpClient);
+                        }
+
                         var nickname = item["nickname"]?.ToString()?.Trim();//作者昵称
                         var user_url = item["user_url"]?.ToString()?.Trim();//作者地址
 
                         var views = item["views"]?.ToString()?.Trim()?.TryParseToInt();//观看看数
                         var digg = item["digg"]?.ToString()?.Trim()?.TryParseToInt();//点赞数
                         var comments = item["comments"]?.ToString()?.Trim()?.TryParseToInt();//评论数
-
+                        
                         csdnOtherList.Add(new CsdnblogsDto
                         {
                             Title = title,
                             SubContent = desc,
                             Img = img,
+                            ImgBase64 = imgBase64,
+                            SufixName = sufixName,
+                            DownLoadImgName = downLoadImgName,
                             CreatedAt = created_at,
                             ProductType = product_type,
                             ContentUrl = url,
@@ -64,6 +78,7 @@ namespace WeChat.Http.WebCrawler
                             ReadNum = views,
                             DiggNum = digg,
                             CommentNum = comments,
+                            LoadContextTime = thisDateTime,
                             AnalyzingType = AnalyzingEnum.BoKe
                         });
                     }

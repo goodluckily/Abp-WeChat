@@ -27,6 +27,10 @@ using WeChat.EntityFramewoekCore;
 using WeChat.Host.Filter;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
+using Autofac.Core;
 
 namespace WeChat.Host
 {
@@ -74,7 +78,12 @@ namespace WeChat.Host
                        .AllowAnyMethod();
                 });
             });
-            
+           
+            services.Configure<MvcNewtonsoftJsonOptions>(options => {
+                options.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";
+            });
+
             #region DB
 
             services.AddAbpDbContext<WeChatDbContext>(options =>

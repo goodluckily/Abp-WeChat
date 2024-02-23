@@ -35,6 +35,14 @@ namespace WeChat.Application.Result
             var result = new DataResult(false, message);
             return result;
         }
+
+
+        [NonAction]
+        public virtual PageResult Page(int code, PageDataModel pageData)
+        {
+            var result = new PageResult(code, pageData);
+            return result;
+        }
         #endregion
     }
 }

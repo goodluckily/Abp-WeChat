@@ -24,6 +24,7 @@ namespace WeChat.Shared
         {
             JsonSerializerSettings settings = new JsonSerializerSettings();
             settings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //settings.ContractResolver = new DefaultContractResolver();//使用默认方式，不更改元数据的key的大小写
             return JsonConvert.SerializeObject(ob, settings);
 
         }

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using WeChat.Shared.Enums;
 
@@ -10,6 +12,8 @@ namespace WeChat.Shared
     {
         public string? Title { get; set; }
         public string? Img { get; set; }
+        public string? ImgBase64 { get; set; }
+        
         public string? SubContent { get; set; }
         public string? ContentUrl { get; set; }
         public string? Author { get; set; }
@@ -21,6 +25,15 @@ namespace WeChat.Shared
         public int? DiggNum { get; set; }//点赞数
         public int? CommentNum { get; set; }
         public int? ReadNum { get; set; }
+
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public AnalyzingEnum? AnalyzingType { get; set; }
+        public object Id { get; set; }
+        public string SufixName { get; set; }
+        public string DownLoadImgName { get; set; }
+        /// <summary>
+        /// 获取时间
+        /// </summary>
+        public string LoadContextTime { get; set; }
     }
 }

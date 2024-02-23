@@ -3,12 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Volo.Abp.Data;
 
 namespace WeChat.Shared
 {
     public class RedisCommon
     {
+        
         private static string _instanceName { get; set; }
+
+        static RedisCommon()
+        {
+            var connectionString = ConfigCommon.GetConfig<string>("RedisCache:ConnectionString");
+            _instanceName = ConfigCommon.GetConfig<string>("RedisCache:InstanceName");
+            RedisHelper.Initialization(new CSRedisClient(connectionString));
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -72,10 +82,10 @@ namespace WeChat.Shared
         /// <param name="value">值</param>
         /// <param name="ExprireTime">过期时间 单位小时</param>
         /// <returns></returns>
-        public static bool SetJsonValue(string key, object value, int ExprireTime = 24)
+        public static bool SetJsonValue(string key, object value, int minute = 30)
         {
             if (string.IsNullOrEmpty(key) || value == null) return false;
-            return RedisHelper.Set(InitKeyName(key), JsonCommon.GetJsonStringSerializeObject(value), 60 * 60 * ExprireTime);
+            return RedisHelper.Set(InitKeyName(key), JsonCommon.GetJsonStringSerializeObject(value), 60 * minute);
         }
 
         /// <summary>
