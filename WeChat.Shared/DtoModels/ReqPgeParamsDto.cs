@@ -17,5 +17,15 @@ namespace WeChat.Shared.DtoModels
 
         //是否启用缓存
         public bool iscache { get; set; } = true;
+
+        /// <summary>
+        /// 其他 or 推荐
+        /// </summary>
+        public string BlogType { get; set; }
+
+        /// <summary>
+        /// 数据缓存时长 分
+        /// </summary>
+        public int RerdisCacheMinute { get; set; } = 5;
     }
 }

@@ -114,7 +114,13 @@ namespace WeChat.Http.WebCrawler
                         var product_type = item["product_type"]?.ToString()?.Trim();//文章类型
                         var url = item["url"]?.ToString()?.Trim();//原文Url
                         var img = item["avatarurl"]?.ToString()?.Trim();
-
+                        var imgBase64 = string.Empty;
+                        var sufixName = string.Empty;
+                        var downLoadImgName = string.Empty;
+                        if (!string.IsNullOrWhiteSpace(img))
+                        {
+                            (imgBase64, sufixName, downLoadImgName) = await ImageCommon.DownloadImageAsBase64(img, httpClient);
+                        }
                         var nickname = item["nickname"]?.ToString()?.Trim();//作者昵称
                         var user_url = "https://blog.csdn.net/" + item["user_name"]?.ToString()?.Trim();//作者地址
 
@@ -127,6 +133,9 @@ namespace WeChat.Http.WebCrawler
                             Title = title,
                             SubContent = desc,
                             Img = img,
+                            ImgBase64 = imgBase64,
+                            SufixName = sufixName,
+                            DownLoadImgName = downLoadImgName,
                             CreatedAt = created_at,
                             ProductType = product_type,
                             ContentUrl = url,

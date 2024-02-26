@@ -38,17 +38,25 @@ namespace WeChat.Application.Services.Api
         [HttpPost("GetCsdn")]
         public async Task<PageResult> GetCsdn([FromBody] ReqPgeParamsDto paramsDto)
         {
+            var defaultKeyName = $"CsdnBlogs-{paramsDto.BlogType}";
             //3 csdn
             List<CsdnblogsDto> data = null;
-            if (RedisCommon.ExistsKey("CsdnBlogs"))
+            if (RedisCommon.ExistsKey(defaultKeyName))
             {
-                data = RedisCommon.Get<List<CsdnblogsDto>>("CsdnBlogs");
+                data = RedisCommon.Get<List<CsdnblogsDto>>(defaultKeyName);
             }
             else 
             {
-                data = await CsdnCrawler.GetCsdnOtherContentAsync(paramsDto.RefreshCount);
+                if (paramsDto.BlogType.Contains("Other"))
+                {
+                    data = await CsdnCrawler.GetCsdnOtherContentAsync(paramsDto.RefreshCount);
+                }
+                else 
+                {
+                    data = await CsdnCrawler.GetCsdnTuiJianContentAsync(paramsDto.RefreshCount);
+                }
                 data.ForEach(x => x.Id = GuidGenerator.Create());
-                RedisCommon.SetJsonValue("CsdnBlogs", data, 10);
+                RedisCommon.SetJsonValue(defaultKeyName, data, paramsDto.RerdisCacheMinute);
             }
            
             return Result.Page((int)HttpStatusCode.OK, new Application.Result.PageDataModel 
