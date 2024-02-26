@@ -8,12 +8,10 @@ using WeChat.Shared.Enums;
 
 namespace WeChat.Shared
 {
-    public class CsdnblogsDto
+    public class CsdnblogsDto: BlogsBaseDto
     {
         public string? Title { get; set; }
         public string? Img { get; set; }
-        public string? ImgBase64 { get; set; }
-        
         public string? SubContent { get; set; }
         public string? ContentUrl { get; set; }
         public string? Author { get; set; }
@@ -28,12 +26,5 @@ namespace WeChat.Shared
 
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public AnalyzingEnum? AnalyzingType { get; set; }
-        public object Id { get; set; }
-        public string SufixName { get; set; }
-        public string DownLoadImgName { get; set; }
-        /// <summary>
-        /// 获取时间
-        /// </summary>
-        public string LoadContextTime { get; set; }
     }
 }

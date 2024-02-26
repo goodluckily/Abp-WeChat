@@ -4,7 +4,7 @@ using WeChat.Shared.Enums;
 
 namespace WeChat.Shared
 {
-    public class NetcnblogsDto
+    public class NetcnblogsDto: BlogsBaseDto
     {
         public string? Title { get; set; }
         public string? Img { get; set; }

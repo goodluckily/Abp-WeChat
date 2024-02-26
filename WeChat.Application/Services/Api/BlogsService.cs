@@ -67,5 +67,42 @@ namespace WeChat.Application.Services.Api
                 total = data.Count
             });
         }
+
+
+        /// <summary>
+        ///博客园
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost("GetBk")]
+        public async Task<PageResult> GetBk([FromBody] ReqPgeParamsDto paramsDto)
+        {
+            var defaultKeyName = $"BkBlogs-{paramsDto.BlogType}";
+            //3 csdn
+            List<NetcnblogsDto> data = null;
+            if (RedisCommon.ExistsKey(defaultKeyName))
+            {
+                data = RedisCommon.Get<List<NetcnblogsDto>>(defaultKeyName);
+            }
+            else
+            {
+                if (paramsDto.BlogType.Contains("Blogs"))
+                {
+                    data = CnblogesCrawler.GetNetCnblogsContent(paramsDto.RefreshCount);
+                }
+                else
+                {
+                    data = CnblogesCrawler.GetToDayNewsCnblogsContent(paramsDto.RefreshCount);
+                }
+                data.ForEach(x => x.Id = GuidGenerator.Create());
+                RedisCommon.SetJsonValue(defaultKeyName, data, paramsDto.RerdisCacheMinute);
+            }
+            return Result.Page((int)HttpStatusCode.OK, new Application.Result.PageDataModel
+            {
+                list = data,
+                pageNum = paramsDto.pageNum,
+                pageSize = paramsDto.pageSize,
+                total = data.Count
+            });
+        }
     }
 }

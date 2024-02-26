@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
@@ -40,60 +41,76 @@ namespace WeChat.Http.WebCrawler
                 //从url中加载
                 HtmlDocument doc = web.Load(requestUrl);
                 //获得title标签节点，其子标签下的所有节点也在其中
-                var itemHtmlNodes = doc.DocumentNode.SelectNodes("//div[@class='post_item']"); //一般是第一页 的20条数据
-                foreach (var itemNode in itemHtmlNodes)
+                var itemHtmlNodes = doc.DocumentNode.SelectNodes("//div[@class='post_item']"); //一般是第一页 的20条数据\
+                using (var httpclient = new HttpClient())
                 {
-                    //标题
-                    var title = itemNode.SelectSingleNode(".//a[@class='titlelnk']").InnerText.Trim();
-
-                    //主图
-                    var img = itemNode.SelectSingleNode(".//img[@class='pfs']")?.Attributes["src"].Value.Trim();
-
-                    //内容简介 介绍
-                    var subContent = itemNode.SelectSingleNode(".//p[@class='post_item_summary']")?.InnerText.Trim();
-
-                    //内容原始文章地址
-                    var contentUrl = itemNode.SelectSingleNode(".//a[@class='titlelnk']")?.Attributes["href"].Value.Trim();
-
-                    //推荐数
-                    var recommendNum = itemNode.SelectSingleNode(".//span[@class='diggnum']")?.InnerText.Trim().TryParseToInt();
-
-                    //作者
-                    var author = itemNode.SelectSingleNode(".//a[@class='lightblue']")?.InnerText.Trim();
-
-                    //作者主页地址
-                    var authorManUrl = itemNode.SelectSingleNode(".//a[@class='lightblue']")?.Attributes["href"].Value.Trim();
-
-                    //发布时间 item_foot
-                    var itemFootContent = itemNode.SelectSingleNode(".//div[@class='post_item_foot']")?.InnerText;
-                    var releaseTime = itemFootContent?.Split("\r\n")[2].Replace("发布于", "").Trim().TryParseToDateTime();
-
-                    //评论数
-                    var commentNum = itemNode.SelectSingleNode(".//span[@class='article_comment']/a")?.InnerText
-                        .Replace("评论(", "")
-                        .Replace(")", "")
-                        .Trim().TryParseToInt();
-
-                    //阅读数
-                    var readNum = itemNode.SelectSingleNode(".//span[@class='article_view']/a")?.InnerText
-                        .Replace("阅读(", "")
-                        .Replace(")", "")
-                        .Trim().TryParseToInt();
-
-                    netcnblogsList.Add(new NetcnblogsDto()
+                    foreach (var itemNode in itemHtmlNodes)
                     {
-                        Title = title,
-                        Img = img,
-                        SubContent = subContent,
-                        ContentUrl = contentUrl,
-                        RecommendNum = recommendNum,
-                        Author = author,
-                        AuthorManUrl = authorManUrl,
-                        ReleaseTime = releaseTime,
-                        CommentNum = commentNum,
-                        ReadNum = readNum,
-                        AnalyzingType = AnalyzingEnum.NET
-                    });
+                        //标题
+                        var title = itemNode.SelectSingleNode(".//a[@class='titlelnk']").InnerText.Trim();
+
+                        //主图
+                        var img = itemNode.SelectSingleNode(".//img[@class='pfs']")?.Attributes["src"].Value?.Trim();
+
+                        var imgBase64 = string.Empty;
+                        var sufixName = string.Empty;
+                        var downLoadImgName = string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(img))
+                        {
+                            img = img.Contains("http") ? img : $"https:{img}";
+                            (imgBase64, sufixName, downLoadImgName) = ImageCommon.DownloadImageAsBase64(img, httpclient).Result;
+                        }
+
+                        //内容简介 介绍
+                        var subContent = itemNode.SelectSingleNode(".//p[@class='post_item_summary']")?.InnerText.Trim();
+
+                        //内容原始文章地址
+                        var contentUrl = itemNode.SelectSingleNode(".//a[@class='titlelnk']")?.Attributes["href"].Value?.Trim();
+
+                        //推荐数
+                        var recommendNum = itemNode.SelectSingleNode(".//span[@class='diggnum']")?.InnerText.Trim().TryParseToInt();
+
+                        //作者
+                        var author = itemNode.SelectSingleNode(".//a[@class='lightblue']")?.InnerText.Trim();
+
+                        //作者主页地址
+                        var authorManUrl = itemNode.SelectSingleNode(".//a[@class='lightblue']")?.Attributes["href"].Value?.Trim();
+
+                        //发布时间 item_foot
+                        var itemFootContent = itemNode.SelectSingleNode(".//div[@class='post_item_foot']")?.InnerText;
+                        var releaseTime = itemFootContent?.Split("\r\n")[2].Replace("发布于", "").Trim().TryParseToDateTime();
+
+                        //评论数
+                        var commentNum = itemNode.SelectSingleNode(".//span[@class='article_comment']/a")?.InnerText
+                            .Replace("评论(", "")
+                            .Replace(")", "")
+                            .Trim().TryParseToInt();
+
+                        //阅读数
+                        var readNum = itemNode.SelectSingleNode(".//span[@class='article_view']/a")?.InnerText
+                            .Replace("阅读(", "")
+                            .Replace(")", "")
+                            .Trim().TryParseToInt();
+
+                        netcnblogsList.Add(new NetcnblogsDto()
+                        {
+                            Title = title,
+                            Img = img,
+                            ImgBase64 = imgBase64,
+                            SufixName = sufixName,
+                            DownLoadImgName = downLoadImgName,
+                            SubContent = subContent,
+                            ContentUrl = contentUrl,
+                            RecommendNum = recommendNum,
+                            Author = author,
+                            AuthorManUrl = authorManUrl,
+                            ReleaseTime = releaseTime,
+                            CommentNum = commentNum,
+                            ReadNum = readNum,
+                            AnalyzingType = AnalyzingEnum.NET
+                        });
+                    }
                 }
             }
 
@@ -108,64 +125,79 @@ namespace WeChat.Http.WebCrawler
         {
             var netcnblogsList = new List<NetcnblogsDto>();
             var web = new HtmlWeb();
-            for (int i = 1; i <= pageCount; i++)
+            using (var httpclient = new HttpClient())
             {
-                var newsUrl = newsBlogsUrl + i.ToString();
-                //从url中加载
-                HtmlDocument doc = web.Load(newsUrl);
-
-                //获得title标签节点，其子标签下的所有节点也在其中
-                var itemHtmlNodes = doc.DocumentNode.SelectNodes("//div[@class='news_block']"); //一般是第一页数据
-                foreach (var itemNode in itemHtmlNodes)
+                for (int i = 1; i <= pageCount; i++)
                 {
-                    //标题
-                    var title = itemNode.SelectSingleNode(".//div[2]/h2").InnerText.Trim();
+                    var newsUrl = newsBlogsUrl + i.ToString();
+                    //从url中加载
+                    HtmlDocument doc = web.Load(newsUrl);
 
-                    //主图
-                    var img = itemNode.SelectSingleNode(".//div[@class='entry_summary']/a/img")?.Attributes["src"].Value.Trim();
-
-                    //内容简介 介绍
-                    var subContent = itemNode.SelectSingleNode(".//div[@class='entry_summary']").InnerText?.Trim();
-
-                    //内容原始文章地址
-                    var contentUrl = "https://news.cnblogs.com" + itemNode.SelectSingleNode(".//h2[@class='news_entry']/a")?.Attributes["href"]?.Value.Trim();
-
-                    //推荐数
-                    var recommendNum = itemNode.SelectSingleNode(".//span[@class='diggnum']")?.InnerText.Trim().TryParseToInt();
-
-                    //作者
-                    var author = itemNode.SelectSingleNode(".//a[@class='gray']")?.InnerText?.Trim();
-
-                    //作者主页地址
-                    var authorManUrl = itemNode.SelectSingleNode(".//a[@class='gray']")?.Attributes["href"]?.Value.Trim();
-
-                    //发布时间
-                    var releaseTime = itemNode.SelectSingleNode(".//span[@class='gray']")?.InnerText?.Trim()?.TryParseToDateTime();
-
-                    //评论数
-                    var commentNum = itemNode.SelectSingleNode(".//span[@class='comment']/a")?.InnerText
-                        .Replace("评论(", "")
-                        .Replace(")", "")
-                        .Trim()?.TryParseToInt();
-
-                    //阅读数 or 浏览
-                    var readNum = itemNode.SelectSingleNode(".//span[@class='view']")?.InnerText
-                        ?.Replace("人浏览", "")?.Trim()?.TryParseToInt();
-
-                    netcnblogsList.Add(new NetcnblogsDto()
+                    //获得title标签节点，其子标签下的所有节点也在其中
+                    var itemHtmlNodes = doc.DocumentNode.SelectNodes("//div[@class='news_block']"); //一般是第一页数据
+                    foreach (var itemNode in itemHtmlNodes)
                     {
-                        Title = title,
-                        Img = img,
-                        SubContent = subContent,
-                        ContentUrl = contentUrl,
-                        RecommendNum = recommendNum,
-                        Author = author,
-                        AuthorManUrl = authorManUrl,
-                        ReleaseTime = releaseTime,
-                        CommentNum = commentNum,
-                        ReadNum = readNum,
-                        AnalyzingType = AnalyzingEnum.ReDian
-                    });
+                        //标题
+                        var title = itemNode.SelectSingleNode(".//div[2]/h2").InnerText.Trim();
+
+                        //主图
+                        var img = itemNode.SelectSingleNode(".//div[@class='entry_summary']/a/img")?.Attributes["src"].Value?.Trim();
+                        var imgBase64 = string.Empty;
+                        var sufixName = string.Empty;
+                        var downLoadImgName = string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(img))
+                        {
+                            img = img.Contains("http") ? img : $"https:{img}";
+                            (imgBase64, sufixName, downLoadImgName) = ImageCommon.DownloadImageAsBase64(img, httpclient).Result;
+                        }
+
+                        //内容简介 介绍
+                        var subContent = itemNode.SelectSingleNode(".//div[@class='entry_summary']").InnerText?.Trim();
+
+                        //内容原始文章地址
+                        var contentUrl = "https://news.cnblogs.com" + itemNode.SelectSingleNode(".//h2[@class='news_entry']/a")?.Attributes["href"]?.Value?.Trim();
+
+                        //推荐数
+                        var recommendNum = itemNode.SelectSingleNode(".//span[@class='diggnum']")?.InnerText.Trim().TryParseToInt();
+
+                        //作者
+                        var author = itemNode.SelectSingleNode(".//a[@class='gray']")?.InnerText?.Trim();
+
+                        //作者主页地址
+                        var authorManUrl = itemNode.SelectSingleNode(".//a[@class='gray']")?.Attributes["href"]?.Value?.Trim();
+
+                        //发布时间
+                        var releaseTime = itemNode.SelectSingleNode(".//span[@class='gray']")?.InnerText?.Trim()?.TryParseToDateTime();
+
+                        //评论数
+                        var commentNum = itemNode.SelectSingleNode(".//span[@class='comment']/a")?.InnerText
+                            .Replace("评论(", "")
+                            .Replace(")", "")
+                            .Trim()?.TryParseToInt();
+
+                        //阅读数 or 浏览
+                        var readNum = itemNode.SelectSingleNode(".//span[@class='view']")?.InnerText
+                            ?.Replace("人浏览", "")?.Trim()?.TryParseToInt();
+
+                        netcnblogsList.Add(new NetcnblogsDto()
+                        {
+                            Title = title,
+                            Img = img,
+                            ImgBase64 = imgBase64,
+                            SufixName = sufixName,
+                            DownLoadImgName = downLoadImgName,
+                            SubContent = subContent,
+                            ContentUrl = contentUrl,
+                            RecommendNum = recommendNum,
+                            Author = author,
+                            AuthorManUrl = authorManUrl,
+                            ReleaseTime = releaseTime,
+                            CommentNum = commentNum,
+                            ReadNum = readNum,
+                            AnalyzingType = AnalyzingEnum.ReDian
+                        });
+                    }
                 }
             }
             return netcnblogsList;
