@@ -15,6 +15,8 @@ using WeChat.Domain;
 using Senparc.Weixin.Entities;
 using System.Data;
 using System.Linq.Dynamic.Core;
+using System.Diagnostics;
+using WeChat.Shared.Enums;
 namespace WeChat.Host
 {
     public class InitSeedDataServer : BackgroundService, ITransientDependency
@@ -33,19 +35,27 @@ namespace WeChat.Host
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            using (var dbContext = _serviceProvider.GetRequiredService<WeChatDbContext>())
+            try
             {
-                // 使用 dbContext
-                var check = dbContext.Set<UserInfo>().Any();
-                if (!check)
+                using (var dbContext = _serviceProvider.GetRequiredService<WeChatDbContext>())
                 {
-                    var (userInfo, role, userAndroleMap) = new UserInfo(_guidGenerator.Create()).GetSeedUserData(_guidGenerator.Create());
-                    await dbContext.AddAsync(userInfo);
-                    await dbContext.AddAsync(role);
-                    await dbContext.AddAsync(userAndroleMap);
-                    dbContext.SaveChanges();
+                    // 使用 dbContext
+                    var check = dbContext.Set<UserInfo>().Any();
+                    if (!check)
+                    {
+                        var (userInfo, role, userAndroleMap) = new UserInfo(_guidGenerator.Create()).GetSeedUserData(_guidGenerator.Create());
+                        await dbContext.AddAsync(userInfo);
+                        await dbContext.AddAsync(role);
+                        await dbContext.AddAsync(userAndroleMap);
+                        dbContext.SaveChanges();
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                NLogCommon.WriteFileLog(NLog.LogLevel.Error, LogTypeEnum.Web, ex.Message, exception: new Exception(ex.Message, ex));
+            }
+            
         }
     }
 }
