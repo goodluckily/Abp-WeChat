@@ -56,7 +56,7 @@ namespace WeChat.Host
                     //services.AddHostedService<WorkService>();
                     
                     //初始化种子数据
-                    services.AddHostedService<InitSeedDataServer> ();
+                    //services.AddHostedService<InitSeedDataServer> ();
                 })
                 .ConfigureLogging(logging =>
                 {
