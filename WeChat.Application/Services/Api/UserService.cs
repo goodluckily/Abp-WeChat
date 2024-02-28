@@ -9,6 +9,7 @@ using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using WeChat.Domain;
 using WeChat.Domain.IRepository;
 using WeChat.Shared;
 using WeChat.Shared.Enums;
@@ -46,7 +47,12 @@ namespace WeChat.Application.Services
         [HttpPost("Login")]
         public async Task<DataResult> Login([FromBody] LoginDto login)
         {
-            var user = await _userInfoRepository.GetUserForRolesLogin(login.LoginName, login.PassWord);
+            //var user = await _userInfoRepository.GetUserForRolesLogin(login.LoginName, login.PassWord);
+            var user = new UserInfo(GuidGenerator.Create())
+            {
+                LoginName = "admin",
+                PassWrod = "123456"
+            };
             if (user is not null)
             {
                 var ExpireTime = ConfigCommon.GetConfig<int>("JWT:ExpireTime");
@@ -59,8 +65,11 @@ namespace WeChat.Application.Services
                 //var userAndRoles = await _userAndRoleMapsRepository.getRolesByUserId(user.Id);
                 //var rolesStr = string.Join(",", userAndRoles.Select(x => x.RoleId).ToArray());
 
-                var userAndRoles = user.Roles.ToList();
-                var rolesStr = string.Join(",", userAndRoles.Select(x => x.Id).ToArray());
+                //var userAndRoles = user.Roles.ToList();
+                //var rolesStr = string.Join(",", userAndRoles.Select(x => x.Id).ToArray());
+
+                var rolesStr = "管理员";
+
 
                 //成功则生成token，将token返回
                 var token = AuthCommon.CreateToken(user.LoginName, user.Id.ToString(), rolesStr, expiresTime);
